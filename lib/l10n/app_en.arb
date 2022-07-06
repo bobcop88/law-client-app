@@ -6,5 +6,14 @@
     "sp_login_btn" : "Login",
     "@sp_login_btn":{
         "description": "current language"
+    },
+    "sp_register_btn" : "Create Account",
+    "@sp_register_btn":{
+        "description": "current language"
+    },
+    "sp_developed" : "Developed by InscaleMedia - 2022",
+    "@sp_developed":{
+        "description": "current language"
     }
+    
 }
