@@ -1,6 +1,10 @@
 {
-    "sp_main_title" : "Law App",
-    "@sp_main_title":{
+    "sp_welcome" : "Welcome to",
+    "@sp_welcome":{
+        "description": "current language"
+    },
+    "sp_login_btn" : "Login",
+    "@sp_login_btn":{
         "description": "current language"
     }
 }

@@ -17,7 +17,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primaryColor: Color.fromRGBO(242, 242, 242, 1),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Color.fromRGBO(200, 36, 47, 1)) ,
+          ),
+        ),
+        textTheme: TextTheme(
+          headline1: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color.fromRGBO(15, 48, 65, 1)),
+          
+        ),
       ),
       localizationsDelegates: const [
         AppLocalizations.delegate,

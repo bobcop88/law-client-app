@@ -14,10 +14,59 @@ class _StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.sp_main_title),
+      backgroundColor: Theme.of(context).primaryColor,
+      body: Container(
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(height: 100,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    AppLocalizations.of(context)!.sp_welcome,
+                    style: Theme.of(context).textTheme.headline1,
+                    
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/logo.png',
+                    color: Color.fromRGBO(15, 48, 65, 1),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/img_start_page.png',
+                    height: 200,
+                  ),
+                ],
+              ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: Text(
+                          AppLocalizations.of(context)!.sp_login_btn,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
-      body: Text(AppLocalizations.of(context)!.sp_main_title),
     );
     
   }
