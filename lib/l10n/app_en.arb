@@ -1,0 +1,6 @@
+{
+    "sp_main_title" : "Law App",
+    "@sp_main_title":{
+        "description": "current language"
+    }
+}
