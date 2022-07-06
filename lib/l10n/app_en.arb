@@ -46,6 +46,22 @@
     "register_page_already_registered" : "Already registered?",
     "@register_page_already_registered":{
         "description": "current language"
+    },
+    "verify_email_page_title" : "The verification email has been sent to your email address",
+    "@verify_email_page_title":{
+        "description": "current language"
+    },
+    "verify_email_page_sub_title" : "Please check in your inbox (also in Spam)",
+    "@verify_email_page_sub_title":{
+        "description": "current language"
+    },
+    "verify_email_btn" : "Resend email",
+    "@verify_email_btn":{
+        "description": "current language"
+    },
+    "verify_email_cancel" : "Cancel",
+    "@verify_email_cancel":{
+        "description": "current language"
     }
     
     

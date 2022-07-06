@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/pages/register_page/register.dart';
@@ -232,60 +233,57 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  // Future signIn() async {
+  Future signIn() async {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => const Center(child: CircularProgressIndicator()),
+    );
 
-  //   showDialog(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     builder: (context) => const Center(child: CircularProgressIndicator()),
-  //   );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
 
-  //   try{
+      //   userId = FirebaseAuth.instance.currentUser!.uid;
+      //   isCompleteProfile = await DatabaseService(uid: userId).checkProfile(userId);
 
-  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //     email: emailController.text.trim(),
-  //     password: passwordController.text.trim(),
-  //     );
+      //   await navigatorKey.currentState!.push(MaterialPageRoute(builder: (context) {
 
-  //   //   userId = FirebaseAuth.instance.currentUser!.uid;
-  //   //   isCompleteProfile = await DatabaseService(uid: userId).checkProfile(userId);
+      //   if(isCompleteProfile){
+      //     print('login page1');
+      //     return const HomePage();
+      //   }else{
+      //   print('login page2');
 
-  //   //   await navigatorKey.currentState!.push(MaterialPageRoute(builder: (context) {
+      //     return const CompleteProfile();
 
-  //   //   if(isCompleteProfile){
-  //   //     print('login page1');
-  //   //     return const HomePage();
-  //   //   }else{
-  //   //   print('login page2');
+      //   }
+      // }));
 
-  //   //     return const CompleteProfile();
+      //   await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
 
-  //   //   }
-  //   // }));
+      //   if(isCompleteProfile){
+      //     print('login page1');
+      //     return const HomePage();
+      //   }else{
+      //   print('login page2');
 
-  //   //   await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+      //     return const CompleteProfile();
 
-  //   //   if(isCompleteProfile){
-  //   //     print('login page1');
-  //   //     return const HomePage();
-  //   //   }else{
-  //   //   print('login page2');
+      //   }
+      // }));
+    } on FirebaseAuthException catch (e) {
+      final snackBar = SnackBar(
+        content: Text(e.message.toString()),
+      );
 
-  //   //     return const CompleteProfile();
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
 
-  //   //   }
-  //   // }));
-  //   }on FirebaseAuthException catch(e){
-  //     final snackBar = SnackBar(
-  //       content: Text(e.message.toString()),
-  //       );
-
-  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  //   }
-
-  //   navigatorKey.currentState!.popUntil((route) => route.isFirst);
-
-  // }
+    // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+  }
 
   void _showPassword() {
     setState(() {
