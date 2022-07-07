@@ -1,30 +1,30 @@
-class UserModel {
-  final String id;
-  final String email;
-  final String isVerified;
-  final int dateCreation;
+// class UserModel {
+//   final String id;
+//   final String email;
+//   final String isVerified;
+//   final int dateCreation;
 
-  UserModel({
-    required this.id,
-    required this.email,
-    required this.isVerified,
-    required this.dateCreation,
-  });
+//   UserModel({
+//     required this.id,
+//     required this.email,
+//     required this.isVerified,
+//     required this.dateCreation,
+//   });
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'email': email,
-        'isVerified': isVerified,
-        'dateCreation': dateCreation,
-      };
+//   Map<String, dynamic> toJson() => {
+//         'id': id,
+//         'email': email,
+//         'isVerified': isVerified,
+//         'dateCreation': dateCreation,
+//       };
 
-  static UserModel fromJson(Map<String, dynamic> json) => UserModel(
-        id: json['id'],
-        email: json['email'],
-        isVerified: json['isVerified'],
-        dateCreation: json['dateCreation'],
-      );
-}
+//   static UserModel fromJson(Map<String, dynamic> json) => UserModel(
+//         id: json['id'],
+//         email: json['email'],
+//         isVerified: json['isVerified'],
+//         dateCreation: json['dateCreation'],
+//       );
+// }
 
 class UserCompleteProfile {
   final String firstName;
@@ -33,6 +33,9 @@ class UserCompleteProfile {
   final int dateOfBirth;
   final String nationality;
   final String documentNumber;
+  final String id;
+  final String? email;
+  final int dateCreation;
 
   UserCompleteProfile(
       {required this.firstName,
@@ -40,7 +43,10 @@ class UserCompleteProfile {
       required this.dateOfBirth,
       required this.nationality,
       required this.documentNumber,
-      required this.phoneNumber});
+      required this.phoneNumber,
+      required this.id,
+      required this.email,
+      required this.dateCreation});
 
   Map<String, dynamic> toJson() => {
         'firstName': firstName,
@@ -49,17 +55,22 @@ class UserCompleteProfile {
         'nationality': nationality,
         'documentNumber': documentNumber,
         'phoneNumber': phoneNumber,
+        'id': id,
+        'email': email,
+        'dateCreation': dateCreation,
       };
 
   static UserCompleteProfile fromJson(Map<String, dynamic> json) =>
       UserCompleteProfile(
-        firstName: json['firstName'],
-        lastName: json['lastName'],
-        dateOfBirth: json['dateOfBirth'],
-        nationality: json['nationality'],
-        documentNumber: json['documentNumber'],
-        phoneNumber: json['phoneNumber'],
-      );
+          firstName: json['firstName'],
+          lastName: json['lastName'],
+          dateOfBirth: json['dateOfBirth'],
+          nationality: json['nationality'],
+          documentNumber: json['documentNumber'],
+          phoneNumber: json['phoneNumber'],
+          id: json['id'],
+          email: json['email'],
+          dateCreation: json['dateCreation']);
 }
 
 class UserAllDetails {
@@ -88,14 +99,15 @@ class UserAllDetails {
   });
 
   static UserAllDetails fromJson(Map<String, dynamic> json) => UserAllDetails(
-      id: json['id'],
-      email: json['email'],
-      phoneNumber: json['phoneNumber'],
-      isVerified: json['isVerified'],
-      dateCreation: json['dateCreation'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      dateOfBirth: json['dateOfBirth'],
-      nationality: json['nationality'],
-      documentNumber: json['documentNumber']);
+        id: json['id'],
+        email: json['email'],
+        phoneNumber: json['phoneNumber'],
+        isVerified: json['isVerified'],
+        dateCreation: json['dateCreation'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        dateOfBirth: json['dateOfBirth'],
+        nationality: json['nationality'],
+        documentNumber: json['documentNumber'],
+      );
 }

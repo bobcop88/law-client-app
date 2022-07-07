@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:new_client_app/utils/users/user_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -22,9 +23,12 @@ class DatabaseUsers {
       nationality: nationality,
       documentNumber: documentNumber,
       phoneNumber: phoneNumber,
+      id: uid,
+      email: FirebaseAuth.instance.currentUser!.email,
+      dateCreation: DateTime.now().microsecondsSinceEpoch,
     );
 
     final json = userCompleteProfile.toJson();
-    await docUser.update(json);
+    await docUser.set(json);
   }
 }

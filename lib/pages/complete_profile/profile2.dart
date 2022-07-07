@@ -5,6 +5,7 @@ import 'package:new_client_app/pages/complete_profile/list_countries/country_cla
 import 'package:new_client_app/pages/complete_profile/profile_class.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
 import 'package:new_client_app/utils/users/database_users.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProfileTwo extends StatefulWidget {
   final PageController controller;
@@ -19,6 +20,8 @@ class _ProfileTwoState extends State<ProfileTwo> {
   final TextEditingController _dateOfBirthController = TextEditingController();
   final TextEditingController _nationality = TextEditingController();
   var dateOfBirthValue;
+  // final email = FirebaseAuth.instance.currentUser!.email;
+  // final userId = FirebaseAuth.instance.currentUser!.uid;
 
   @override
   Widget build(BuildContext context) {
@@ -33,17 +36,16 @@ class _ProfileTwoState extends State<ProfileTwo> {
             ),
             const Image(
               image: AssetImage('assets/details.png'),
-              height: 100.0,
-              width: 100.0,
+              width: 150.0,
               fit: BoxFit.contain,
             ),
             const SizedBox(
               height: 20.0,
             ),
-            const Text(
-              'Just few more details...',
-              style: TextStyle(
-                color: Colors.black,
+            Text(
+              AppLocalizations.of(context)!.profile2_title,
+              style: const TextStyle(
+                color: Color.fromRGBO(15, 48, 65, 1),
                 fontSize: 25.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -65,21 +67,21 @@ class _ProfileTwoState extends State<ProfileTwo> {
                 controller: _dateOfBirthController,
                 keyboardType: TextInputType.none,
                 // textInputAction: TextInputAction.next,
-                decoration: const InputDecoration(
-                  label: Text('Date of Birth'),
-                  labelStyle: TextStyle(
+                decoration: InputDecoration(
+                  label: Text(AppLocalizations.of(context)!.profile2_dob),
+                  labelStyle: const TextStyle(
                     color: Colors.black,
                   ),
-                  hintText: 'Select your Date of Birth',
-                  enabledBorder: OutlineInputBorder(
+                  hintText: AppLocalizations.of(context)!.profile2_enter_dob,
+                  enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color.fromRGBO(253, 69, 77, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 2.0,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color.fromRGBO(253, 69, 77, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 2.0,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -98,21 +100,22 @@ class _ProfileTwoState extends State<ProfileTwo> {
               child: TextField(
                 controller: _nationality,
                 keyboardType: TextInputType.none,
-                decoration: const InputDecoration(
-                  label: Text('Nationality'),
-                  labelStyle: TextStyle(
+                decoration: InputDecoration(
+                  label: Text(AppLocalizations.of(context)!.profile2_country),
+                  labelStyle: const TextStyle(
                     color: Colors.black,
                   ),
-                  hintText: 'Select your Nationality',
-                  enabledBorder: OutlineInputBorder(
+                  hintText:
+                      AppLocalizations.of(context)!.profile2_enter_country,
+                  enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color.fromRGBO(253, 69, 77, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 2.0,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color.fromRGBO(253, 69, 77, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 2.0,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -129,21 +132,21 @@ class _ProfileTwoState extends State<ProfileTwo> {
               padding: const EdgeInsets.only(left: 15.0, right: 15.0),
               child: TextField(
                 controller: _documentNumber,
-                decoration: const InputDecoration(
-                  label: Text('ID number'),
-                  labelStyle: TextStyle(
+                decoration: InputDecoration(
+                  label: Text(AppLocalizations.of(context)!.profile2_id),
+                  labelStyle: const TextStyle(
                     color: Colors.black,
                   ),
-                  hintText: 'Please enter your ID number',
-                  enabledBorder: OutlineInputBorder(
+                  hintText: AppLocalizations.of(context)!.profile2_enter_id,
+                  enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color.fromRGBO(253, 69, 77, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 2.0,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
-                  focusedBorder: OutlineInputBorder(
+                  focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(
-                        color: Color.fromRGBO(253, 69, 77, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 2.0,
                       ),
                       borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -162,27 +165,28 @@ class _ProfileTwoState extends State<ProfileTwo> {
                     children: [
                       Expanded(
                         child: ElevatedButton(
+                          // style: ButtonStyle(
+                          //     backgroundColor: MaterialStateProperty.all(
+                          //         const Color.fromRGBO(253, 69, 77, 1))),
+                          onPressed: () {
+                            completeProfile();
+                            Navigator.of(context).pop();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const HomePage()));
+                            // widget.controller.animateToPage(2, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                          },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
+                            children: [
                               Text(
-                                'Finished!',
-                                style: TextStyle(
+                                AppLocalizations.of(context)!
+                                    .profile2_finish_btn,
+                                style: const TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
                             ],
                           ),
-                          style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all(
-                                  const Color.fromRGBO(253, 69, 77, 1))),
-                          onPressed: () {
-                            completeProfile();
-                            Navigator.of(context).pop();
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => HomePage()));
-                            // widget.controller.animateToPage(2, duration: Duration(seconds: 1), curve: Curves.easeIn);
-                          },
                         ),
                       ),
                     ],
@@ -209,7 +213,7 @@ class _ProfileTwoState extends State<ProfileTwo> {
               data: Theme.of(context).copyWith(
                 colorScheme: const ColorScheme.light(
                   primary:
-                      Color.fromRGBO(253, 69, 77, 1), // header background color
+                      Color.fromRGBO(15, 48, 65, 1), // header background color
                   onPrimary:
                       Color.fromARGB(255, 247, 247, 247), // header text color
                   onSurface: Colors.black, // body text color
@@ -237,10 +241,10 @@ class _ProfileTwoState extends State<ProfileTwo> {
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10), side: BorderSide.none),
             backgroundColor: Colors.white,
-            title: const Text(
-              'Select your Country',
-              style: TextStyle(
-                  color: Color.fromRGBO(253, 69, 77, 1),
+            title: Text(
+              AppLocalizations.of(context)!.profile2_select_country_title,
+              style: const TextStyle(
+                  color: Color.fromRGBO(15, 48, 65, 1),
                   fontSize: 25.0,
                   fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
@@ -258,54 +262,49 @@ class _ProfileTwoState extends State<ProfileTwo> {
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
-                        return Container(
-                          // height: 500.0,
-                          // width: 300.0,
-                          child: ListView.separated(
-                            physics: const AlwaysScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            separatorBuilder:
-                                (BuildContext context, int index) =>
-                                    const Divider(
-                              thickness: 1,
-                              color: Color.fromRGBO(253, 69, 77, 1),
-                            ),
-                            itemCount: snapshot.data!.length,
-                            itemBuilder: (context, index) {
-                              return SimpleDialogOption(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      snapshot.data![index].flag ?? '',
+                        return ListView.separated(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          separatorBuilder: (BuildContext context, int index) =>
+                              const Divider(
+                            thickness: 1,
+                            color: Color.fromRGBO(15, 48, 65, 1),
+                          ),
+                          itemCount: snapshot.data!.length,
+                          itemBuilder: (context, index) {
+                            return SimpleDialogOption(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    snapshot.data![index].flag ?? '',
+                                    style: const TextStyle(
+                                      fontSize: 17.0,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 5.0,
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      snapshot.data![index].name,
                                       style: const TextStyle(
                                         fontSize: 17.0,
+                                        // color: Color.fromRGBO(253, 69, 77, 1),
+                                        // fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        snapshot.data![index].name,
-                                        style: const TextStyle(
-                                          fontSize: 20.0,
-                                          color: Color.fromRGBO(253, 69, 77, 1),
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  _nationality.value = TextEditingValue(
-                                      text: snapshot.data![index].name);
-                                  FocusScope.of(context).unfocus();
-                                },
-                              );
-                            },
-                          ),
+                                  ),
+                                ],
+                              ),
+                              onPressed: () {
+                                Navigator.pop(context);
+                                _nationality.value = TextEditingValue(
+                                    text: snapshot.data![index].name);
+                                FocusScope.of(context).unfocus();
+                              },
+                            );
+                          },
                         );
                       }
                     }),

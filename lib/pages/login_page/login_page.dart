@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:new_client_app/main.dart';
+import 'package:new_client_app/pages/homepage/home_page.dart';
 import 'package:new_client_app/pages/register_page/register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -156,7 +158,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: signIn,
                               style: ButtonStyle(
                                   padding: MaterialStateProperty.all(
                                       EdgeInsets.all(15)),
@@ -214,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                             },
                             child: Text(
                               AppLocalizations.of(context)!.loginp_register_now,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color.fromRGBO(200, 36, 47, 1),
                                 // fontSize: 17.0,
                               ),
@@ -245,35 +247,6 @@ class _LoginPageState extends State<LoginPage> {
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-
-      //   userId = FirebaseAuth.instance.currentUser!.uid;
-      //   isCompleteProfile = await DatabaseService(uid: userId).checkProfile(userId);
-
-      //   await navigatorKey.currentState!.push(MaterialPageRoute(builder: (context) {
-
-      //   if(isCompleteProfile){
-      //     print('login page1');
-      //     return const HomePage();
-      //   }else{
-      //   print('login page2');
-
-      //     return const CompleteProfile();
-
-      //   }
-      // }));
-
-      //   await Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-
-      //   if(isCompleteProfile){
-      //     print('login page1');
-      //     return const HomePage();
-      //   }else{
-      //   print('login page2');
-
-      //     return const CompleteProfile();
-
-      //   }
-      // }));
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString()),
@@ -282,7 +255,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
 
-    // navigatorKey.currentState!.popUntil((route) => route.isFirst);
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 
   void _showPassword() {

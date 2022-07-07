@@ -62,6 +62,87 @@
     "verify_email_cancel" : "Cancel",
     "@verify_email_cancel":{
         "description": "current language"
+    },
+    "welcome_profile_title" : "Welcome to",
+    "@welcome_profile_title":{
+        "description": "current language"
+    },
+    "welcome_profile_subtitle" : "Take just few moments to complete your profile!",
+    "@welcome_profile_subtitle":{
+        "description": "current language"
+    },
+    "welcome_profile_btn" : "Start Now",
+    "@welcome_profile_btn":{
+        "description": "current language"
+    },
+    "profile1_title" : "Complete your personal details",
+    "@profile1_title":{
+        "description": "current language"
+    },
+    "profile1_name" : "Name",
+    "@profile1_name":{
+        "description": "current language"
+    },
+    "profile1_enter_name" : "Enter your Name",
+    "@profile1_enter_name":{
+        "description": "current language"
+    },
+    "profile1_surname" : "Surname",
+    "@profile1_surname":{
+        "description": "current language"
+    },
+    "profile1_enter_surname" : "Enter your Surname",
+    "@profile1_enter_surname":{
+        "description": "current language"
+    },
+    
+    "profile1_phone" : "Phone number",
+    "@profile1_phone":{
+        "description": "current language"
+    },
+    "profile1_enter_phone" : "Enter your Phone Number",
+    "@profile1_enter_phone":{
+        "description": "current language"
+    },
+    "profile1_continue_btn" : "Continue",
+    "@profile1_continue_btn":{
+        "description": "current language"
+    },
+    "profile2_title" : "Just few more details",
+    "@profile2_title":{
+        "description": "current language"
+    },
+    "profile2_dob" : "Date of Birth",
+    "@profile2_dob":{
+        "description": "current language"
+    },
+    "profile2_enter_dob" : "Enter your Date of Birth",
+    "@profile2_enter_dob":{
+        "description": "current language"
+    },
+    "profile2_country" : "Nationality",
+    "@profile2_country":{
+        "description": "current language"
+    },
+    "profile2_enter_country" : "Select your Nationality",
+    "@profile2_enter_country":{
+        "description": "current language"
+    },
+    "profile2_id" : "ID Number",
+    "@profile2_id":{
+        "description": "current language"
+    },
+    "profile2_enter_id" : "Enter your Id Number",
+    "@profile2_enter_id":{
+        "description": "current language"
+    },
+    "profile2_finish_btn" : "Go to Law App",
+    "@profile2_finish_btn":{
+        "description": "current language"
+    },
+    "profile2_select_country_title" : "Select your Country",
+    "@profile2_select_country_title":{
+        "description": "current language"
     }
     
     

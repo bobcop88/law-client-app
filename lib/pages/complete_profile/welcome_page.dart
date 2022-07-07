@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class WelcomePageProfile extends StatefulWidget {
   final PageController controller;
@@ -33,10 +34,24 @@ class _WelcomePageProfileState extends State<WelcomePageProfile> {
                 height: 20.0,
               ),
               Row(
-                children: const [
+                children: [
                   Expanded(
                     child: Text(
-                      'Welcome to\nCompany Name',
+                      AppLocalizations.of(context)!.welcome_profile_title,
+                      style: const TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Company Name',
                       style: TextStyle(
                         fontSize: 40.0,
                         fontWeight: FontWeight.bold,
@@ -54,33 +69,36 @@ class _WelcomePageProfileState extends State<WelcomePageProfile> {
                 endIndent: 100.0,
                 height: 50.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Expanded(
-                    child: Text(
-                      'Take just few moments to complete your profile!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 17.0,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        AppLocalizations.of(context)!.welcome_profile_subtitle,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 17.0,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 50.0,
               ),
               ElevatedButton(
-                child: const Text(
-                  'Start Now',
-                  style: TextStyle(
+                child: Text(
+                  AppLocalizations.of(context)!.welcome_profile_btn,
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(
-                        const Color.fromRGBO(253, 69, 77, 1))),
+                // style: ButtonStyle(
+                //     backgroundColor: MaterialStateProperty.all(
+                //         const Color.fromRGBO(253, 69, 77, 1))),
                 onPressed: () {
                   widget.controller.animateToPage(1,
                       duration: const Duration(seconds: 1),

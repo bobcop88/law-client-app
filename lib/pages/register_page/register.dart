@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
 import 'package:new_client_app/pages/register_page/verify_email_page.dart';
+import 'package:new_client_app/utils/users/database_users.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -357,12 +358,14 @@ class _RegisterPageState extends State<RegisterPage> {
       User? user = result.user;
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
-        content: Text(e.message.toString()),
+        content: Text(e.message.toString() ==
+                'The email address is already in use by another account.'
+            ? 'You have already an account. Please login with your email and password.'
+            : e.message.toString()),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
-    navigatorKey.currentState!.pushReplacement(
-        MaterialPageRoute(builder: (context) => VerifyEmailPage()));
+    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

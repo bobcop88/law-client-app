@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:new_client_app/pages/complete_profile/complete_profile_page.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
 import 'package:new_client_app/pages/register_page/register.dart';
-import 'package:new_client_app/pages/register_page/verify_email_page.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(242, 242, 242, 1),
+      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -43,81 +43,81 @@ class _StartPageState extends State<StartPage> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: Image.asset(
                       'assets/logo.png',
-                      color: Color.fromRGBO(15, 48, 65, 1),
+                      color: const Color.fromRGBO(15, 48, 65, 1),
                     ),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30.0, 0, 30.0, 10.0),
+                padding: const EdgeInsets.fromLTRB(30.0, 0, 30.0, 10.0),
                 child: Row(
                   children: [
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => LoginPage()));
+                              builder: (context) => const LoginPage()));
                         },
-                        child: Text(
-                          AppLocalizations.of(context)!.sp_login_btn,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                          ),
-                        ),
                         style: ButtonStyle(
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(15)),
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.all(15)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20)))),
+                        child: Text(
+                          AppLocalizations.of(context)!.sp_login_btn,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
               Padding(
-                padding: EdgeInsets.fromLTRB(30.0, 5.0, 30.0, 0),
+                padding: const EdgeInsets.fromLTRB(30.0, 5.0, 30.0, 0),
                 child: Row(
                   children: [
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => RegisterPage()));
+                              builder: (context) => const RegisterPage()));
                         },
-                        child: Text(
-                          AppLocalizations.of(context)!.sp_register_btn,
-                          style: TextStyle(
-                            fontSize: 20.0,
-                            color: Color.fromRGBO(200, 36, 47, 1),
-                          ),
-                        ),
                         style: ButtonStyle(
-                            padding:
-                                MaterialStateProperty.all(EdgeInsets.all(15)),
+                            padding: MaterialStateProperty.all(
+                                const EdgeInsets.all(15)),
                             shape: MaterialStateProperty.all(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(20))),
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.white),
-                            side: MaterialStateProperty.all(BorderSide(
-                                color: Color.fromRGBO(200, 36, 47, 1)))),
+                            side: MaterialStateProperty.all(const BorderSide(
+                                color: const Color.fromRGBO(200, 36, 47, 1)))),
+                        child: Text(
+                          AppLocalizations.of(context)!.sp_register_btn,
+                          style: const TextStyle(
+                            fontSize: 20.0,
+                            color: const Color.fromRGBO(200, 36, 47, 1),
+                          ),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -129,9 +129,9 @@ class _StartPageState extends State<StartPage> {
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => VerifyEmailPage()));
+                            builder: (context) => const CompleteProfilePage()));
                       },
-                      child: Text('verify')),
+                      child: const Text('verify')),
                 ],
               ),
             ],
