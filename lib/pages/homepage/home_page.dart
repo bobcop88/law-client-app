@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/home_first.dart';
@@ -35,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
         elevation: 1,
-        shadowColor: Color.fromRGBO(15, 48, 65, 1),
+        shadowColor: const Color.fromRGBO(15, 48, 65, 1),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -49,8 +48,8 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: IconButton(
-              icon: Icon(CupertinoIcons.chat_bubble_2),
-              color: Color.fromRGBO(15, 48, 65, 1),
+              icon: const Icon(CupertinoIcons.chat_bubble_2),
+              color: const Color.fromRGBO(15, 48, 65, 1),
               onPressed: () {},
             ),
           )
@@ -93,29 +92,29 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: const BoxDecoration(color: Colors.white),
         child: SalomonBottomBar(
           // height: 60.0,
           items: [
             SalomonBottomBarItem(
-              icon: Icon(
+              icon: const Icon(
                 Icons.home_filled,
               ),
-              title: Text('Home'),
-              selectedColor: Color.fromRGBO(200, 36, 47, 1),
+              title: const Text('Home'),
+              selectedColor: const Color.fromRGBO(200, 36, 47, 1),
             ),
             SalomonBottomBarItem(
-                icon: Icon(
+                icon: const Icon(
                   Icons.miscellaneous_services_outlined,
                 ),
-                title: Text('Services'),
-                selectedColor: Color.fromRGBO(200, 36, 47, 1)),
+                title: const Text('Services'),
+                selectedColor: const Color.fromRGBO(200, 36, 47, 1)),
             SalomonBottomBarItem(
-                icon: Icon(
-                  Icons.contact_support_outlined,
+                icon: const Icon(
+                  CupertinoIcons.person_fill,
                 ),
-                title: Text('Contact'),
-                selectedColor: Color.fromRGBO(200, 36, 47, 1)),
+                title: const Text('Profile'),
+                selectedColor: const Color.fromRGBO(200, 36, 47, 1)),
           ],
           currentIndex: _selectedIndex,
           onTap: (_selectedIndex) {

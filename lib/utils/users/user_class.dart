@@ -77,7 +77,6 @@ class UserAllDetails {
   final String id;
   final String email;
   final String phoneNumber;
-  final String isVerified;
   final int dateCreation;
   final String firstName;
   final String lastName;
@@ -89,7 +88,6 @@ class UserAllDetails {
     required this.id,
     required this.email,
     required this.phoneNumber,
-    required this.isVerified,
     required this.dateCreation,
     required this.firstName,
     required this.lastName,
@@ -102,7 +100,6 @@ class UserAllDetails {
         id: json['id'],
         email: json['email'],
         phoneNumber: json['phoneNumber'],
-        isVerified: json['isVerified'],
         dateCreation: json['dateCreation'],
         firstName: json['firstName'],
         lastName: json['lastName'],

@@ -31,4 +31,12 @@ class DatabaseUsers {
     final json = userCompleteProfile.toJson();
     await docUser.set(json);
   }
+
+  Stream<UserAllDetails> readUser() {
+    return FirebaseFirestore.instance
+        .collection('clients')
+        .doc(uid)
+        .snapshots()
+        .map((snapshot) => UserAllDetails.fromJson(snapshot.data()!));
+  }
 }
