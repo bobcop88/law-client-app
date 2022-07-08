@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
 
 class ImmigrationPage extends StatefulWidget {
   const ImmigrationPage({Key? key}) : super(key: key);
@@ -81,7 +82,12 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
                           height: 10.0,
                         ),
                         ElevatedButton(
-                          onPressed: nationality == 'Bulgaria' ? () {} : null,
+                          onPressed: nationality == 'Bulgaria'
+                              ? () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (context) => EuVisaPage()));
+                                }
+                              : null,
                           child: Text('Request service'),
                         ),
                       ],
@@ -142,7 +148,6 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
                         ElevatedButton(
                           onPressed: nationality != 'Bulgaria' ? () {} : null,
                           child: Text('Request service'),
-                          style: ButtonStyle(),
                         ),
                       ],
                     ),

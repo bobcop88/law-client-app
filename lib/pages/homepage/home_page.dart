@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
 import 'package:new_client_app/pages/app_pages/home_first.dart';
 import 'package:new_client_app/pages/app_pages/profile_page.dart';
 import 'package:new_client_app/pages/app_pages/services_page.dart';
@@ -15,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final PageController menuController = PageController();
+  final userId = FirebaseAuth.instance.currentUser!.uid;
 
   void pageChanged(int index) {
     setState(() {
@@ -50,7 +53,10 @@ class _HomePageState extends State<HomePage> {
             child: IconButton(
               icon: const Icon(CupertinoIcons.chat_bubble_2),
               color: const Color.fromRGBO(15, 48, 65, 1),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ChatPage(id: userId)));
+              },
             ),
           )
         ],

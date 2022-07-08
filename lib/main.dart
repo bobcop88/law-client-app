@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Color.fromRGBO(242, 242, 242, 1),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
+            visualDensity: VisualDensity.compact,
             backgroundColor:
                 MaterialStateProperty.all(Color.fromRGBO(200, 36, 47, 1)),
           ),
