@@ -63,6 +63,14 @@
     "@verify_email_cancel":{
         "description": "current language"
     },
+    "forgot_passw_title" : "Forgot Password?",
+    "@forgot_passw_title":{
+        "description": "current language"
+    },
+    "forgot_passw_sub_title" : "Enter your email address and reset your password",
+    "@forgot_passw_sub_title":{
+        "description": "current language"
+    },
     "welcome_profile_title" : "Welcome to",
     "@welcome_profile_title":{
         "description": "current language"

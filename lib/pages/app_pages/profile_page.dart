@@ -27,60 +27,73 @@ class _ProfilePageState extends State<ProfilePage> {
           final userDetails = snapshot.data!;
           return Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: const Color.fromRGBO(15, 48, 65, 1),
-                          radius: 25.0,
-                          child: Text(
-                            userDetails.firstName.split(' ')[0][0] +
-                                userDetails.lastName.split(' ')[0][0],
-                            style: const TextStyle(
-                                fontSize: 20.0, color: Colors.white),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          '${userDetails.firstName} ${userDetails.lastName}',
-                          style: const TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5.0,
-                        ),
-                        Row(
-                          children: [
-                            const Text(
-                              'Registered on: ',
-                              style: TextStyle(
-                                color: Colors.grey,
-                              ),
+              Container(
+                decoration: BoxDecoration(
+                    color: Color.fromRGBO(15, 48, 65, 1),
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(50),
+                        bottomRight: Radius.circular(50))),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 20.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 25.0,
+                            child: Text(
+                              userDetails.firstName.split(' ')[0][0] +
+                                  userDetails.lastName.split(' ')[0][0],
+                              style: const TextStyle(
+                                  fontSize: 20.0,
+                                  color: Color.fromRGBO(15, 48, 65, 1)),
                             ),
-                            Text(DateFormat('dd MMMM yyyy').format(
-                                DateTime.fromMicrosecondsSinceEpoch(
-                                    snapshot.data!.dateCreation))),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                          ),
+                          const SizedBox(
+                            height: 5.0,
+                          ),
+                          Text(
+                            '${userDetails.firstName} ${userDetails.lastName}',
+                            style: const TextStyle(
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          const SizedBox(
+                            height: 5.0,
+                          ),
+                          Row(
+                            children: [
+                              const Text(
+                                'Registered on: ',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10.0,
+                                ),
+                              ),
+                              Text(
+                                DateFormat('dd MMMM yyyy').format(
+                                    DateTime.fromMicrosecondsSinceEpoch(
+                                        snapshot.data!.dateCreation)),
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 10.0),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
-              const Divider(
-                thickness: 2,
-                color: Color.fromRGBO(15, 48, 65, 1),
-                indent: 150,
-                endIndent: 150,
-              ),
+              // const Divider(
+              //   thickness: 2,
+              //   color: Color.fromRGBO(15, 48, 65, 1),
+              //   indent: 150,
+              //   endIndent: 150,
+              // ),
               Expanded(
                 child: ListView(
                   padding: const EdgeInsets.all(10.0),
@@ -256,7 +269,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      // Navigator.of(context).pop();
                       FirebaseAuth.instance.signOut();
                     },
                     label: const Text('Log out'),

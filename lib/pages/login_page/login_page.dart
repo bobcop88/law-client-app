@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
+import 'package:new_client_app/pages/register_page/forgot_password_page.dart';
 import 'package:new_client_app/pages/register_page/register.dart';
 
 class LoginPage extends StatefulWidget {
@@ -96,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         style: const TextStyle(
                             color: Color.fromRGBO(15, 48, 65, 1),
-                            fontWeight: FontWeight.bold,
+                            // fontWeight: FontWeight.bold,
                             fontSize: 17.0),
                       ),
                       const SizedBox(
@@ -125,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                                   ? Icons.visibility_outlined
                                   : Icons.visibility_off_outlined,
                               size: 17.0,
-                              color: Color.fromRGBO(15, 48, 65, 1),
+                              color: const Color.fromRGBO(15, 48, 65, 1),
                             ),
                           ),
                           focusedBorder: const OutlineInputBorder(
@@ -148,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: _hidePassword,
                         style: const TextStyle(
                             color: Color.fromRGBO(15, 48, 65, 1),
-                            fontWeight: FontWeight.bold,
+                            // fontWeight: FontWeight.bold,
                             fontSize: 17.0),
                       ),
                       const SizedBox(
@@ -161,14 +162,14 @@ class _LoginPageState extends State<LoginPage> {
                               onPressed: signIn,
                               style: ButtonStyle(
                                   padding: MaterialStateProperty.all(
-                                      EdgeInsets.all(15)),
+                                      const EdgeInsets.all(15)),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20)))),
                               child: Text(
                                 AppLocalizations.of(context)!.sp_login_btn,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -180,10 +181,11 @@ class _LoginPageState extends State<LoginPage> {
                       // SizedBox(height: 10.0,),
                       TextButton(
                         onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => const ForgotPassword()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPassword()));
                         },
                         child: Text(
                           AppLocalizations.of(context)!.loginp_forgot_password,
@@ -204,7 +206,7 @@ class _LoginPageState extends State<LoginPage> {
                             style: ButtonStyle(
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.white),
-                              side: MaterialStateProperty.all(BorderSide(
+                              side: MaterialStateProperty.all(const BorderSide(
                                   color: Color.fromRGBO(200, 36, 47, 1))),
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
@@ -212,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => RegisterPage()));
+                                  builder: (context) => const RegisterPage()));
                             },
                             child: Text(
                               AppLocalizations.of(context)!.loginp_register_now,

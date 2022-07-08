@@ -57,38 +57,35 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: PageView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        onPageChanged: (index) {
-                          pageChanged(index);
-                        },
-                        controller: menuController,
-                        children: [
-                          HomeFirst(
-                            controller: menuController,
-                          ),
-                          ServicesPage(
-                            controller: menuController,
-                          ),
-                          ProfilePage(
-                            controller: menuController,
-                          ),
-                        ],
-                      ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Column(
+                children: [
+                  Expanded(
+                    child: PageView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      onPageChanged: (index) {
+                        pageChanged(index);
+                      },
+                      controller: menuController,
+                      children: [
+                        HomeFirst(
+                          controller: menuController,
+                        ),
+                        ServicesPage(
+                          controller: menuController,
+                        ),
+                        ProfilePage(
+                          controller: menuController,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: Container(
