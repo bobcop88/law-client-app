@@ -27,6 +27,7 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
       body: Container(
         decoration: const BoxDecoration(
@@ -122,16 +123,6 @@ class _StartPageState extends State<StartPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(AppLocalizations.of(context)!.sp_developed),
-                ],
-              ),
-              Row(
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const CompleteProfilePage()));
-                      },
-                      child: const Text('verify')),
                 ],
               ),
             ],

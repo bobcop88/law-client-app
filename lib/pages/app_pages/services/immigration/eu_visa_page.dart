@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:new_client_app/utils/services/database_services.dart';
 
 class EuVisaPage extends StatefulWidget {
   const EuVisaPage({Key? key}) : super(key: key);
@@ -34,7 +36,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text(
                   'EU visa',
                   style: TextStyle(
@@ -48,7 +50,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
               height: 10.0,
             ),
             Row(
-              children: [
+              children: const [
                 Expanded(
                   child: Text(
                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fermentum justo turpis, consequat mollis ex congue ut. Nam sagittis lacinia ipsum, id semper tellus.',
@@ -62,7 +64,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
               height: 20.0,
             ),
             Row(
-              children: [
+              children: const [
                 Text(
                   'Requirements',
                   style: TextStyle(
@@ -81,10 +83,10 @@ class _EuVisaPageState extends State<EuVisaPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Sufficient economic resources',
                       ),
-                      Text(
+                      const Text(
                         'This can be demonstrated in various ways for example payslips or bank statements',
                         style: TextStyle(fontSize: 12.0, color: Colors.grey),
                       ),
@@ -92,14 +94,14 @@ class _EuVisaPageState extends State<EuVisaPage> {
                         children: [
                           ElevatedButton(
                             onPressed: () {},
-                            style: ButtonStyle(
+                            style: const ButtonStyle(
                                 visualDensity: VisualDensity.compact),
-                            child: Text('Upload'),
+                            child: const Text('Upload'),
                           ),
                           const SizedBox(
                             width: 10.0,
                           ),
-                          Text(
+                          const Text(
                             'No document uploaded',
                             style: TextStyle(fontSize: 12.0),
                           ),
@@ -110,17 +112,17 @@ class _EuVisaPageState extends State<EuVisaPage> {
                 ),
               ],
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: [
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         'Empadronamiento',
                       ),
-                      Text(
+                      const Text(
                         'Proof of your place of residence in Spain',
                         style: TextStyle(fontSize: 12.0, color: Colors.grey),
                       ),
@@ -130,12 +132,12 @@ class _EuVisaPageState extends State<EuVisaPage> {
                             onPressed: () {
                               _showSelectFile(context);
                             },
-                            child: Text('Upload'),
+                            child: const Text('Upload'),
                           ),
                           const SizedBox(
                             width: 10.0,
                           ),
-                          Text(
+                          const Text(
                             'No document uploaded',
                             style: TextStyle(fontSize: 12.0),
                           ),
@@ -146,6 +148,22 @@ class _EuVisaPageState extends State<EuVisaPage> {
                 ),
               ],
             ),
+            const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    DatabaseService(uid: user)
+                        .createMyServices('EU Visa', docUrl, 'test');
+                  },
+                  child: const Text('Send request'),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 20.0,
+            )
           ],
         ),
       ),
@@ -172,7 +190,6 @@ class _EuVisaPageState extends State<EuVisaPage> {
         fileName = pickedFile!.name;
         previewVisible = true;
         link = pickedFile!.path;
-        print(link);
       });
     });
 
@@ -190,7 +207,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                   selectFile();
                   Navigator.of(context).pop();
                 },
-                child: Text('Select from Device'),
+                child: const Text('Select from Device'),
               ),
               // CupertinoActionSheetAction(
               //   onPressed: () {
