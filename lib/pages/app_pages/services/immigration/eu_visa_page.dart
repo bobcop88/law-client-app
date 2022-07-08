@@ -1,3 +1,9 @@
+import 'dart:io';
+
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class EuVisaPage extends StatefulWidget {
@@ -8,6 +14,13 @@ class EuVisaPage extends StatefulWidget {
 }
 
 class _EuVisaPageState extends State<EuVisaPage> {
+  PlatformFile? pickedFile;
+  UploadTask? uploadTask;
+  final user = FirebaseAuth.instance.currentUser!.uid;
+  var fileName = 'No document selected';
+  var previewVisible = false;
+  String? link = '';
+  String docUrl = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,7 +127,9 @@ class _EuVisaPageState extends State<EuVisaPage> {
                       Row(
                         children: [
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              _showSelectFile(context);
+                            },
                             child: Text('Upload'),
                           ),
                           const SizedBox(
@@ -135,5 +150,58 @@ class _EuVisaPageState extends State<EuVisaPage> {
         ),
       ),
     );
+  }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+
+    if (result == null) return;
+
+    setState(() {
+      pickedFile = result.files.first;
+    });
+
+    final path = '$user/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+    uploadTask = ref.putFile(file);
+
+    final snapshot = await uploadTask!.whenComplete(() {
+      setState(() {
+        fileName = pickedFile!.name;
+        previewVisible = true;
+        link = pickedFile!.path;
+        print(link);
+      });
+    });
+
+    docUrl = await snapshot.ref.getDownloadURL();
+  }
+
+  void _showSelectFile(BuildContext context) {
+    showCupertinoModalPopup(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoActionSheet(
+            actions: [
+              CupertinoActionSheetAction(
+                onPressed: () {
+                  selectFile();
+                  Navigator.of(context).pop();
+                },
+                child: Text('Select from Device'),
+              ),
+              // CupertinoActionSheetAction(
+              //   onPressed: () {
+              //     cameraFile();
+              //   },
+              //   child: Text(
+              //     'Camera'
+              //   ),
+              // ),
+            ],
+          );
+        });
   }
 }
