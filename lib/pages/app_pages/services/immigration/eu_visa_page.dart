@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:new_client_app/pages/app_pages/services/preview_doc.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 
 class EuVisaPage extends StatefulWidget {
@@ -137,9 +138,40 @@ class _EuVisaPageState extends State<EuVisaPage> {
                           const SizedBox(
                             width: 10.0,
                           ),
-                          const Text(
-                            'No document uploaded',
-                            style: TextStyle(fontSize: 12.0),
+                          // const Text(
+                          //   'No document uploaded',
+                          //   style: TextStyle(fontSize: 12.0),
+                          // ),
+                          SizedBox(width: 5.0),
+                          Expanded(
+                            child: Text(
+                              fileName,
+                              style: TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                                fontSize: 12.0,
+                              ),
+                            ),
+                          ),
+                          Visibility(
+                            visible: previewVisible,
+                            child: TextButton(
+                              child: Text(
+                                'Preview',
+                                style: TextStyle(fontSize: 12.0),
+                              ),
+                              style: ButtonStyle(
+                                  tapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                  minimumSize:
+                                      MaterialStateProperty.all(Size.zero),
+                                  padding: MaterialStateProperty.all(
+                                      EdgeInsets.zero)),
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: ((context) =>
+                                        PreviewDoc(file: link!))));
+                              },
+                            ),
                           ),
                         ],
                       )
