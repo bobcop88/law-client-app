@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "986321652720",
+    "project_id": "law-final",
+    "storage_bucket": "law-final.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986321652720:android:240d02f7318679412c2b35",
+        "android_client_info": {
+          "package_name": "com.example.new_client_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986321652720-7qef69hl66h5ksbgt1brahnmljtmjg4q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDApbMEDZ3gwM0Z9bw3DS0pya6uximk4LE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986321652720-7qef69hl66h5ksbgt1brahnmljtmjg4q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "986321652720-1rqvp8t1mnkuhuvlp31hlvkms2cuji27.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.newClientApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
