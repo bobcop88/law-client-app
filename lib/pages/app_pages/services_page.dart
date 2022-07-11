@@ -21,8 +21,12 @@ class _ServicesPageState extends State<ServicesPage> {
                 child: Container(
                   height: 200,
                   decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromRGBO(15, 48, 65, 1),
+                      width: 3,
+                    ),
                     image: DecorationImage(
-                        fit: BoxFit.contain,
+                        fit: BoxFit.cover,
                         colorFilter: ColorFilter.mode(
                             const Color.fromRGBO(15, 48, 65, 1)
                                 .withOpacity(0.7),
@@ -70,6 +74,7 @@ class _ServicesPageState extends State<ServicesPage> {
               ),
             ],
           ),
+          const SizedBox(height: 10.0,),
           Row(
             children: [
               Expanded(
