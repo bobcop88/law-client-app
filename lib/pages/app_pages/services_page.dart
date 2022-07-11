@@ -22,7 +22,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   height: 200,
                   decoration: BoxDecoration(
                     border: Border.all(
-                      color: Color.fromRGBO(15, 48, 65, 1),
+                      color: const Color.fromRGBO(15, 48, 65, 1),
                       width: 3,
                     ),
                     image: DecorationImage(
@@ -37,7 +37,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'IMMIGRATION',
                         style: TextStyle(
                             color: Colors.white,
@@ -50,7 +50,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         indent: 150,
                         endIndent: 150,
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra nulla non faucibus elementum. In vel pharetra justo. Proin ornare risus felis, in eleifend lorem fringilla vel. ',
@@ -64,9 +64,9 @@ class _ServicesPageState extends State<ServicesPage> {
                       ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: ((context) => ImmigrationPage())));
+                              builder: ((context) => const ImmigrationPage())));
                         },
-                        child: Text('Immigration services'),
+                        child: const Text('Immigration services'),
                       ),
                     ],
                   ),
@@ -74,13 +74,19 @@ class _ServicesPageState extends State<ServicesPage> {
               ),
             ],
           ),
-          const SizedBox(height: 10.0,),
+          const SizedBox(
+            height: 10.0,
+          ),
           Row(
             children: [
               Expanded(
                 child: Container(
                   height: 200,
                   decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromRGBO(15, 48, 65, 1),
+                      width: 3,
+                    ),
                     image: DecorationImage(
                         fit: BoxFit.contain,
                         colorFilter: ColorFilter.mode(
@@ -93,7 +99,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'GLOBAL MOBILITY',
                         style: TextStyle(
                             color: Colors.white,
@@ -106,7 +112,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         indent: 150,
                         endIndent: 150,
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra nulla non faucibus elementum. In vel pharetra justo. Proin ornare risus felis, in eleifend lorem fringilla vel. ',
@@ -119,7 +125,7 @@ class _ServicesPageState extends State<ServicesPage> {
                       ),
                       ElevatedButton(
                         onPressed: () {},
-                        child: Text('Global Mobility'),
+                        child: const Text('Global Mobility'),
                       ),
                     ],
                   ),
@@ -127,12 +133,19 @@ class _ServicesPageState extends State<ServicesPage> {
               ),
             ],
           ),
+          const SizedBox(
+            height: 10.0,
+          ),
           Row(
             children: [
               Expanded(
                 child: Container(
                   height: 200,
                   decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromRGBO(15, 48, 65, 1),
+                      width: 3,
+                    ),
                     image: DecorationImage(
                         fit: BoxFit.contain,
                         colorFilter: ColorFilter.mode(
@@ -145,7 +158,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'NATIONALITY & CITIZENSHIP',
                         style: TextStyle(
                             color: Colors.white,
@@ -158,7 +171,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         indent: 150,
                         endIndent: 150,
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra nulla non faucibus elementum. In vel pharetra justo. Proin ornare risus felis, in eleifend lorem fringilla vel. ',
@@ -171,7 +184,7 @@ class _ServicesPageState extends State<ServicesPage> {
                       ),
                       ElevatedButton(
                         onPressed: () {},
-                        child: Text('Nationality & Citizenship'),
+                        child: const Text('Nationality & Citizenship'),
                       ),
                     ],
                   ),
@@ -179,12 +192,19 @@ class _ServicesPageState extends State<ServicesPage> {
               ),
             ],
           ),
+          const SizedBox(
+            height: 10.0,
+          ),
           Row(
             children: [
               Expanded(
                 child: Container(
                   height: 200,
                   decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color.fromRGBO(15, 48, 65, 1),
+                      width: 3,
+                    ),
                     image: DecorationImage(
                         fit: BoxFit.contain,
                         colorFilter: ColorFilter.mode(
@@ -197,7 +217,7 @@ class _ServicesPageState extends State<ServicesPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         'BUSINESS',
                         style: TextStyle(
                             color: Colors.white,
@@ -210,7 +230,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         indent: 150,
                         endIndent: 150,
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque viverra nulla non faucibus elementum. In vel pharetra justo. Proin ornare risus felis, in eleifend lorem fringilla vel. ',
@@ -223,7 +243,7 @@ class _ServicesPageState extends State<ServicesPage> {
                       ),
                       ElevatedButton(
                         onPressed: () {},
-                        child: Text('Business'),
+                        child: const Text('Business'),
                       ),
                     ],
                   ),

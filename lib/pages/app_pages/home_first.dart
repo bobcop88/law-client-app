@@ -285,6 +285,25 @@ class _HomeFirstState extends State<HomeFirst> {
               ],
             ),
           ),
+          const SizedBox(
+            height: 40.0,
+          ),
+          Row(
+            children: const [
+              Text(
+                'Categories',
+                style: TextStyle(
+                    color: Color.fromRGBO(15, 48, 65, 1),
+                    fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const Divider(
+            color: Color.fromRGBO(15, 48, 65, 1),
+            thickness: 2,
+            endIndent: 300,
+            height: 20.0,
+          ),
         ],
       ),
     );

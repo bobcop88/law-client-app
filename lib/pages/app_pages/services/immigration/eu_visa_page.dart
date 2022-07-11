@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,7 +16,7 @@ class EuVisaPage extends StatefulWidget {
 }
 
 class _EuVisaPageState extends State<EuVisaPage> {
-  PlatformFile? pickedFile;
+  XFile? pickedFile;
   UploadTask? uploadTask;
   final user = FirebaseAuth.instance.currentUser!.uid;
   var fileName = 'No document selected';
@@ -93,8 +92,10 @@ class _EuVisaPageState extends State<EuVisaPage> {
                       ),
                       Row(
                         children: [
-                          ElevatedButton(
-                            onPressed: () {},
+                          TextButton(
+                            onPressed: () {
+                              _showSelectFile(context);
+                            },
                             style: const ButtonStyle(
                                 visualDensity: VisualDensity.compact),
                             child: const Text('Upload'),
@@ -129,7 +130,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                       ),
                       Row(
                         children: [
-                          ElevatedButton(
+                          TextButton(
                             onPressed: () {
                               _showSelectFile(context);
                             },
@@ -138,15 +139,11 @@ class _EuVisaPageState extends State<EuVisaPage> {
                           const SizedBox(
                             width: 10.0,
                           ),
-                          // const Text(
-                          //   'No document uploaded',
-                          //   style: TextStyle(fontSize: 12.0),
-                          // ),
-                          SizedBox(width: 5.0),
+                          const SizedBox(width: 5.0),
                           Expanded(
                             child: Text(
                               fileName,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 overflow: TextOverflow.ellipsis,
                                 fontSize: 12.0,
                               ),
@@ -155,10 +152,6 @@ class _EuVisaPageState extends State<EuVisaPage> {
                           Visibility(
                             visible: previewVisible,
                             child: TextButton(
-                              child: Text(
-                                'Preview',
-                                style: TextStyle(fontSize: 12.0),
-                              ),
                               style: ButtonStyle(
                                   tapTargetSize:
                                       MaterialTapTargetSize.shrinkWrap,
@@ -171,10 +164,22 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                     builder: ((context) =>
                                         PreviewDoc(file: link!))));
                               },
+                              child: const Text(
+                                'Preview',
+                                style: TextStyle(fontSize: 12.0),
+                              ),
                             ),
                           ),
                         ],
-                      )
+                      ),
+                      // Row(
+                      //   children: [
+                      //     ElevatedButton(
+                      //       onPressed: cameraFile,
+                      //       child: Text('Camera'),
+                      //     ),
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
@@ -203,16 +208,17 @@ class _EuVisaPageState extends State<EuVisaPage> {
   }
 
   Future selectFile() async {
-    final result = await FilePicker.platform.pickFiles();
+    // final result = await FilePicker.platform.pickFiles();
+    final result = await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (result == null) return;
 
     setState(() {
-      pickedFile = result.files.first;
+      pickedFile = result;
     });
 
     final path = '$user/${pickedFile!.name}';
-    final file = File(pickedFile!.path!);
+    final file = File(pickedFile!.path);
 
     final ref = FirebaseStorage.instance.ref().child(path);
     uploadTask = ref.putFile(file);
@@ -229,28 +235,64 @@ class _EuVisaPageState extends State<EuVisaPage> {
   }
 
   void _showSelectFile(BuildContext context) {
-    showCupertinoModalPopup(
-        context: context,
-        builder: (BuildContext context) {
-          return CupertinoActionSheet(
-            actions: [
-              CupertinoActionSheetAction(
-                onPressed: () {
-                  selectFile();
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Select from Device'),
-              ),
-              // CupertinoActionSheetAction(
-              //   onPressed: () {
-              //     cameraFile();
-              //   },
-              //   child: Text(
-              //     'Camera'
-              //   ),
-              // ),
-            ],
-          );
-        });
+    if (Platform.isIOS) {
+      showCupertinoModalPopup(
+          context: context,
+          builder: (BuildContext context) {
+            return CupertinoActionSheet(
+              actions: [
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    selectFile();
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Select from Device'),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    cameraFile();
+                  },
+                  child: Text('Camera'),
+                ),
+              ],
+            );
+          });
+    } else {
+      showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return Wrap(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.folder),
+                  title: Text('Select from Gallery'),
+                  onTap: () {
+                    selectFile();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.camera_alt),
+                  title: Text('Camera'),
+                  onTap: cameraFile,
+                ),
+              ],
+            );
+          });
+    }
+  }
+
+  Future cameraFile() async {
+    final ImagePicker picker = ImagePicker();
+
+    final XFile? photo = await picker.pickImage(
+      source: ImageSource.camera,
+      imageQuality: 2,
+    );
+    if (photo == null) return;
+
+    final path = '$user/${photo.name}';
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+    ref.putFile(File(photo.path));
   }
 }
