@@ -49,17 +49,23 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(
-              icon: const Icon(CupertinoIcons.chat_bubble_2),
-              color: const Color.fromRGBO(15, 48, 65, 1),
-              onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ChatPage(id: userId)));
-              },
-            ),
-          )
+          IconButton(
+            icon: const Icon(CupertinoIcons.chat_bubble_2),
+            color: const Color.fromRGBO(15, 48, 65, 1),
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => ChatPage(id: userId)));
+            },
+          ),
+          IconButton(
+            icon: const Icon(CupertinoIcons.bell),
+            color: const Color.fromRGBO(15, 48, 65, 1),
+            tooltip: 'pressed',
+            onPressed: () {
+              print('pressed');
+              Text('test');
+            },
+          ),
         ],
       ),
       backgroundColor: Theme.of(context).primaryColor,

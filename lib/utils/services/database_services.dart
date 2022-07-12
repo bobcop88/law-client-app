@@ -55,4 +55,14 @@ class DatabaseService {
             .map((doc) => UserMyServices.fromJson(doc.data()))
             .toList());
   }
+
+  Stream<List<UserMyServices>> readAllMyServicesPending() {
+    return FirebaseFirestore.instance
+        .collection('clients/$uid/myServices')
+        .where("currentState", isNotEqualTo: "Completed")
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => UserMyServices.fromJson(doc.data()))
+            .toList());
+  }
 }

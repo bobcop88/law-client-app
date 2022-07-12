@@ -17,7 +17,7 @@ class _PendingServicesState extends State<PendingServices> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<UserMyServices>>(
-        stream: DatabaseService(uid: userId).readAllMyServices(),
+        stream: DatabaseService(uid: userId).readAllMyServicesPending(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return CircularProgressIndicator();
@@ -59,8 +59,8 @@ class _PendingServicesState extends State<PendingServices> {
                 ),
               ],
             ),
-            Divider(),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   'Start Date: ',
@@ -69,6 +69,28 @@ class _PendingServicesState extends State<PendingServices> {
                 Text(DateFormat('dd MMMM yyyy').format(
                     DateTime.fromMicrosecondsSinceEpoch(
                         services.creationDate))),
+              ],
+            ),
+            Divider(),
+            Row(
+              children: [
+                Text(
+                  'Status: ',
+                  style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                ),
+                Text(services.currentState),
+              ],
+            ),
+            SizedBox(
+              height: 5.0,
+            ),
+            Row(
+              children: [
+                Text(
+                  'Doc1 Status: ',
+                  style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                ),
+                Text(services.doc1Status),
               ],
             ),
           ],
