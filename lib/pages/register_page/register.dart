@@ -20,6 +20,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final passwordConfirmationController = TextEditingController();
+  bool acceptTerms = false;
+  bool termsError = false;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     key: loginFormKey,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 10.0,
                         ),
                         TextFormField(
@@ -125,9 +127,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               // fontWeight: FontWeight.bold,
                             ),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color.fromRGBO(15, 48, 65, 1),
-                              fontWeight: FontWeight.bold,
+                              // fontWeight: FontWeight.bold,
                               fontSize: 17.0),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (email) =>
@@ -135,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ? 'Enter a valid email address'
                                   : null,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8.0,
                         ),
                         TextFormField(
@@ -144,12 +146,12 @@ class _RegisterPageState extends State<RegisterPage> {
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
-                            prefixIcon: Icon(
+                            prefixIcon: const Icon(
                               Icons.lock,
                               color: Color.fromRGBO(15, 48, 65, 1),
                             ),
                             labelText: 'Password',
-                            labelStyle: TextStyle(
+                            labelStyle: const TextStyle(
                                 color: Color.fromRGBO(15, 48, 65, 1),
                                 fontSize: 17.0,
                                 fontWeight: FontWeight.bold),
@@ -159,11 +161,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 _hidePassword
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
-                                size: 15.0,
-                                color: Color.fromRGBO(15, 48, 65, 1),
+                                size: 18.0,
+                                color: const Color.fromRGBO(15, 48, 65, 1),
                               ),
                             ),
-                            focusedBorder: OutlineInputBorder(
+                            focusedBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15.0)),
                               borderSide: BorderSide(
@@ -171,7 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   width: 1.0,
                                   style: BorderStyle.solid),
                             ),
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15.0)),
                               borderSide: BorderSide(
@@ -179,7 +181,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   width: 1.0,
                                   style: BorderStyle.solid),
                             ),
-                            focusedErrorBorder: OutlineInputBorder(
+                            focusedErrorBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15.0)),
                               borderSide: BorderSide(
@@ -187,7 +189,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   width: 1.0,
                                   style: BorderStyle.solid),
                             ),
-                            errorBorder: OutlineInputBorder(
+                            errorBorder: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(15.0)),
                               borderSide: BorderSide(
@@ -196,9 +198,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   style: BorderStyle.solid),
                             ),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Color.fromRGBO(15, 48, 65, 1),
-                              fontWeight: FontWeight.bold,
+                              // fontWeight: FontWeight.bold,
                               fontSize: 17.0),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           obscureText: _hidePassword,
@@ -207,7 +209,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ? 'Enter min. 6 characters'
                                   : null,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 8.0,
                         ),
                         TextFormField(
@@ -258,9 +260,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                     style: BorderStyle.solid),
                               ),
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color.fromRGBO(15, 48, 65, 1),
-                                fontWeight: FontWeight.bold,
+                                // fontWeight: FontWeight.bold,
                                 fontSize: 17.0),
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
@@ -269,7 +271,63 @@ class _RegisterPageState extends State<RegisterPage> {
                                     value != passwordController.text
                                 ? 'Password not matching. Please retry'
                                 : null),
-                        SizedBox(
+                        // const SizedBox(
+                        //   height: 10.0,
+                        // ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: acceptTerms,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  acceptTerms = value!;
+                                });
+                              },
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              visualDensity: VisualDensity.compact,
+                              checkColor: Colors.white,
+                              fillColor:
+                                  MaterialStateProperty.resolveWith((states) {
+                                if (states.contains(MaterialState.selected)) {
+                                  return const Color.fromRGBO(200, 36, 47, 1);
+                                }
+                              }),
+                            ),
+                            const Text('I accept'),
+                            TextButton(
+                              onPressed: () {},
+                              style: const ButtonStyle(
+                                visualDensity: VisualDensity.compact,
+                              ),
+                              child: const Text(
+                                'Terms and Conditions',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: Color.fromRGBO(200, 36, 47, 1),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Visibility(
+                                visible: termsError,
+                                child: Text(
+                                  'Please accept Terms and Conditions',
+                                  style: TextStyle(
+                                    color: Colors.red[700],
+                                    fontSize: 12.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
                           height: 20.0,
                         ),
                         Row(
@@ -279,14 +337,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                 onPressed: signUp,
                                 style: ButtonStyle(
                                     padding: MaterialStateProperty.all(
-                                        EdgeInsets.all(15)),
+                                        const EdgeInsets.all(15)),
                                     shape: MaterialStateProperty.all(
                                         RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(20)))),
                                 child: Text(
                                   AppLocalizations.of(context)!.sp_register_btn,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20.0,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -295,7 +353,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
                         Row(
@@ -304,21 +362,23 @@ class _RegisterPageState extends State<RegisterPage> {
                             Text(
                               AppLocalizations.of(context)!
                                   .register_page_already_registered,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Color.fromRGBO(15, 48, 65, 1)),
                             ),
                             TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: ((context) => const LoginPage())));
+                              },
+                              style: const ButtonStyle(
+                                  visualDensity: VisualDensity.compact),
                               child: Text(
                                 AppLocalizations.of(context)!.sp_login_btn,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Color.fromRGBO(15, 48, 65, 1),
                                   decoration: TextDecoration.underline,
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: ((context) => LoginPage())));
-                              },
                             ),
                           ],
                         ),
@@ -343,6 +403,12 @@ class _RegisterPageState extends State<RegisterPage> {
   Future signUp() async {
     final isValid = loginFormKey.currentState!.validate();
     if (!isValid) return;
+    if (!acceptTerms) {
+      setState(() {
+        termsError = true;
+      });
+      return;
+    }
 
     showDialog(
       context: context,

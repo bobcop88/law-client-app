@@ -125,6 +125,9 @@ class _StartPageState extends State<StartPage> {
                   Text(AppLocalizations.of(context)!.sp_developed),
                 ],
               ),
+              const SizedBox(
+                height: 10.0,
+              ),
             ],
           ),
         ),

@@ -28,7 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
           return Column(
             children: [
               Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Color.fromRGBO(15, 48, 65, 1),
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(50),
@@ -77,7 +77,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 DateFormat('dd MMMM yyyy').format(
                                     DateTime.fromMicrosecondsSinceEpoch(
                                         snapshot.data!.dateCreation)),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Colors.white, fontSize: 10.0),
                               ),
                             ],
@@ -256,9 +256,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           MaterialPageRoute(
                               builder: (context) => const ForgotPassword()));
                     },
-                    child: Text(
+                    child: const Text(
                       'Reset Password',
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Color.fromRGBO(15, 48, 65, 1),
                         decoration: TextDecoration.underline,
                       ),

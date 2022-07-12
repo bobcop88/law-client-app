@@ -203,25 +203,45 @@ class _LoginPageState extends State<LoginPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Colors.white),
-                              side: MaterialStateProperty.all(const BorderSide(
-                                  color: Color.fromRGBO(200, 36, 47, 1))),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(20))),
-                            ),
+                          // ElevatedButton(
+                          //   style: ButtonStyle(
+                          //     backgroundColor:
+                          //         MaterialStateProperty.all(Colors.white),
+                          //     side: MaterialStateProperty.all(const BorderSide(
+                          //         color: Color.fromRGBO(200, 36, 47, 1))),
+                          //     shape: MaterialStateProperty.all(
+                          //         RoundedRectangleBorder(
+                          //             borderRadius: BorderRadius.circular(20))),
+                          //   ),
+                          //   onPressed: () {
+                          //     Navigator.of(context).push(MaterialPageRoute(
+                          //         builder: (context) => const RegisterPage()));
+                          //   },
+                          //   child: Text(
+                          //     AppLocalizations.of(context)!.loginp_register_now,
+                          //     style: const TextStyle(
+                          //       color: Color.fromRGBO(200, 36, 47, 1),
+                          //       // fontSize: 17.0,
+                          //     ),
+                          //   ),
+                          // ),
+                          const Text(
+                            'Not registered yet?',
+                            style: const TextStyle(
+                                color: Color.fromRGBO(15, 48, 65, 1)),
+                          ),
+                          TextButton(
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (context) => const RegisterPage()));
                             },
+                            style: const ButtonStyle(
+                                visualDensity: VisualDensity.compact),
                             child: Text(
                               AppLocalizations.of(context)!.loginp_register_now,
                               style: const TextStyle(
-                                color: Color.fromRGBO(200, 36, 47, 1),
-                                // fontSize: 17.0,
+                                color: Color.fromRGBO(15, 48, 65, 1),
+                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),

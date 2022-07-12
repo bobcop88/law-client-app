@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
 import 'package:new_client_app/pages/app_pages/home_first.dart';
+import 'package:new_client_app/pages/app_pages/my_services_page.dart';
 import 'package:new_client_app/pages/app_pages/profile_page.dart';
 import 'package:new_client_app/pages/app_pages/services_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -82,6 +83,7 @@ class _HomePageState extends State<HomePage> {
                         ServicesPage(
                           controller: menuController,
                         ),
+                        MyServicesPage(controller: menuController),
                         ProfilePage(
                           controller: menuController,
                         ),
@@ -111,6 +113,12 @@ class _HomePageState extends State<HomePage> {
                   Icons.miscellaneous_services_outlined,
                 ),
                 title: const Text('Services'),
+                selectedColor: const Color.fromRGBO(200, 36, 47, 1)),
+            SalomonBottomBarItem(
+                icon: const Icon(
+                  CupertinoIcons.folder_badge_person_crop,
+                ),
+                title: const Text('My Services'),
                 selectedColor: const Color.fromRGBO(200, 36, 47, 1)),
             SalomonBottomBarItem(
                 icon: const Icon(
