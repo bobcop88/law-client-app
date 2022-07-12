@@ -1,9 +1,14 @@
+import 'dart:async';
+
+import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
 import 'package:new_client_app/pages/app_pages/home_first.dart';
 import 'package:new_client_app/pages/app_pages/my_services_page.dart';
+import 'package:new_client_app/pages/app_pages/notifications/notifications_page.dart';
 import 'package:new_client_app/pages/app_pages/profile_page.dart';
 import 'package:new_client_app/pages/app_pages/services_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -19,6 +24,17 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final PageController menuController = PageController();
   final userId = FirebaseAuth.instance.currentUser!.uid;
+  bool showNewChatMessage = false;
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(
+      const Duration(seconds: 10),
+      (_) => checkNewChat(),
+    );
+  }
 
   void pageChanged(int index) {
     setState(() {
@@ -30,6 +46,12 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  @override
+  void dispose() {
+    timer?.cancel();
+    super.dispose();
   }
 
   @override
@@ -49,22 +71,38 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         actions: [
-          IconButton(
-            icon: const Icon(CupertinoIcons.chat_bubble_2),
-            color: const Color.fromRGBO(15, 48, 65, 1),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => ChatPage(id: userId)));
-            },
+          Badge(
+            badgeContent: const Text(
+              '1',
+              style: TextStyle(fontSize: 8, color: Colors.white),
+            ),
+            position: BadgePosition.topEnd(top: 10, end: 10),
+            showBadge: showNewChatMessage ? true : false,
+            child: IconButton(
+              icon: const Icon(CupertinoIcons.chat_bubble_2),
+              color: const Color.fromRGBO(15, 48, 65, 1),
+              onPressed: () {
+                updateLastMessage();
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ChatPage(id: userId)));
+                checkNewChat();
+              },
+            ),
           ),
-          IconButton(
-            icon: const Icon(CupertinoIcons.bell),
-            color: const Color.fromRGBO(15, 48, 65, 1),
-            tooltip: 'pressed',
-            onPressed: () {
-              print('pressed');
-              Text('test');
-            },
+          Badge(
+            badgeContent: const Text(
+              '1',
+              style: TextStyle(fontSize: 8, color: Colors.white),
+            ),
+            position: BadgePosition.topEnd(top: 10, end: 10),
+            child: IconButton(
+              icon: const Icon(CupertinoIcons.bell),
+              color: const Color.fromRGBO(15, 48, 65, 1),
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => NotificationsPage()));
+              },
+            ),
           ),
         ],
       ),
@@ -138,52 +176,33 @@ class _HomePageState extends State<HomePage> {
             _onItemTapped(_selectedIndex);
             menuController.jumpToPage(_selectedIndex);
           },
-          // backgroundColor: Colors.white,
-          // selectedItemColor: Color.fromRGBO(253, 69, 77, 1),
-          // selectedIconTheme: IconThemeData(
-          //   color: Color.fromRGBO(253, 69, 77, 1),
-          // ),
-          // showUnselectedLabels: false,
         ),
       ),
     );
   }
-}
 
-// BoxDecoration(
-//           border: Border(top: BorderSide(color: Colors.grey)),
-//         ),
-//         child: BottomNavigationBar(
-//           // height: 60.0,
-//           items: const [
-//             BottomNavigationBarItem(
-//               icon: Icon(
-//                 Icons.home_filled,
-//               ),
-//               label: 'Home',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(
-//                 Icons.miscellaneous_services_outlined,
-//               ),
-//               label: 'Services',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(
-//                 Icons.contact_support_outlined,
-//               ),
-//               label: 'Contact',
-//             ),
-//           ],
-//           currentIndex: _selectedIndex,
-//           onTap: (_selectedIndex) {
-//             _onItemTapped(_selectedIndex);
-//             menuController.jumpToPage(_selectedIndex);
-//           },
-//           backgroundColor: Colors.white,
-//           selectedItemColor: Color.fromRGBO(253, 69, 77, 1),
-//           selectedIconTheme: IconThemeData(
-//             color: Color.fromRGBO(253, 69, 77, 1),
-//           ),
-//           showUnselectedLabels: false,
-//         ),
+  void checkNewChat() {
+    FirebaseFirestore.instance
+        .collection('chats')
+        .doc(userId)
+        .get()
+        .then((value) {
+      if (value.data()!['isRead'] == false) {
+        setState(() {
+          showNewChatMessage = true;
+        });
+      } else {
+        setState(() {
+          showNewChatMessage = false;
+        });
+      }
+    });
+  }
+
+  void updateLastMessage() {
+    FirebaseFirestore.instance
+        .collection('chats')
+        .doc(userId)
+        .update({'isRead': true});
+  }
+}

@@ -201,8 +201,8 @@ class _ChatPageState extends State<ChatPage> {
 
   void sendMessage() async {
     FocusScope.of(context).unfocus();
-    await DatabaseChat()
-        .startChat(widget.id, 'first', _messageController.text.trim());
+    await DatabaseChat().startChat(widget.id, 'rVu8FOvKC3aoBcOiq4FKinZY42p1',
+        _messageController.text.trim());
     _messageController.clear();
   }
 }

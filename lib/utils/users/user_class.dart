@@ -1,31 +1,3 @@
-// class UserModel {
-//   final String id;
-//   final String email;
-//   final String isVerified;
-//   final int dateCreation;
-
-//   UserModel({
-//     required this.id,
-//     required this.email,
-//     required this.isVerified,
-//     required this.dateCreation,
-//   });
-
-//   Map<String, dynamic> toJson() => {
-//         'id': id,
-//         'email': email,
-//         'isVerified': isVerified,
-//         'dateCreation': dateCreation,
-//       };
-
-//   static UserModel fromJson(Map<String, dynamic> json) => UserModel(
-//         id: json['id'],
-//         email: json['email'],
-//         isVerified: json['isVerified'],
-//         dateCreation: json['dateCreation'],
-//       );
-// }
-
 class UserCompleteProfile {
   final String firstName;
   final String lastName;

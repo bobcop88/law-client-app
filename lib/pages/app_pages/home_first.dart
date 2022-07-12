@@ -291,7 +291,7 @@ class _HomeFirstState extends State<HomeFirst> {
           Row(
             children: const [
               Text(
-                'Categories',
+                'News',
                 style: TextStyle(
                     color: Color.fromRGBO(15, 48, 65, 1),
                     fontWeight: FontWeight.bold),
@@ -303,6 +303,32 @@ class _HomeFirstState extends State<HomeFirst> {
             thickness: 2,
             endIndent: 300,
             height: 20.0,
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                Container(
+                  // decoration: BoxDecoration(
+                  //   image: DecorationImage(
+                  //       image: AssetImage('assets/images/news_1.jpeg')),
+                  // ),
+                  width: 200,
+                  height: 100,
+                  child: Column(
+                    children: [
+                      Image.asset(
+                        'assets/images/news_1.jpeg',
+                        height: 50,
+                        width: 200,
+                        fit: BoxFit.cover,
+                      ),
+                      Text('news 2'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
