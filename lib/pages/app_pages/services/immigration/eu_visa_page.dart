@@ -289,6 +289,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                 CupertinoActionSheetAction(
                   onPressed: () {
                     cameraFile(doc, preview, folder);
+                    Navigator.of(context).pop();
                   },
                   child: Text('Camera'),
                 ),
@@ -306,6 +307,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                   title: Text('Select from Gallery'),
                   onTap: () {
                     selectFile(doc, preview, folder);
+                    Navigator.of(context).pop();
                   },
                 ),
                 ListTile(
@@ -313,6 +315,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                   title: Text('Camera'),
                   onTap: () {
                     cameraFile(doc, preview, folder);
+                    Navigator.of(context).pop();
                   },
                 ),
               ],
@@ -322,29 +325,29 @@ class _EuVisaPageState extends State<EuVisaPage> {
   }
 
   Future cameraFile(fileName, previewFile, folder) async {
-    final ImagePicker picker = ImagePicker();
+    // final ImagePicker picker = ImagePicker();
 
-    final XFile? photo = await picker.pickImage(
+    final XFile? photo = await ImagePicker().pickImage(
       source: ImageSource.camera,
-      imageQuality: 2,
+      // imageQuality: 2,
     );
     if (photo == null) return;
 
     final path = '$user/euVisa/$folder/${photo.name}';
 
     final ref = FirebaseStorage.instance.ref().child(path);
-    ref.putFile(File(photo.path));
+    uploadTask = ref.putFile(File(photo.path));
     final snapshot = await uploadTask!.whenComplete(() {
       setState(() {
         if (fileName == doc1Name) {
-          doc1Name = pickedFile!.name;
+          doc1Name = photo.name;
           previewdoc1 = true;
         }
         if (fileName == doc2Name) {
-          doc2Name = pickedFile!.name;
+          doc2Name = photo.name;
           previewdoc2 = true;
         }
-        link = pickedFile!.path;
+        link = photo.path;
         // print('finished');
       });
     });
