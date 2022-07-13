@@ -20,7 +20,7 @@ class _PendingServicesState extends State<PendingServices> {
         stream: DatabaseService(uid: userId).readAllMyServicesPending(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else {
             final services = snapshot.data!;
             return Padding(
@@ -50,8 +50,8 @@ class _PendingServicesState extends State<PendingServices> {
                 Expanded(
                   child: Text(
                     services.serviceName,
-                    style: TextStyle(
-                        color: Color.fromRGBO(15, 48, 65, 1),
+                    style: const TextStyle(
+                        color: const Color.fromRGBO(15, 48, 65, 1),
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
@@ -62,7 +62,7 @@ class _PendingServicesState extends State<PendingServices> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Start Date: ',
                   style: TextStyle(fontSize: 12.0, color: Colors.grey),
                 ),
@@ -71,22 +71,22 @@ class _PendingServicesState extends State<PendingServices> {
                         services.creationDate))),
               ],
             ),
-            Divider(),
+            const Divider(),
             Row(
               children: [
-                Text(
+                const Text(
                   'Status: ',
-                  style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                  style: const TextStyle(fontSize: 12.0, color: Colors.grey),
                 ),
                 Text(services.currentState),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 5.0,
             ),
             Row(
               children: [
-                Text(
+                const Text(
                   'Doc1 Status: ',
                   style: TextStyle(fontSize: 12.0, color: Colors.grey),
                 ),
