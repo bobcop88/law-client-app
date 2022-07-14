@@ -17,7 +17,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         title: const Text('Notifications'),
       ),
       body: Column(
-        children: [Text('notifications')],
+        children: [Text('In development')],
       ),
     );
   }
