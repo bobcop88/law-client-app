@@ -25,15 +25,16 @@ class _HomePageState extends State<HomePage> {
   final PageController menuController = PageController();
   final userId = FirebaseAuth.instance.currentUser!.uid;
   bool showNewChatMessage = false;
+  bool showNotificationBadge = false;
   Timer? timer;
 
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(
-      const Duration(seconds: 10),
-      (_) => checkNewChat(),
-    );
+    timer = Timer.periodic(const Duration(seconds: 10), (_) {
+      checkNewChat();
+      checkNewNotification2(userId);
+    });
   }
 
   void pageChanged(int index) {
@@ -95,12 +96,16 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 8, color: Colors.white),
             ),
             position: BadgePosition.topEnd(top: 10, end: 10),
+            showBadge: showNotificationBadge,
             child: IconButton(
               icon: const Icon(CupertinoIcons.bell),
               color: const Color.fromRGBO(15, 48, 65, 1),
               onPressed: () {
+                updateNotificationBadge();
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => NotificationsPage()));
+                    builder: (context) => NotificationsPage(
+                          id: userId,
+                        )));
               },
             ),
           ),
@@ -204,5 +209,58 @@ class _HomePageState extends State<HomePage> {
         .collection('chats')
         .doc(userId)
         .update({'isRead': true});
+  }
+
+  void checkNewNotification(userId) {
+    FirebaseFirestore.instance
+        .collection('clients/$userId/notificationsFromAdmin')
+        .doc()
+        .get()
+        .then((value) {
+      if (value.data()!['isNew'] == true) {
+        setState(() {
+          showNotificationBadge = true;
+        });
+      } else {
+        setState(() {
+          showNotificationBadge = false;
+        });
+      }
+    });
+  }
+
+  checkNewNotification2(userId) async {
+    final collection = await FirebaseFirestore.instance
+        .collection('clients/$userId/notificationsFromAdmin')
+        .get();
+    collection.docs.forEach((element) {
+      if (element.data()['isNew'] == true) {
+        setState(() {
+          showNotificationBadge = true;
+          // element.data()['IsNew'] == false;
+        });
+      } else {
+        setState(() {
+          showNotificationBadge = false;
+        });
+      }
+    });
+  }
+
+  void updateNotificationBadge() async {
+    final collection = await FirebaseFirestore.instance
+        .collection('clients/$userId/notificationsFromAdmin')
+        .get();
+    collection.docs.forEach((element) {
+      if (element.data()['isNew'] == true) {
+        element.data().update({'isNew': false })
+        setState(() {
+          // showNotificationBadge = true;
+          element.data()['IsNew'] == false;
+        });
+      } else {
+        return;
+      }
+    });
   }
 }
