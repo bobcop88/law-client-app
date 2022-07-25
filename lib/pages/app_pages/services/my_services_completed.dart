@@ -20,6 +20,16 @@ class _CompletedServicesState extends State<CompletedServices> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const CircularProgressIndicator();
+          } else if (snapshot.data!.isEmpty) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [Text('No Completed Services')],
+                ),
+              ],
+            );
           } else {
             final services = snapshot.data!;
             return Padding(

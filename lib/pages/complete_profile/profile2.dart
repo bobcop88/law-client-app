@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:new_client_app/pages/complete_profile/list_countries/country_class.dart';
@@ -326,6 +328,13 @@ class _ProfileTwoState extends State<ProfileTwo> {
         _documentNumber.text,
         ProfileDatas.phoneNumber!,
       );
+
+      await FirebaseMessaging.instance.getToken().then((token) {
+        FirebaseFirestore.instance
+            .collection('clients')
+            .doc(id)
+            .set({'deviceToken': token});
+      });
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString()),
