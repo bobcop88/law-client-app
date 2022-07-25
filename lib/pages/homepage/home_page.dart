@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     timer = Timer.periodic(const Duration(seconds: 10), (_) {
       checkNewChat();
-      checkNewNotification2(userId);
+      checkNewNotification(userId);
     });
   }
 
@@ -211,25 +211,7 @@ class _HomePageState extends State<HomePage> {
         .update({'isRead': true});
   }
 
-  void checkNewNotification(userId) {
-    FirebaseFirestore.instance
-        .collection('clients/$userId/notificationsFromAdmin')
-        .doc()
-        .get()
-        .then((value) {
-      if (value.data()!['isNew'] == true) {
-        setState(() {
-          showNotificationBadge = true;
-        });
-      } else {
-        setState(() {
-          showNotificationBadge = false;
-        });
-      }
-    });
-  }
-
-  checkNewNotification2(userId) async {
+  checkNewNotification(userId) async {
     final collection = await FirebaseFirestore.instance
         .collection('clients/$userId/notificationsFromAdmin')
         .get();
@@ -237,7 +219,6 @@ class _HomePageState extends State<HomePage> {
       if (element.data()['isNew'] == true) {
         setState(() {
           showNotificationBadge = true;
-          // element.data()['IsNew'] == false;
         });
       } else {
         setState(() {
@@ -252,15 +233,7 @@ class _HomePageState extends State<HomePage> {
         .collection('clients/$userId/notificationsFromAdmin')
         .get();
     collection.docs.forEach((element) {
-      if (element.data()['isNew'] == true) {
-        element.data().update({'isNew': false })
-        setState(() {
-          // showNotificationBadge = true;
-          element.data()['IsNew'] == false;
-        });
-      } else {
-        return;
-      }
+      element.reference.update({'isNew': false});
     });
   }
 }

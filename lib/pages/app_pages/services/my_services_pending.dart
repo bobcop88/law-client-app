@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:new_client_app/pages/app_pages/services/services_pending/pending_service_page.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 import 'package:new_client_app/utils/services/my_service_class.dart';
 
@@ -59,8 +60,8 @@ class _PendingServicesState extends State<PendingServices> {
                 ),
               ],
             ),
+            const Divider(),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
                   'Start Date: ',
@@ -71,7 +72,9 @@ class _PendingServicesState extends State<PendingServices> {
                         services.creationDate))),
               ],
             ),
-            const Divider(),
+            const SizedBox(
+              height: 5.0,
+            ),
             Row(
               children: [
                 const Text(
@@ -81,16 +84,35 @@ class _PendingServicesState extends State<PendingServices> {
                 Text(services.currentState),
               ],
             ),
+            // const SizedBox(
+            //   height: 5.0,
+            // ),
+            // Row(
+            //   children: [
+            //     const Text(
+            //       'Doc1 Status: ',
+            //       style: TextStyle(fontSize: 12.0, color: Colors.grey),
+            //     ),
+            //     Text(services.doc1Status),
+            //   ],
+            // ),
             const SizedBox(
               height: 5.0,
             ),
             Row(
               children: [
-                const Text(
-                  'Doc1 Status: ',
-                  style: TextStyle(fontSize: 12.0, color: Colors.grey),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ServicePendingPage(
+                            serviceName: services.serviceName,
+                            userId: userId)));
+                  },
+                  child: Text(
+                    'See Details',
+                    style: TextStyle(fontSize: 12.0),
+                  ),
                 ),
-                Text(services.doc1Status),
               ],
             ),
           ],

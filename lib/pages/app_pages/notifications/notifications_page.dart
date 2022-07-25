@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:new_client_app/pages/app_pages/services/services_pending/pending_service_page.dart';
 import 'package:new_client_app/utils/notifications/database_notifications.dart';
 import 'package:new_client_app/utils/notifications/notification_class.dart';
 
@@ -24,7 +25,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
         stream: DatabaseNotifications().readNotifications(widget.id),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           } else {
             final notification = snapshot.data!;
             return Column(
@@ -63,7 +64,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                 ),
                 Text(
                   dateFormat(notification.notificationDate),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12.0,
                     color: Colors.grey,
                   ),
@@ -75,16 +76,22 @@ class _NotificationsPageState extends State<NotificationsPage> {
             ),
             Row(
               children: [
-                Text('Update for '),
+                const Text('Update for '),
                 GestureDetector(
                   child: Text(
                     notification.notificationType,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.blueAccent,
                       decoration: TextDecoration.underline,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pop();
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ServicePendingPage(
+                            serviceName: notification.notificationType,
+                            userId: widget.id)));
+                  },
                 ),
               ],
             ),
@@ -92,13 +99,13 @@ class _NotificationsPageState extends State<NotificationsPage> {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 TextButton(
-                  style: ButtonStyle(
+                  style: const ButtonStyle(
                     visualDensity: VisualDensity.compact,
                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   ),
                   onPressed: () {},
                   child: Row(
-                    children: [
+                    children: const [
                       Icon(
                         Icons.delete,
                         size: 14.0,
