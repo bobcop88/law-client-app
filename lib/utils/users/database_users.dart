@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:new_client_app/utils/users/user_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -26,6 +27,7 @@ class DatabaseUsers {
       id: uid,
       email: FirebaseAuth.instance.currentUser!.email,
       dateCreation: DateTime.now().microsecondsSinceEpoch,
+      token: 'getDeviceToken()',
     );
 
     final json = userCompleteProfile.toJson();
@@ -39,4 +41,10 @@ class DatabaseUsers {
         .snapshots()
         .map((snapshot) => UserAllDetails.fromJson(snapshot.data()!));
   }
+
+  // getDeviceToken() {
+  //   final token;
+  //   FirebaseMessaging.instance.getToken().then((value) => value = token);
+
+  // }
 }

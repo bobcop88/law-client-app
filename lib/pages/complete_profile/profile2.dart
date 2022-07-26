@@ -328,13 +328,6 @@ class _ProfileTwoState extends State<ProfileTwo> {
         _documentNumber.text,
         ProfileDatas.phoneNumber!,
       );
-
-      await FirebaseMessaging.instance.getToken().then((token) {
-        FirebaseFirestore.instance
-            .collection('clients')
-            .doc(id)
-            .set({'deviceToken': token});
-      });
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString()),

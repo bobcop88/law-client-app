@@ -26,7 +26,15 @@ class _CompletedServicesState extends State<CompletedServices> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text('No Completed Services')],
+                  children: [
+                    Text('No Completed Services'),
+                    ElevatedButton(
+                      onPressed: () {
+                        FirebaseAuth.instance.signOut();
+                      },
+                      child: Text('out'),
+                    ),
+                  ],
                 ),
               ],
             );
