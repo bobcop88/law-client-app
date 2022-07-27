@@ -32,6 +32,7 @@ class UserCompleteProfile {
         'id': id,
         'email': email,
         'dateCreation': dateCreation,
+        'token': token,
       };
 
   static UserCompleteProfile fromJson(Map<String, dynamic> json) =>

@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/complete_profile/profile_class.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:new_client_app/utils/errors/error_dialog.dart';
 
 class ProfileOne extends StatefulWidget {
   final PageController controller;
@@ -155,17 +157,19 @@ class _ProfileOneState extends State<ProfileOne> {
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            // style: ButtonStyle(
-                            //     backgroundColor: MaterialStateProperty.all(
-                            //         const Color.fromRGBO(253, 69, 77, 1))),
                             onPressed: () {
-                              widget.controller.jumpToPage(2);
-                              // duration: const Duration(seconds: 1),
-                              // curve: Curves.easeIn);
+                              if (_firstName.text.isEmpty ||
+                                  _lastName.text.isEmpty ||
+                                  _phoneNumber.text.isEmpty) {
+                                // errorFieldMissing();
+                                ErrorDialog().errorFieldMissing(context);
+                              } else {
+                                widget.controller.jumpToPage(2);
 
-                              ProfileDatas.firstName = _firstName.text;
-                              ProfileDatas.lastName = _lastName.text;
-                              ProfileDatas.phoneNumber = _phoneNumber.text;
+                                ProfileDatas.firstName = _firstName.text;
+                                ProfileDatas.lastName = _lastName.text;
+                                ProfileDatas.phoneNumber = _phoneNumber.text;
+                              }
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -192,5 +196,34 @@ class _ProfileOneState extends State<ProfileOne> {
         ),
       ),
     );
+  }
+
+  errorFieldMissing() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Missing fields'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [Text('Some fields are missing')],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Complete now'),
+              ),
+              TextButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  FirebaseAuth.instance.currentUser!.delete();
+                },
+                child: Text('Exit'),
+              ),
+            ],
+          );
+        });
   }
 }

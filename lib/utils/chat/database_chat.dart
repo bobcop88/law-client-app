@@ -27,7 +27,8 @@ class DatabaseChat {
       'user': userId,
       'senderLastMessage': userId,
       'textLastMessage': messageText,
-      'timeLastMessage': DateTime.now().microsecondsSinceEpoch
+      'timeLastMessage': DateTime.now().microsecondsSinceEpoch,
+      'isRead': false,
     });
   }
 

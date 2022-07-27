@@ -316,7 +316,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                 ),
                 CupertinoActionSheetAction(
                   onPressed: () {
-                    cameraFile(doc, preview, folder);
+                    cameraFile(doc, preview, folder, docUrl);
                     Navigator.of(context).pop();
                   },
                   child: Text('Camera'),
@@ -342,7 +342,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                   leading: Icon(Icons.camera_alt),
                   title: Text('Camera'),
                   onTap: () {
-                    cameraFile(doc, preview, folder);
+                    cameraFile(doc, preview, folder, docUrl);
                     Navigator.of(context).pop();
                   },
                 ),
@@ -352,7 +352,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
     }
   }
 
-  Future cameraFile(fileName, previewFile, folder) async {
+  Future cameraFile(fileName, previewFile, folder, docUrl) async {
     // final ImagePicker picker = ImagePicker();
 
     final XFile? photo = await ImagePicker().pickImage(
@@ -379,12 +379,15 @@ class _EuVisaPageState extends State<EuVisaPage> {
         // print('finished');
       });
     });
-    if (fileName == doc1Name) {
-      // doc1Url = await snapshot.ref.getDownloadURL();
-    }
-    if (fileName == doc2Name) {
-      doc2Url = await snapshot.ref.getDownloadURL();
-    }
+    final docUrlTemp = await snapshot.ref.getDownloadURL();
+    setState(() {
+      if (docUrl == doc1Url) {
+        doc1Url = docUrlTemp;
+      }
+      if (docUrl == doc2Url) {
+        doc2Url = docUrlTemp;
+      }
+    });
   }
 
   requestSentPopUp() {
@@ -443,8 +446,10 @@ class _EuVisaPageState extends State<EuVisaPage> {
               TextButton(
                 onPressed: () {
                   Navigator.pop(context, true);
-                  FirebaseStorage.instance.refFromURL(doc1Url).delete();
-                  FirebaseStorage.instance.refFromURL(doc2Url).delete();
+                  if (doc1Url != '1' || doc2Url != '2') {
+                    FirebaseStorage.instance.refFromURL(doc1Url).delete();
+                    FirebaseStorage.instance.refFromURL(doc2Url).delete();
+                  }
                 },
                 child: Text('Exit'),
               ),

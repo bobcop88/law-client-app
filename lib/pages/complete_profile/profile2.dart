@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:new_client_app/pages/complete_profile/list_countries/country_class.dart';
 import 'package:new_client_app/pages/complete_profile/profile_class.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
+import 'package:new_client_app/utils/errors/error_dialog.dart';
 import 'package:new_client_app/utils/users/database_users.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -21,7 +22,7 @@ class _ProfileTwoState extends State<ProfileTwo> {
   final TextEditingController _documentNumber = TextEditingController();
   final TextEditingController _dateOfBirthController = TextEditingController();
   final TextEditingController _nationality = TextEditingController();
-  var dateOfBirthValue;
+  var dateOfBirthValue = 0;
   // final email = FirebaseAuth.instance.currentUser!.email;
   // final userId = FirebaseAuth.instance.currentUser!.uid;
 
@@ -91,6 +92,7 @@ class _ProfileTwoState extends State<ProfileTwo> {
                 onTap: () {
                   // FocusScope.of(context).unfocus();
                   _selectDOB();
+                  getDeviceToken();
                 },
               ),
             ),
@@ -167,15 +169,17 @@ class _ProfileTwoState extends State<ProfileTwo> {
                     children: [
                       Expanded(
                         child: ElevatedButton(
-                          // style: ButtonStyle(
-                          //     backgroundColor: MaterialStateProperty.all(
-                          //         const Color.fromRGBO(253, 69, 77, 1))),
                           onPressed: () {
-                            completeProfile();
-                            Navigator.of(context).pop();
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const HomePage()));
-                            // widget.controller.animateToPage(2, duration: Duration(seconds: 1), curve: Curves.easeIn);
+                            if (dateOfBirthValue == 0 ||
+                                _nationality.text.isEmpty ||
+                                _documentNumber.text.isEmpty) {
+                              ErrorDialog().errorFieldMissing(context);
+                            } else {
+                              completeProfile();
+                              Navigator.of(context).pop();
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const HomePage()));
+                            }
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -327,6 +331,7 @@ class _ProfileTwoState extends State<ProfileTwo> {
         _nationality.text,
         _documentNumber.text,
         ProfileDatas.phoneNumber!,
+        ProfileDatas.token!,
       );
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
@@ -335,5 +340,13 @@ class _ProfileTwoState extends State<ProfileTwo> {
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+  }
+
+  Future getDeviceToken() async {
+    await FirebaseMessaging.instance.getToken().then((token) {
+      setState(() {
+        ProfileDatas.token = token;
+      });
+    });
   }
 }

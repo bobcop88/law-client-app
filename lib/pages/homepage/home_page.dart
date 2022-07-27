@@ -11,6 +11,8 @@ import 'package:new_client_app/pages/app_pages/my_services_page.dart';
 import 'package:new_client_app/pages/app_pages/notifications/notifications_page.dart';
 import 'package:new_client_app/pages/app_pages/profile_page.dart';
 import 'package:new_client_app/pages/app_pages/services_page.dart';
+import 'package:new_client_app/pages/complete_profile/complete_profile_page.dart';
+import 'package:new_client_app/pages/complete_profile/welcome_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,10 +29,12 @@ class _HomePageState extends State<HomePage> {
   bool showNewChatMessage = false;
   bool showNotificationBadge = false;
   Timer? timer;
+  bool userCompleted = true;
 
   @override
   void initState() {
     super.initState();
+    checkUserComplete();
     timer = Timer.periodic(const Duration(seconds: 10), (_) {
       checkNewChat();
       checkNewNotification(userId);
@@ -235,5 +239,44 @@ class _HomePageState extends State<HomePage> {
     collection.docs.forEach((element) {
       element.reference.update({'isNew': false});
     });
+  }
+
+  void checkUserComplete() {
+    FirebaseFirestore.instance
+        .collection('clients')
+        .doc(userId)
+        .get()
+        .then((doc) {
+      if (doc.exists == false) {
+        return errorComplete();
+      }
+    });
+  }
+
+  void errorComplete() {
+    showDialog(
+        context: context,
+        builder: (BuildContext content) {
+          return AlertDialog(
+            title: Text('Please complete your profile'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => CompleteProfilePage()));
+                },
+                child: Text('Complete now'),
+              ),
+              TextButton(
+                onPressed: () {
+                  FirebaseAuth.instance.signOut();
+                  Navigator.of(context).pop();
+                },
+                child: Text('Not now'),
+              ),
+            ],
+          );
+        });
   }
 }

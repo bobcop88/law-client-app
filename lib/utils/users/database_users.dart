@@ -13,8 +13,14 @@ class DatabaseUsers {
   final CollectionReference userProfile =
       FirebaseFirestore.instance.collection('clients');
 
-  Future completeUserProfile(String firstName, String lastName, int dateOfBirth,
-      String nationality, String documentNumber, String phoneNumber) async {
+  Future completeUserProfile(
+      String firstName,
+      String lastName,
+      int dateOfBirth,
+      String nationality,
+      String documentNumber,
+      String phoneNumber,
+      String token) async {
     final docUser = userProfile.doc(uid);
 
     final userCompleteProfile = UserCompleteProfile(
@@ -27,7 +33,7 @@ class DatabaseUsers {
       id: uid,
       email: FirebaseAuth.instance.currentUser!.email,
       dateCreation: DateTime.now().microsecondsSinceEpoch,
-      token: 'getDeviceToken()',
+      token: token,
     );
 
     final json = userCompleteProfile.toJson();

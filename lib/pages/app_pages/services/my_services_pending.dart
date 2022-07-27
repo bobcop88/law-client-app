@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:new_client_app/pages/app_pages/services/services_pending/pending_service_page.dart';
+import 'package:new_client_app/pages/complete_profile/profile_class.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 import 'package:new_client_app/utils/services/my_service_class.dart';
 
@@ -28,7 +30,9 @@ class _PendingServicesState extends State<PendingServices> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text('No Pending Services')],
+                  children: [
+                    Text('No Pending Services'),
+                  ],
                 ),
               ],
             );

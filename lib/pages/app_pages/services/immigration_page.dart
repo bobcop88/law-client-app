@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
+import 'package:new_client_app/utils/errors/error_service_exists.dart';
 
 class ImmigrationPage extends StatefulWidget {
   const ImmigrationPage({Key? key}) : super(key: key);
@@ -82,12 +83,26 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
                           height: 10.0,
                         ),
                         ElevatedButton(
-                          onPressed: nationality == 'Bulgaria'
-                              ? () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => EuVisaPage()));
-                                }
-                              : null,
+                          onPressed: () async {
+                            var check = await FirebaseFirestore.instance
+                                .collection('clients/$user/myServices/')
+                                .doc('EU Visa')
+                                .get()
+                                .then((service) {
+                              print(service.exists);
+                              service.exists ? true : false;
+                            });
+
+                            if (nationality == 'Bulgaria') {
+                              check
+                                  ? Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                          builder: (context) => EuVisaPage()))
+                                  : null;
+                            } else {
+                              return;
+                            }
+                          },
                           child: Text('Request service'),
                         ),
                       ],
