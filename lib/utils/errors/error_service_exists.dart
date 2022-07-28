@@ -17,4 +17,34 @@ class ErrorServiceExists {
       service.exists ? true : false;
     });
   }
+
+  alertServiceExists(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Service already requested'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [Text('You have already requested the service')],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Close'),
+              ),
+              // TextButton(
+              //   onPressed: () {
+              //     Navigator.of(context).pop();
+              //     FirebaseAuth.instance.currentUser!.delete();
+              //     // FirebaseAuth.instance.signOut();
+              //   },
+              //   child: Text('Exit'),
+              // ),
+            ],
+          );
+        });
+  }
 }

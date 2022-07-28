@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:new_client_app/utils/logs/database_logs.dart';
 
 class WelcomePageProfile extends StatefulWidget {
   final PageController controller;
@@ -11,6 +13,8 @@ class WelcomePageProfile extends StatefulWidget {
 }
 
 class _WelcomePageProfileState extends State<WelcomePageProfile> {
+  String user = FirebaseAuth.instance.currentUser!.uid;
+  String email = FirebaseAuth.instance.currentUser!.email!;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -103,6 +107,8 @@ class _WelcomePageProfileState extends State<WelcomePageProfile> {
                   widget.controller.animateToPage(1,
                       duration: const Duration(seconds: 1),
                       curve: Curves.easeIn);
+                  DatabaseLogUser().createLogUser(
+                      user, 'client', email, 'Email Verified', 'Registration');
                 },
               ),
             ],

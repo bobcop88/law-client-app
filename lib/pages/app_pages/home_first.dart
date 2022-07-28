@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration_page.dart';
+import 'package:new_client_app/utils/errors/error_service_exists.dart';
+import 'package:new_client_app/utils/services/database_services.dart';
 
 class HomeFirst extends StatefulWidget {
   final PageController controller;
@@ -14,6 +17,7 @@ class HomeFirst extends StatefulWidget {
 class _HomeFirstState extends State<HomeFirst> {
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser!.uid;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -44,9 +48,15 @@ class _HomeFirstState extends State<HomeFirst> {
                   height: 100.0,
                   width: 100.0,
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const EuVisaPage()));
+                    onTap: () async {
+                      bool check = await DatabaseService(uid: user)
+                          .checkService('EU Visa');
+                      check
+                          ? Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const EuVisaPage()))
+                          : ErrorServiceExists(
+                                  uid: user, serviceName: 'EU Visa')
+                              .alertServiceExists(context);
                     },
                     child: Card(
                       elevation: 2,

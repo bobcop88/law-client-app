@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
 import 'package:new_client_app/utils/errors/error_service_exists.dart';
+import 'package:new_client_app/utils/services/database_services.dart';
 
 class ImmigrationPage extends StatefulWidget {
   const ImmigrationPage({Key? key}) : super(key: key);
@@ -84,21 +85,24 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            var check = await FirebaseFirestore.instance
-                                .collection('clients/$user/myServices/')
-                                .doc('EU Visa')
-                                .get()
-                                .then((service) {
-                              print(service.exists);
-                              service.exists ? true : false;
-                            });
+                            // bool check = await FirebaseFirestore.instance
+                            //     .collection('clients/$user/myServices/')
+                            //     .doc('EU Visa')
+                            //     .get()
+                            //     .then((service) {
+                            //   return service.exists ? false : true;
+                            // });
+                            bool check = await DatabaseService(uid: user)
+                                .checkService('EU Visa');
 
                             if (nationality == 'Bulgaria') {
                               check
                                   ? Navigator.of(context).push(
                                       MaterialPageRoute(
                                           builder: (context) => EuVisaPage()))
-                                  : null;
+                                  : ErrorServiceExists(
+                                          uid: user, serviceName: 'EU Visa')
+                                      .alertServiceExists(context);
                             } else {
                               return;
                             }

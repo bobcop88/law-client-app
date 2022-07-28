@@ -48,9 +48,10 @@ class DatabaseUsers {
         .map((snapshot) => UserAllDetails.fromJson(snapshot.data()!));
   }
 
-  // getDeviceToken() {
-  //   final token;
-  //   FirebaseMessaging.instance.getToken().then((value) => value = token);
-
-  // }
+  updateDeviceToken(token) {
+    return FirebaseFirestore.instance
+        .collection('clients')
+        .doc(uid)
+        .update({'token': token});
+  }
 }

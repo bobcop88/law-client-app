@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
 import 'package:new_client_app/pages/register_page/forgot_password_page.dart';
 import 'package:new_client_app/pages/register_page/register.dart';
+import 'package:new_client_app/utils/users/database_users.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -17,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   var _hidePassword = true;
+  String deviceToken = '';
 
   @override
   Widget build(BuildContext context) {
@@ -242,12 +245,16 @@ class _LoginPageState extends State<LoginPage> {
       barrierDismissible: false,
       builder: (context) => const Center(child: CircularProgressIndicator()),
     );
+    getDeviceToken();
 
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      DatabaseUsers(uid: FirebaseAuth.instance.currentUser!.uid)
+          .updateDeviceToken(deviceToken);
+      // print(FirebaseAuth.instance.currentUser!.uid);
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString()),
@@ -262,6 +269,15 @@ class _LoginPageState extends State<LoginPage> {
   void _showPassword() {
     setState(() {
       _hidePassword = !_hidePassword;
+    });
+  }
+
+  Future getDeviceToken() async {
+    return await FirebaseMessaging.instance.getToken().then((token) {
+      // print(token);
+      setState(() {
+        deviceToken = token!;
+      });
     });
   }
 }

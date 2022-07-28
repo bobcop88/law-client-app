@@ -269,7 +269,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      // Navigator.of(context).pop();
                       FirebaseAuth.instance.signOut();
                     },
                     label: const Text('Log out'),

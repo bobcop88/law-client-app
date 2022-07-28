@@ -33,7 +33,7 @@ class _MyServicesPageState extends State<MyServicesPage>
           initialIndex: 1,
           child: TabBar(
             controller: tabController,
-            tabs: [
+            tabs: const [
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text('Pending'),
@@ -49,11 +49,10 @@ class _MyServicesPageState extends State<MyServicesPage>
             indicatorColor: Color.fromRGBO(200, 36, 47, 1),
           ),
         ),
-        Container(
-          height: 300,
+        Expanded(
           child: TabBarView(
             controller: tabController,
-            children: [
+            children: const [
               PendingServices(),
               CompletedServices(),
             ],

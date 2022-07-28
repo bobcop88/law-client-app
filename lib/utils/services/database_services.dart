@@ -75,4 +75,15 @@ class DatabaseService {
             .map((doc) => UserMyServices.fromJson(doc.data()))
             .toList());
   }
+
+  Future<bool> checkService(serviceName) async {
+    bool check = await FirebaseFirestore.instance
+        .collection('clients/$uid/myServices/')
+        .doc(serviceName)
+        .get()
+        .then((service) {
+      return service.exists ? false : true;
+    });
+    return check;
+  }
 }

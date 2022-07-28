@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/pages/complete_profile/complete_profile_page.dart';
+import 'package:new_client_app/utils/logs/database_logs.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -15,6 +16,8 @@ class VerifyEmailPage extends StatefulWidget {
 class _VerifyEmailPageState extends State<VerifyEmailPage> {
   bool isEmailVerified = false;
   bool canResendEmailVerification = false;
+  String user = FirebaseAuth.instance.currentUser!.uid;
+  String email = FirebaseAuth.instance.currentUser!.email!;
 
   Timer? timer;
 

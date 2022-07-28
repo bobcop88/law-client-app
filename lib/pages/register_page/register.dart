@@ -5,6 +5,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
 import 'package:new_client_app/pages/register_page/verify_email_page.dart';
+import 'package:new_client_app/utils/logs/database_logs.dart';
 import 'package:new_client_app/utils/users/database_users.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -423,6 +424,12 @@ class _RegisterPageState extends State<RegisterPage> {
         password: passwordController.text.trim(),
       );
       User? user = result.user;
+      DatabaseLogUser().createLogUser(
+          user!.uid,
+          'client',
+          emailController.text.trim(),
+          'Registration with email',
+          'Registration');
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString() ==

@@ -7,6 +7,7 @@ import 'package:new_client_app/pages/complete_profile/list_countries/country_cla
 import 'package:new_client_app/pages/complete_profile/profile_class.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
 import 'package:new_client_app/utils/errors/error_dialog.dart';
+import 'package:new_client_app/utils/logs/database_logs.dart';
 import 'package:new_client_app/utils/users/database_users.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -323,6 +324,7 @@ class _ProfileTwoState extends State<ProfileTwo> {
   Future completeProfile() async {
     try {
       final id = FirebaseAuth.instance.currentUser!.uid;
+      final email = FirebaseAuth.instance.currentUser!.email;
 
       await DatabaseUsers(uid: id).completeUserProfile(
         ProfileDatas.firstName!,
@@ -333,6 +335,8 @@ class _ProfileTwoState extends State<ProfileTwo> {
         ProfileDatas.phoneNumber!,
         ProfileDatas.token!,
       );
+      DatabaseLogUser().createLogUser(
+          id, 'client', email!, 'Completed profile user', 'Registration');
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString()),

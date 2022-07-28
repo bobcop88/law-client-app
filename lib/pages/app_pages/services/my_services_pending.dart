@@ -28,11 +28,13 @@ class _PendingServicesState extends State<PendingServices> {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('No Pending Services'),
-                  ],
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('No Pending Services'),
+                    ],
+                  ),
                 ),
               ],
             );
