@@ -6,7 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
-import 'package:new_client_app/pages/app_pages/home_first.dart';
+import 'package:new_client_app/pages/app_pages/homepage_first/home_first.dart';
 import 'package:new_client_app/pages/app_pages/my_services_page.dart';
 import 'package:new_client_app/pages/app_pages/notifications/notifications_page.dart';
 import 'package:new_client_app/pages/app_pages/profile_page.dart';

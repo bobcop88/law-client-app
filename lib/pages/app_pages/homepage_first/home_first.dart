@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_client_app/pages/app_pages/homepage_first/widgets/news_scrolling.dart';
+import 'package:new_client_app/pages/app_pages/homepage_first/widgets/team_scrolling.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration_page.dart';
 import 'package:new_client_app/utils/errors/error_service_exists.dart';
@@ -430,6 +432,10 @@ class _HomeFirstState extends State<HomeFirst> {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                teamScrolling(),
               ],
             ),
           ),
@@ -448,137 +454,12 @@ class _HomeFirstState extends State<HomeFirst> {
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-          const Divider(
-            color: Color.fromRGBO(15, 48, 65, 1),
-            thickness: 2,
-            endIndent: 300,
-            height: 20.0,
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: const Color.fromRGBO(15, 48, 65, 1)),
-                      borderRadius: BorderRadius.circular(10)),
-                  width: 200,
-                  height: 130,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Expanded(
-                              child: Text(
-                                'Title of First News',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(15, 48, 65, 1)),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Divider(),
-                        Row(
-                          children: const [
-                            Expanded(
-                              child: Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta et diam sit amet ullamcorper. Aenean maximus vulputate pharetra. Aliquam tincidunt dolor id sollicitudin efficitur. Sed faucibus id lorem pharetra consectetur. Nunc pulvinar commodo metus sed suscipit. Nulla bibendum non velit ut elementum',
-                                style: TextStyle(fontSize: 11.0),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: const Text(
-                                'Read More',
-                                style: TextStyle(
-                                    fontSize: 12.0,
-                                    decoration: TextDecoration.underline,
-                                    color: Colors.blueAccent),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 const SizedBox(
-                  width: 10.0,
+                  height: 15.0,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border.all(
-                          color: const Color.fromRGBO(15, 48, 65, 1)),
-                      borderRadius: BorderRadius.circular(10)),
-                  width: 200,
-                  height: 130,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          children: const [
-                            Expanded(
-                              child: Text(
-                                'Title of First News',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Color.fromRGBO(15, 48, 65, 1)),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Divider(),
-                        Row(
-                          children: const [
-                            Expanded(
-                              child: Text(
-                                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec porta et diam sit amet ullamcorper. Aenean maximus vulputate pharetra. Aliquam tincidunt dolor id sollicitudin efficitur. Sed faucibus id lorem pharetra consectetur. Nunc pulvinar commodo metus sed suscipit. Nulla bibendum non velit ut elementum',
-                                style: TextStyle(fontSize: 11.0),
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 3,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const Spacer(),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: const Text(
-                                'Read More',
-                                style: TextStyle(
-                                    fontSize: 12.0,
-                                    decoration: TextDecoration.underline,
-                                    color: Colors.blueAccent),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                newsScrolling(),
+                const SizedBox(
+                  height: 50.0,
                 ),
               ],
             ),

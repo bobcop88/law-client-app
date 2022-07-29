@@ -91,6 +91,7 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/slider_home/
+    - assets/images/team/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
