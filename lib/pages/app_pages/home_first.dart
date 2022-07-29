@@ -1,10 +1,11 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration_page.dart';
 import 'package:new_client_app/utils/errors/error_service_exists.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class HomeFirst extends StatefulWidget {
   final PageController controller;
@@ -15,293 +16,398 @@ class HomeFirst extends StatefulWidget {
 }
 
 class _HomeFirstState extends State<HomeFirst> {
+  int activeIndex = 0;
+  final urlImages = [
+    'assets/slider_home/slider_1.png',
+    'assets/slider_home/slider_2.png',
+    'assets/slider_home/slider_3.png'
+  ];
+
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser!.uid;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
+    return SingleChildScrollView(
       child: Column(
         children: [
-          const SizedBox(
-            height: 20.0,
-          ),
-          Row(
-            children: const [
-              Text(
-                'Top Services',
-                style: TextStyle(
-                    color: Color.fromRGBO(15, 48, 65, 1),
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const Divider(
-            color: Color.fromRGBO(15, 48, 65, 1),
-            thickness: 2,
-            endIndent: 300,
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                SizedBox(
-                  height: 100.0,
-                  width: 100.0,
-                  child: GestureDetector(
-                    onTap: () async {
-                      bool check = await DatabaseService(uid: user)
-                          .checkService('EU Visa');
-                      check
-                          ? Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const EuVisaPage()))
-                          : ErrorServiceExists(
-                                  uid: user, serviceName: 'EU Visa')
-                              .alertServiceExists(context);
+          Container(
+            decoration: const BoxDecoration(color: Colors.white),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 10.0),
+              child: Column(
+                children: [
+                  CarouselSlider.builder(
+                    itemCount: urlImages.length,
+                    options: CarouselOptions(
+                      height: 200,
+                      viewportFraction: 1,
+                      onPageChanged: (index, reason) {
+                        setState(() {
+                          activeIndex = index;
+                        });
+                      },
+                    ),
+                    itemBuilder: (context, index, realIndex) {
+                      final urlImage = urlImages[index];
+                      return buildImage(urlImage, index);
                     },
-                    child: Card(
-                      elevation: 2,
-                      shadowColor: const Color.fromRGBO(15, 48, 65, 1),
-                      // color: const Color.fromRGBO(15, 48, 65, 1),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(
-                            'assets/icons/briefcase.png',
-                            height: 35.0,
-                          ),
-                          const SizedBox(
-                            height: 8.0,
-                          ),
-                          const Text(
-                            'EU Visa',
-                            style: TextStyle(
-                                color: Color.fromRGBO(15, 48, 65, 1),
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 100.0,
-                  width: 100.0,
-                  child: Card(
-                    elevation: 2,
-                    shadowColor: const Color.fromRGBO(15, 48, 65, 1),
-                    // color: const Color.fromRGBO(15, 48, 65, 1),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/icons/balance.png',
-                          height: 35.0,
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        const Text(
-                          'Service A',
-                          style: TextStyle(
-                              color: Color.fromRGBO(15, 48, 65, 1),
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
+                  const SizedBox(
+                    height: 5.0,
                   ),
-                ),
-                SizedBox(
-                  height: 100.0,
-                  width: 100.0,
-                  child: Card(
-                    elevation: 2,
-                    shadowColor: const Color.fromRGBO(15, 48, 65, 1),
-                    // color: const Color.fromRGBO(15, 48, 65, 1),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/icons/convergence.png',
-                          height: 35.0,
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        const Text(
-                          'Service B',
-                          style: TextStyle(
-                              color: Color.fromRGBO(15, 48, 65, 1),
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 100.0,
-                  width: 100.0,
-                  child: Card(
-                    elevation: 2,
-                    shadowColor: const Color.fromRGBO(15, 48, 65, 1),
-                    // color: const Color.fromRGBO(15, 48, 65, 1),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          'assets/icons/note.png',
-                          height: 35.0,
-                        ),
-                        const SizedBox(
-                          height: 8.0,
-                        ),
-                        const Text(
-                          'Service C',
-                          style: TextStyle(
-                              color: Color.fromRGBO(15, 48, 65, 1),
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+                  buildIndicator(),
+                ],
+              ),
             ),
           ),
           const SizedBox(
-            height: 40.0,
+            height: 10.0,
           ),
-          Row(
-            children: const [
-              Text(
-                'Categories',
-                style: TextStyle(
-                    color: Color.fromRGBO(15, 48, 65, 1),
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          const Divider(
-            color: Color.fromRGBO(15, 48, 65, 1),
-            thickness: 2,
-            endIndent: 300,
-            height: 20.0,
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Column(
               children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const ImmigrationPage()));
-                  },
-                  child: Container(
-                    height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
-                          image:
-                              const AssetImage('assets/images/immigration.jpg'),
-                          fit: BoxFit.cover,
-                          colorFilter: ColorFilter.mode(
-                              Colors.black.withOpacity(0.5), BlendMode.darken)),
+                Row(
+                  children: const [
+                    Text(
+                      'Top Services',
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Text(
-                          'Immigration',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0,
+                  ],
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () async {
+                          bool check = await DatabaseService(uid: user)
+                              .checkService('EU Visa');
+                          check
+                              ? Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const EuVisaPage()))
+                              : ErrorServiceExists(
+                                      uid: user, serviceName: 'EU Visa')
+                                  .alertServiceExists(context);
+                        },
+                        child: Container(
+                          height: 65,
+                          decoration: BoxDecoration(
+                              color: const Color.fromRGBO(103, 108, 122, 1),
+                              borderRadius: BorderRadius.circular(10)),
+                          child: Row(
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 8.0, right: 15.0),
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(6.0),
+                                    child: Image.asset(
+                                      'assets/icons/visa.png',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              const Text(
+                                'Eu Visa',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                const SizedBox(width: 10.0),
-                Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: const AssetImage('assets/images/business.jpg'),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.5), BlendMode.darken)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Business',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
+                    const SizedBox(
+                      width: 20.0,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 65,
+                        decoration: BoxDecoration(
+                            color: const Color.fromRGBO(196, 194, 194, 1),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 15.0),
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Image.asset(
+                                    'assets/icons/fiscal_icon.png',
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              'Fiscal',
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: 10.0),
-                Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image: const AssetImage('assets/images/mobility.jpg'),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.5), BlendMode.darken)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Mobility',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
+                const SizedBox(
+                  height: 15.0,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 65,
+                        decoration: BoxDecoration(
+                            color: const Color.fromRGBO(250, 169, 22, 1),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 15.0),
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Image.asset(
+                                    'assets/icons/relocation_icon.png',
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              'Relocation',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 10.0),
-                Container(
-                  height: 150,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    image: DecorationImage(
-                        image:
-                            const AssetImage('assets/images/passport_img.jpg'),
-                        fit: BoxFit.cover,
-                        colorFilter: ColorFilter.mode(
-                            Colors.black.withOpacity(0.5), BlendMode.darken)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Nationality & Citizenship',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0,
+                    ),
+                    const SizedBox(
+                      width: 20.0,
+                    ),
+                    Expanded(
+                      child: Container(
+                        height: 65,
+                        decoration: BoxDecoration(
+                            color: const Color.fromRGBO(19, 38, 63, 1),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 8.0, right: 15.0),
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(5),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(6.0),
+                                  child: Image.asset(
+                                    'assets/icons/litigation_icon.png',
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              'Litigation',
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
                         ),
-                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 40.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Column(
+              children: [
+                Row(
+                  children: const [
+                    Text(
+                      'Categories',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 15.0,
+                ),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => const ImmigrationPage()));
+                        },
+                        child: Container(
+                          height: 150,
+                          width: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            image: DecorationImage(
+                                image: const AssetImage(
+                                    'assets/images/immigration.jpg'),
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.black.withOpacity(0.3),
+                                    BlendMode.darken)),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Text(
+                                'Immigration',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20.0,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                              image: const AssetImage(
+                                  'assets/images/business.jpg'),
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.3),
+                                  BlendMode.darken)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [
+                            Text(
+                              'Business',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                              image: const AssetImage(
+                                  'assets/images/mobility.jpg'),
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.3),
+                                  BlendMode.darken)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [
+                            Text(
+                              'Mobility',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      Container(
+                        height: 150,
+                        width: 150,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                              image: const AssetImage(
+                                  'assets/images/passport_img.jpg'),
+                              fit: BoxFit.cover,
+                              colorFilter: ColorFilter.mode(
+                                  Colors.black.withOpacity(0.3),
+                                  BlendMode.darken)),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: const [
+                            Text(
+                              'Nationality & Citizenship',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20.0,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -312,15 +418,38 @@ class _HomeFirstState extends State<HomeFirst> {
           const SizedBox(
             height: 40.0,
           ),
-          Row(
-            children: const [
-              Text(
-                'News',
-                style: TextStyle(
-                    color: Color.fromRGBO(15, 48, 65, 1),
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Column(
+              children: [
+                Row(
+                  children: const [
+                    Text(
+                      'The Team',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 40.0,
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+            child: Column(
+              children: [
+                Row(
+                  children: const [
+                    Text(
+                      'News',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           const Divider(
             color: Color.fromRGBO(15, 48, 65, 1),
@@ -457,5 +586,32 @@ class _HomeFirstState extends State<HomeFirst> {
         ],
       ),
     );
+  }
+
+  Widget buildImage(String urlImage, int index) {
+    return Container(
+      margin: const EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.asset(
+          urlImage,
+          fit: BoxFit.cover,
+        ),
+      ),
+    );
+  }
+
+  Widget buildIndicator() {
+    return AnimatedSmoothIndicator(
+        effect: const ExpandingDotsEffect(
+            dotColor: Colors.grey,
+            activeDotColor: Color.fromRGBO(250, 169, 22, 1),
+            dotHeight: 10.0,
+            dotWidth: 10.0),
+        activeIndex: activeIndex,
+        count: urlImages.length);
   }
 }

@@ -159,26 +159,26 @@ class _HomePageState extends State<HomePage> {
                 Icons.home_filled,
               ),
               title: const Text('Home'),
-              selectedColor: const Color.fromRGBO(200, 36, 47, 1),
+              selectedColor: const Color.fromRGBO(250, 169, 22, 1),
             ),
             SalomonBottomBarItem(
                 icon: const Icon(
                   Icons.miscellaneous_services_outlined,
                 ),
                 title: const Text('Services'),
-                selectedColor: const Color.fromRGBO(200, 36, 47, 1)),
+                selectedColor: const Color.fromRGBO(250, 169, 22, 1)),
             SalomonBottomBarItem(
                 icon: const Icon(
                   CupertinoIcons.folder_badge_person_crop,
                 ),
                 title: const Text('My Services'),
-                selectedColor: const Color.fromRGBO(200, 36, 47, 1)),
+                selectedColor: const Color.fromRGBO(250, 169, 22, 1)),
             SalomonBottomBarItem(
                 icon: const Icon(
                   CupertinoIcons.person_fill,
                 ),
                 title: const Text('Profile'),
-                selectedColor: const Color.fromRGBO(200, 36, 47, 1)),
+                selectedColor: const Color.fromRGBO(250, 169, 22, 1)),
           ],
           currentIndex: _selectedIndex,
           onTap: (_selectedIndex) {

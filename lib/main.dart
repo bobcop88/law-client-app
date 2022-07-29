@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
+import 'package:new_client_app/pages/login_page/login_page.dart';
 import 'package:new_client_app/pages/register_page/verify_email_page.dart';
 import 'package:new_client_app/pages/start_page/start_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -60,12 +61,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       navigatorKey: navigatorKey,
       theme: ThemeData(
-        primaryColor: Color.fromRGBO(242, 242, 242, 1),
+        primaryColor: const Color.fromRGBO(242, 242, 242, 1),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
             visualDensity: VisualDensity.compact,
-            backgroundColor:
-                MaterialStateProperty.all(Color.fromRGBO(200, 36, 47, 1)),
+            backgroundColor: MaterialStateProperty.all(
+                const Color.fromRGBO(250, 169, 22, 1)),
           ),
         ),
         textTheme: const TextTheme(
@@ -122,7 +123,7 @@ class _MainPageState extends State<MainPage> {
 
             return isEmailVerified ? const HomePage() : const VerifyEmailPage();
           } else {
-            return const StartPage();
+            return const LoginPage();
           }
         },
       ),

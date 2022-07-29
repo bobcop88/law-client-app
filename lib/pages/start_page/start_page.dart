@@ -105,12 +105,12 @@ class _StartPageState extends State<StartPage> {
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.white),
                             side: MaterialStateProperty.all(const BorderSide(
-                                color: const Color.fromRGBO(200, 36, 47, 1)))),
+                                color: const Color.fromRGBO(250, 169, 22, 1)))),
                         child: Text(
                           AppLocalizations.of(context)!.sp_register_btn,
                           style: const TextStyle(
                             fontSize: 20.0,
-                            color: const Color.fromRGBO(200, 36, 47, 1),
+                            color: const Color.fromRGBO(250, 169, 22, 1),
                           ),
                         ),
                       ),
