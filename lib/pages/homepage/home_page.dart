@@ -7,12 +7,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
 import 'package:new_client_app/pages/app_pages/homepage_first/home_first.dart';
-import 'package:new_client_app/pages/app_pages/my_services_page.dart';
+import 'package:new_client_app/pages/app_pages/my_services_main_page/my_services_page.dart';
 import 'package:new_client_app/pages/app_pages/notifications/notifications_page.dart';
-import 'package:new_client_app/pages/app_pages/profile_page.dart';
-import 'package:new_client_app/pages/app_pages/services_page.dart';
+import 'package:new_client_app/pages/app_pages/profile_page/profile_page.dart';
+import 'package:new_client_app/pages/app_pages/services_main_page/services_page.dart';
 import 'package:new_client_app/pages/complete_profile/complete_profile_page.dart';
-import 'package:new_client_app/pages/complete_profile/welcome_page.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,7 +34,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     checkUserComplete();
-    timer = Timer.periodic(const Duration(seconds: 10), (_) {
+    timer = Timer.periodic(const Duration(seconds: 2), (_) {
       checkNewChat();
       checkNewNotification(userId);
     });
@@ -63,8 +62,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        elevation: 1,
+        backgroundColor: Colors.white,
+        elevation: 0,
         shadowColor: const Color.fromRGBO(15, 48, 65, 1),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -196,7 +195,8 @@ class _HomePageState extends State<HomePage> {
         .doc(userId)
         .get()
         .then((value) {
-      if (value.data()!['isRead'] == false) {
+      if (value.data()!['isRead'] == false &&
+          value.data()!['senderLastMessage'] != userId) {
         setState(() {
           showNewChatMessage = true;
         });

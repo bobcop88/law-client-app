@@ -28,25 +28,28 @@ class _MyServicesPageState extends State<MyServicesPage>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        DefaultTabController(
-          length: 2,
-          initialIndex: 1,
-          child: TabBar(
-            controller: tabController,
-            tabs: const [
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Pending'),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text('Completed'),
-              ),
-            ],
-            padding: EdgeInsets.all(8.0),
-            unselectedLabelColor: Color.fromRGBO(15, 48, 65, 1),
-            labelColor: Color.fromRGBO(200, 36, 47, 1),
-            indicatorColor: Color.fromRGBO(200, 36, 47, 1),
+        Container(
+          decoration: BoxDecoration(color: Colors.white),
+          child: DefaultTabController(
+            length: 2,
+            initialIndex: 1,
+            child: TabBar(
+              controller: tabController,
+              tabs: const [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Pending'),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text('Completed'),
+                ),
+              ],
+              padding: EdgeInsets.only(top: 10),
+              // unselectedLabelColor: Color.fromRGBO(15, 48, 65, 1),
+              // labelColor: Color.fromRGBO(250, 169, 22, 1),
+              indicatorColor: Color.fromRGBO(250, 169, 22, 1),
+            ),
           ),
         ),
         Expanded(
