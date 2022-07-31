@@ -9,16 +9,17 @@ import 'package:image_picker/image_picker.dart';
 import 'package:new_client_app/pages/app_pages/services/my_services_pending.dart';
 import 'package:new_client_app/pages/app_pages/services/preview_doc.dart';
 import 'package:new_client_app/pages/app_pages/services/services_pending/pending_service_page.dart';
+import 'package:new_client_app/pages/app_pages/services/widgets/uploadFile_function.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 
-class EuVisaPage extends StatefulWidget {
-  const EuVisaPage({Key? key}) : super(key: key);
+class BusinessServiceOnePage extends StatefulWidget {
+  const BusinessServiceOnePage({Key? key}) : super(key: key);
 
   @override
-  State<EuVisaPage> createState() => _EuVisaPageState();
+  State<BusinessServiceOnePage> createState() => _BusinessServiceOnePageState();
 }
 
-class _EuVisaPageState extends State<EuVisaPage> {
+class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
   final user = FirebaseAuth.instance.currentUser!.uid;
@@ -29,6 +30,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
   String? link = '';
   var doc1Url = '1';
   var doc2Url = '2';
+  String serviceName = 'Business Service 1';
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -39,7 +41,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: const Color.fromRGBO(15, 48, 65, 1),
-          title: const Text('EU Visa'),
+          title: const Text('Business Service 1'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -49,7 +51,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Text(
-                    'EU visa',
+                    'Business Service 1',
                     style: TextStyle(
                         fontSize: 30.0,
                         fontWeight: FontWeight.bold,
@@ -105,8 +107,21 @@ class _EuVisaPageState extends State<EuVisaPage> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                _showSelectFile(context, doc1Name, previewdoc1,
-                                    'Bank Statement', doc1Url);
+                                UploadDocument(
+                                        pickedFile: pickedFile,
+                                        uploadTask: uploadTask,
+                                        user: user,
+                                        doc1Name: doc1Name,
+                                        doc2Name: doc2Name,
+                                        previewdoc1: previewdoc1,
+                                        previewdoc2: previewdoc2,
+                                        link: link,
+                                        doc1Url: doc1Url,
+                                        doc2Url: doc2Url,
+                                        serviceName: serviceName)
+                                    .showSelectFile(context, doc1Name,
+                                        previewdoc1, 'Bank Statement', doc1Url);
+                                ;
                               },
                               style: const ButtonStyle(
                                   visualDensity: VisualDensity.compact),
@@ -172,8 +187,24 @@ class _EuVisaPageState extends State<EuVisaPage> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                _showSelectFile(context, doc2Name, previewdoc2,
-                                    'Empadronamiento', doc2Url);
+                                UploadDocument(
+                                        pickedFile: pickedFile,
+                                        uploadTask: uploadTask,
+                                        user: user,
+                                        doc1Name: doc1Name,
+                                        doc2Name: doc2Name,
+                                        previewdoc1: previewdoc1,
+                                        previewdoc2: previewdoc2,
+                                        link: link,
+                                        doc1Url: doc1Url,
+                                        doc2Url: doc2Url,
+                                        serviceName: serviceName)
+                                    .showSelectFile(
+                                        context,
+                                        doc2Name,
+                                        previewdoc2,
+                                        'Empadronamiento',
+                                        doc2Url);
                               },
                               child: const Text('Upload'),
                             ),
@@ -240,8 +271,8 @@ class _EuVisaPageState extends State<EuVisaPage> {
                         return;
                       }
                       Navigator.of(context).pop();
-                      DatabaseService(uid: user)
-                          .createMyServices('EU Visa', doc1Url, doc2Url);
+                      DatabaseService(uid: user).createMyServices(
+                          'Business Service 1', doc1Url, doc2Url);
                       requestSentPopUp();
                     },
                     child: const Text('Send request'),
@@ -258,137 +289,137 @@ class _EuVisaPageState extends State<EuVisaPage> {
     );
   }
 
-  Future selectFile(fileName, previewFile, folder, docUrl) async {
-    final result = await FilePicker.platform.pickFiles();
-    // final result = await ImagePicker().pickImage(source: ImageSource.gallery);
+  // Future selectFile(fileName, previewFile, folder, docUrl) async {
+  //   final result = await FilePicker.platform.pickFiles();
+  //   // final result = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if (result == null) return;
+  //   if (result == null) return;
 
-    setState(() {
-      pickedFile = result.files.first;
-    });
+  //   setState(() {
+  //     pickedFile = result.files.first;
+  //   });
 
-    final path = '$user/euVisa/$folder/${pickedFile!.name}';
-    final file = File(pickedFile!.path!);
+  //   final path = '$user/businessServiceOne/$folder/${pickedFile!.name}';
+  //   final file = File(pickedFile!.path!);
 
-    final ref = FirebaseStorage.instance.ref().child(path);
-    uploadTask = ref.putFile(file);
+  //   final ref = FirebaseStorage.instance.ref().child(path);
+  //   uploadTask = ref.putFile(file);
 
-    final snapshot = await uploadTask!.whenComplete(() {
-      setState(() {
-        if (fileName == doc1Name) {
-          doc1Name = pickedFile!.name;
-          previewdoc1 = true;
-        }
-        if (fileName == doc2Name) {
-          doc2Name = pickedFile!.name;
-          previewdoc2 = true;
-        }
-        link = pickedFile!.path;
-        // print('finished');
-      });
-    });
+  //   final snapshot = await uploadTask!.whenComplete(() {
+  //     setState(() {
+  //       if (fileName == doc1Name) {
+  //         doc1Name = pickedFile!.name;
+  //         previewdoc1 = true;
+  //       }
+  //       if (fileName == doc2Name) {
+  //         doc2Name = pickedFile!.name;
+  //         previewdoc2 = true;
+  //       }
+  //       link = pickedFile!.path;
+  //       // print('finished');
+  //     });
+  //   });
 
-    final docUrlTemp = await snapshot.ref.getDownloadURL();
-    setState(() {
-      if (docUrl == doc1Url) {
-        doc1Url = docUrlTemp;
-      }
-      if (docUrl == doc2Url) {
-        doc2Url = docUrlTemp;
-      }
-    });
-  }
+  //   final docUrlTemp = await snapshot.ref.getDownloadURL();
+  //   setState(() {
+  //     if (docUrl == doc1Url) {
+  //       doc1Url = docUrlTemp;
+  //     }
+  //     if (docUrl == doc2Url) {
+  //       doc2Url = docUrlTemp;
+  //     }
+  //   });
+  // }
 
-  _showSelectFile(BuildContext context, doc, preview, folder, docUrl) {
-    if (Platform.isIOS) {
-      showCupertinoModalPopup(
-          context: context,
-          builder: (BuildContext context) {
-            return CupertinoActionSheet(
-              actions: [
-                CupertinoActionSheetAction(
-                  onPressed: () {
-                    selectFile(doc, preview, folder, docUrl);
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Select from Device'),
-                ),
-                CupertinoActionSheetAction(
-                  onPressed: () {
-                    cameraFile(doc, preview, folder, docUrl);
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Camera'),
-                ),
-              ],
-            );
-          });
-    } else {
-      showModalBottomSheet(
-          context: context,
-          builder: (BuildContext context) {
-            return Wrap(
-              children: [
-                ListTile(
-                  leading: Icon(Icons.folder),
-                  title: Text('Select from Gallery'),
-                  onTap: () {
-                    selectFile(doc, preview, folder, docUrl);
-                    Navigator.of(context).pop();
-                  },
-                ),
-                ListTile(
-                  leading: Icon(Icons.camera_alt),
-                  title: Text('Camera'),
-                  onTap: () {
-                    cameraFile(doc, preview, folder, docUrl);
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          });
-    }
-  }
+  // _showSelectFile(BuildContext context, doc, preview, folder, docUrl) {
+  //   if (Platform.isIOS) {
+  //     showCupertinoModalPopup(
+  //         context: context,
+  //         builder: (BuildContext context) {
+  //           return CupertinoActionSheet(
+  //             actions: [
+  //               CupertinoActionSheetAction(
+  //                 onPressed: () {
+  //                   selectFile(doc, preview, folder, docUrl);
+  //                   Navigator.of(context).pop();
+  //                 },
+  //                 child: const Text('Select from Device'),
+  //               ),
+  //               CupertinoActionSheetAction(
+  //                 onPressed: () {
+  //                   cameraFile(doc, preview, folder, docUrl);
+  //                   Navigator.of(context).pop();
+  //                 },
+  //                 child: Text('Camera'),
+  //               ),
+  //             ],
+  //           );
+  //         });
+  //   } else {
+  //     showModalBottomSheet(
+  //         context: context,
+  //         builder: (BuildContext context) {
+  //           return Wrap(
+  //             children: [
+  //               ListTile(
+  //                 leading: Icon(Icons.folder),
+  //                 title: Text('Select from Gallery'),
+  //                 onTap: () {
+  //                   selectFile(doc, preview, folder, docUrl);
+  //                   Navigator.of(context).pop();
+  //                 },
+  //               ),
+  //               ListTile(
+  //                 leading: Icon(Icons.camera_alt),
+  //                 title: Text('Camera'),
+  //                 onTap: () {
+  //                   cameraFile(doc, preview, folder, docUrl);
+  //                   Navigator.of(context).pop();
+  //                 },
+  //               ),
+  //             ],
+  //           );
+  //         });
+  //   }
+  // }
 
-  Future cameraFile(fileName, previewFile, folder, docUrl) async {
-    // final ImagePicker picker = ImagePicker();
+  // Future cameraFile(fileName, previewFile, folder, docUrl) async {
+  //   // final ImagePicker picker = ImagePicker();
 
-    final XFile? photo = await ImagePicker().pickImage(
-      source: ImageSource.camera,
-      // imageQuality: 2,
-    );
-    if (photo == null) return;
+  //   final XFile? photo = await ImagePicker().pickImage(
+  //     source: ImageSource.camera,
+  //     // imageQuality: 2,
+  //   );
+  //   if (photo == null) return;
 
-    final path = '$user/euVisa/$folder/${photo.name}';
+  //   final path = '$user/businessServiceOne/$folder/${photo.name}';
 
-    final ref = FirebaseStorage.instance.ref().child(path);
-    uploadTask = ref.putFile(File(photo.path));
-    final snapshot = await uploadTask!.whenComplete(() {
-      setState(() {
-        if (fileName == doc1Name) {
-          doc1Name = photo.name;
-          previewdoc1 = true;
-        }
-        if (fileName == doc2Name) {
-          doc2Name = photo.name;
-          previewdoc2 = true;
-        }
-        link = photo.path;
-        // print('finished');
-      });
-    });
-    final docUrlTemp = await snapshot.ref.getDownloadURL();
-    setState(() {
-      if (docUrl == doc1Url) {
-        doc1Url = docUrlTemp;
-      }
-      if (docUrl == doc2Url) {
-        doc2Url = docUrlTemp;
-      }
-    });
-  }
+  //   final ref = FirebaseStorage.instance.ref().child(path);
+  //   uploadTask = ref.putFile(File(photo.path));
+  //   final snapshot = await uploadTask!.whenComplete(() {
+  //     setState(() {
+  //       if (fileName == doc1Name) {
+  //         doc1Name = photo.name;
+  //         previewdoc1 = true;
+  //       }
+  //       if (fileName == doc2Name) {
+  //         doc2Name = photo.name;
+  //         previewdoc2 = true;
+  //       }
+  //       link = photo.path;
+  //       // print('finished');
+  //     });
+  //   });
+  //   final docUrlTemp = await snapshot.ref.getDownloadURL();
+  //   setState(() {
+  //     if (docUrl == doc1Url) {
+  //       doc1Url = docUrlTemp;
+  //     }
+  //     if (docUrl == doc2Url) {
+  //       doc2Url = docUrlTemp;
+  //     }
+  //   });
+  // }
 
   requestSentPopUp() {
     showDialog(
@@ -403,7 +434,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => ServicePendingPage(
-                                serviceName: 'EU Visa',
+                                serviceName: 'Business Service 1',
                                 userId: user,
                               )));
                     },

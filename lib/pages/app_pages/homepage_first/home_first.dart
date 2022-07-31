@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/homepage_first/widgets/news_scrolling.dart';
 import 'package:new_client_app/pages/app_pages/homepage_first/widgets/team_scrolling.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
-import 'package:new_client_app/pages/app_pages/services/immigration_page.dart';
+import 'package:new_client_app/pages/app_pages/services/immigration/immigration_page.dart';
 import 'package:new_client_app/utils/errors/error_service_exists.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
