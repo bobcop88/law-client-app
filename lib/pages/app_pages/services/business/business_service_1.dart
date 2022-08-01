@@ -13,7 +13,7 @@ import 'package:new_client_app/pages/app_pages/services/widgets/uploadFile_funct
 import 'package:new_client_app/utils/services/database_services.dart';
 
 class BusinessServiceOnePage extends StatefulWidget {
-  const BusinessServiceOnePage({Key? key}) : super(key: key);
+  const BusinessServiceOnePage({Key? pageKey}) : super(key: pageKey);
 
   @override
   State<BusinessServiceOnePage> createState() => _BusinessServiceOnePageState();
@@ -30,7 +30,6 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
   String? link = '';
   var doc1Url = '1';
   var doc2Url = '2';
-  String serviceName = 'Business Service 1';
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -107,21 +106,8 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                UploadDocument(
-                                        pickedFile: pickedFile,
-                                        uploadTask: uploadTask,
-                                        user: user,
-                                        doc1Name: doc1Name,
-                                        doc2Name: doc2Name,
-                                        previewdoc1: previewdoc1,
-                                        previewdoc2: previewdoc2,
-                                        link: link,
-                                        doc1Url: doc1Url,
-                                        doc2Url: doc2Url,
-                                        serviceName: serviceName)
-                                    .showSelectFile(context, doc1Name,
-                                        previewdoc1, 'Bank Statement', doc1Url);
-                                ;
+                                _showSelectFile(context, doc1Name, previewdoc1,
+                                    'Bank Statement', doc1Url);
                               },
                               style: const ButtonStyle(
                                   visualDensity: VisualDensity.compact),
@@ -187,24 +173,8 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                           children: [
                             TextButton(
                               onPressed: () {
-                                UploadDocument(
-                                        pickedFile: pickedFile,
-                                        uploadTask: uploadTask,
-                                        user: user,
-                                        doc1Name: doc1Name,
-                                        doc2Name: doc2Name,
-                                        previewdoc1: previewdoc1,
-                                        previewdoc2: previewdoc2,
-                                        link: link,
-                                        doc1Url: doc1Url,
-                                        doc2Url: doc2Url,
-                                        serviceName: serviceName)
-                                    .showSelectFile(
-                                        context,
-                                        doc2Name,
-                                        previewdoc2,
-                                        'Empadronamiento',
-                                        doc2Url);
+                                _showSelectFile(context, doc2Name, previewdoc2,
+                                    'Empadronamiento', doc2Url);
                               },
                               child: const Text('Upload'),
                             ),
@@ -289,137 +259,137 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
     );
   }
 
-  // Future selectFile(fileName, previewFile, folder, docUrl) async {
-  //   final result = await FilePicker.platform.pickFiles();
-  //   // final result = await ImagePicker().pickImage(source: ImageSource.gallery);
+  Future selectFile(fileName, previewFile, folder, docUrl) async {
+    final result = await FilePicker.platform.pickFiles();
+    // final result = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-  //   if (result == null) return;
+    if (result == null) return;
 
-  //   setState(() {
-  //     pickedFile = result.files.first;
-  //   });
+    setState(() {
+      pickedFile = result.files.first;
+    });
 
-  //   final path = '$user/businessServiceOne/$folder/${pickedFile!.name}';
-  //   final file = File(pickedFile!.path!);
+    final path = '$user/Business Service 1/$folder/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
 
-  //   final ref = FirebaseStorage.instance.ref().child(path);
-  //   uploadTask = ref.putFile(file);
+    final ref = FirebaseStorage.instance.ref().child(path);
+    uploadTask = ref.putFile(file);
 
-  //   final snapshot = await uploadTask!.whenComplete(() {
-  //     setState(() {
-  //       if (fileName == doc1Name) {
-  //         doc1Name = pickedFile!.name;
-  //         previewdoc1 = true;
-  //       }
-  //       if (fileName == doc2Name) {
-  //         doc2Name = pickedFile!.name;
-  //         previewdoc2 = true;
-  //       }
-  //       link = pickedFile!.path;
-  //       // print('finished');
-  //     });
-  //   });
+    final snapshot = await uploadTask!.whenComplete(() {
+      setState(() {
+        if (fileName == doc1Name) {
+          doc1Name = pickedFile!.name;
+          previewdoc1 = true;
+        }
+        if (fileName == doc2Name) {
+          doc2Name = pickedFile!.name;
+          previewdoc2 = true;
+        }
+        link = pickedFile!.path;
+        // print('finished');
+      });
+    });
 
-  //   final docUrlTemp = await snapshot.ref.getDownloadURL();
-  //   setState(() {
-  //     if (docUrl == doc1Url) {
-  //       doc1Url = docUrlTemp;
-  //     }
-  //     if (docUrl == doc2Url) {
-  //       doc2Url = docUrlTemp;
-  //     }
-  //   });
-  // }
+    final docUrlTemp = await snapshot.ref.getDownloadURL();
+    setState(() {
+      if (docUrl == doc1Url) {
+        doc1Url = docUrlTemp;
+      }
+      if (docUrl == doc2Url) {
+        doc2Url = docUrlTemp;
+      }
+    });
+  }
 
-  // _showSelectFile(BuildContext context, doc, preview, folder, docUrl) {
-  //   if (Platform.isIOS) {
-  //     showCupertinoModalPopup(
-  //         context: context,
-  //         builder: (BuildContext context) {
-  //           return CupertinoActionSheet(
-  //             actions: [
-  //               CupertinoActionSheetAction(
-  //                 onPressed: () {
-  //                   selectFile(doc, preview, folder, docUrl);
-  //                   Navigator.of(context).pop();
-  //                 },
-  //                 child: const Text('Select from Device'),
-  //               ),
-  //               CupertinoActionSheetAction(
-  //                 onPressed: () {
-  //                   cameraFile(doc, preview, folder, docUrl);
-  //                   Navigator.of(context).pop();
-  //                 },
-  //                 child: Text('Camera'),
-  //               ),
-  //             ],
-  //           );
-  //         });
-  //   } else {
-  //     showModalBottomSheet(
-  //         context: context,
-  //         builder: (BuildContext context) {
-  //           return Wrap(
-  //             children: [
-  //               ListTile(
-  //                 leading: Icon(Icons.folder),
-  //                 title: Text('Select from Gallery'),
-  //                 onTap: () {
-  //                   selectFile(doc, preview, folder, docUrl);
-  //                   Navigator.of(context).pop();
-  //                 },
-  //               ),
-  //               ListTile(
-  //                 leading: Icon(Icons.camera_alt),
-  //                 title: Text('Camera'),
-  //                 onTap: () {
-  //                   cameraFile(doc, preview, folder, docUrl);
-  //                   Navigator.of(context).pop();
-  //                 },
-  //               ),
-  //             ],
-  //           );
-  //         });
-  //   }
-  // }
+  _showSelectFile(BuildContext context, doc, preview, folder, docUrl) {
+    if (Platform.isIOS) {
+      showCupertinoModalPopup(
+          context: context,
+          builder: (BuildContext context) {
+            return CupertinoActionSheet(
+              actions: [
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    selectFile(doc, preview, folder, docUrl);
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Select from Device'),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    cameraFile(doc, preview, folder, docUrl);
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Camera'),
+                ),
+              ],
+            );
+          });
+    } else {
+      showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return Wrap(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.folder),
+                  title: Text('Select from Gallery'),
+                  onTap: () {
+                    selectFile(doc, preview, folder, docUrl);
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(Icons.camera_alt),
+                  title: Text('Camera'),
+                  onTap: () {
+                    cameraFile(doc, preview, folder, docUrl);
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          });
+    }
+  }
 
-  // Future cameraFile(fileName, previewFile, folder, docUrl) async {
-  //   // final ImagePicker picker = ImagePicker();
+  Future cameraFile(fileName, previewFile, folder, docUrl) async {
+    // final ImagePicker picker = ImagePicker();
 
-  //   final XFile? photo = await ImagePicker().pickImage(
-  //     source: ImageSource.camera,
-  //     // imageQuality: 2,
-  //   );
-  //   if (photo == null) return;
+    final XFile? photo = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+      // imageQuality: 2,
+    );
+    if (photo == null) return;
 
-  //   final path = '$user/businessServiceOne/$folder/${photo.name}';
+    final path = '$user/Business Service 1/$folder/${photo.name}';
 
-  //   final ref = FirebaseStorage.instance.ref().child(path);
-  //   uploadTask = ref.putFile(File(photo.path));
-  //   final snapshot = await uploadTask!.whenComplete(() {
-  //     setState(() {
-  //       if (fileName == doc1Name) {
-  //         doc1Name = photo.name;
-  //         previewdoc1 = true;
-  //       }
-  //       if (fileName == doc2Name) {
-  //         doc2Name = photo.name;
-  //         previewdoc2 = true;
-  //       }
-  //       link = photo.path;
-  //       // print('finished');
-  //     });
-  //   });
-  //   final docUrlTemp = await snapshot.ref.getDownloadURL();
-  //   setState(() {
-  //     if (docUrl == doc1Url) {
-  //       doc1Url = docUrlTemp;
-  //     }
-  //     if (docUrl == doc2Url) {
-  //       doc2Url = docUrlTemp;
-  //     }
-  //   });
-  // }
+    final ref = FirebaseStorage.instance.ref().child(path);
+    uploadTask = ref.putFile(File(photo.path));
+    final snapshot = await uploadTask!.whenComplete(() {
+      setState(() {
+        if (fileName == doc1Name) {
+          doc1Name = photo.name;
+          previewdoc1 = true;
+        }
+        if (fileName == doc2Name) {
+          doc2Name = photo.name;
+          previewdoc2 = true;
+        }
+        link = photo.path;
+        // print('finished');
+      });
+    });
+    final docUrlTemp = await snapshot.ref.getDownloadURL();
+    setState(() {
+      if (docUrl == doc1Url) {
+        doc1Url = docUrlTemp;
+      }
+      if (docUrl == doc2Url) {
+        doc2Url = docUrlTemp;
+      }
+    });
+  }
 
   requestSentPopUp() {
     showDialog(

@@ -16,7 +16,7 @@ Widget newsScrolling(BuildContext context) {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                  image: AssetImage('assets/slider_home/slider_3.png'),
+                  image: AssetImage('assets/images/News1.jpg'),
                   fit: BoxFit.cover),
             ),
             width: 250,
@@ -81,7 +81,7 @@ Widget newsScrolling(BuildContext context) {
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
-                image: AssetImage('assets/slider_home/slider_3.png'),
+                image: AssetImage('assets/images/News2.jpg'),
                 fit: BoxFit.cover),
           ),
           width: 250,

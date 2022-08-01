@@ -161,9 +161,8 @@ class _HomePageState extends State<HomePage> {
               selectedColor: const Color.fromRGBO(250, 169, 22, 1),
             ),
             SalomonBottomBarItem(
-                icon: const Icon(
-                  Icons.miscellaneous_services_outlined,
-                ),
+                icon: ImageIcon(
+                    AssetImage('assets/icons/Servicios-BottomMenu.png')),
                 title: const Text('Services'),
                 selectedColor: const Color.fromRGBO(250, 169, 22, 1)),
             SalomonBottomBarItem(

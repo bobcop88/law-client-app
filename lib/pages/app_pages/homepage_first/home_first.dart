@@ -20,9 +20,9 @@ class HomeFirst extends StatefulWidget {
 class _HomeFirstState extends State<HomeFirst> {
   int activeIndex = 0;
   final urlImages = [
-    'assets/slider_home/slider_1.png',
-    'assets/slider_home/slider_2.png',
-    'assets/slider_home/slider_3.png'
+    'assets/slider_home/Slider1.png',
+    'assets/slider_home/Slider2.png',
+    'assets/slider_home/Slider3.png',
   ];
 
   @override
@@ -113,7 +113,7 @@ class _HomeFirstState extends State<HomeFirst> {
                                   child: Padding(
                                     padding: const EdgeInsets.all(6.0),
                                     child: Image.asset(
-                                      'assets/icons/visa.png',
+                                      'assets/icons/EUVisas-TopServices.png',
                                     ),
                                   ),
                                 ),
@@ -154,7 +154,7 @@ class _HomeFirstState extends State<HomeFirst> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(6.0),
                                   child: Image.asset(
-                                    'assets/icons/fiscal_icon.png',
+                                    'assets/icons/Fiscal-TopServices.png',
                                   ),
                                 ),
                               ),
@@ -198,7 +198,7 @@ class _HomeFirstState extends State<HomeFirst> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(6.0),
                                   child: Image.asset(
-                                    'assets/icons/relocation_icon.png',
+                                    'assets/icons/Relocation-TopServices.png',
                                   ),
                                 ),
                               ),
@@ -238,7 +238,7 @@ class _HomeFirstState extends State<HomeFirst> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(6.0),
                                   child: Image.asset(
-                                    'assets/icons/litigation_icon.png',
+                                    'assets/icons/Litigation-TopServices.png',
                                   ),
                                 ),
                               ),
@@ -479,6 +479,7 @@ class _HomeFirstState extends State<HomeFirst> {
         borderRadius: BorderRadius.circular(20),
         child: Image.asset(
           urlImage,
+          width: 400,
           fit: BoxFit.cover,
         ),
       ),

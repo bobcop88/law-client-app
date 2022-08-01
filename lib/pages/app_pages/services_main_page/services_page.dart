@@ -37,8 +37,9 @@ class _ServicesPageState extends State<ServicesPage> {
                           borderRadius: BorderRadius.circular(20),
                           image: DecorationImage(
                             fit: BoxFit.cover,
+                            alignment: Alignment.centerLeft,
                             image: AssetImage(
-                              'assets/images/categories/immigration.png',
+                              'assets/images/categories/immigration.jpg',
                             ),
                           ),
                         ),
@@ -117,7 +118,7 @@ class _ServicesPageState extends State<ServicesPage> {
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
-                              'assets/images/categories/business.png',
+                              'assets/images/categories/Corporate.jpg',
                             ),
                           ),
                         ),
@@ -191,7 +192,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
-                            'assets/images/categories/nationality.png',
+                            'assets/images/categories/Properties.jpg',
                           ),
                         ),
                       ),
@@ -265,7 +266,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
-                            'assets/images/categories/mobility.png',
+                            'assets/images/categories/Litigation.jpg',
                           ),
                         ),
                       ),
