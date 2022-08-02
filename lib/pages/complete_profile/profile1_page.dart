@@ -55,8 +55,7 @@ class _ProfileOneState extends State<ProfileOne> {
                 ],
               ),
               const Divider(
-                thickness: 2,
-                color: Colors.black,
+                thickness: 1,
                 indent: 100.0,
                 endIndent: 100.0,
                 height: 50.0,

@@ -65,6 +65,25 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       setState(() {
         canResendEmailVerification = true;
       });
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('The email has been sent again'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [Text('Please verify your email address')],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('Close'),
+                ),
+              ],
+            );
+          });
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString()),
@@ -80,83 +99,99 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
       return const CompleteProfilePage();
     } else {
       return Scaffold(
-        backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
-        body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/img_start_page.png',
+        backgroundColor: const Color.fromARGB(255, 224, 224, 224),
+        body: Column(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+              child: Row(
+                children: [Expanded(child: Image.asset('assets/logo.png'))],
               ),
-              fit: BoxFit.cover,
-              opacity: 0.2,
             ),
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
+            const SizedBox(
+              height: 30.0,
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                  child: Column(
                     children: [
-                      Expanded(
-                        child: Text(
-                          AppLocalizations.of(context)!.verify_email_page_title,
-                          style: const TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(15, 48, 65, 1),
-                          ),
-                        ),
+                      const SizedBox(
+                        height: 100.0,
                       ),
-                    ],
-                  ),
-                  const Divider(
-                    thickness: 5.0,
-                    color: Color.fromRGBO(15, 48, 65, 1),
-                    endIndent: 200,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(AppLocalizations.of(context)!
-                            .verify_email_page_sub_title),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                              padding:
-                                  MaterialStateProperty.all(EdgeInsets.all(15)),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius:
-                                          BorderRadius.circular(20)))),
-                          onPressed: () {
-                            canResendEmailVerification
-                                ? sendVerificationEmail()
-                                : null;
-                          },
-                          child: Text(
-                            AppLocalizations.of(context)!.verify_email_btn,
-                            style: const TextStyle(
-                              fontSize: 17.0,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Expanded(
+                            child: Text(
+                              'The verification email has been sent to your email address',
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: -1),
+                              textAlign: TextAlign.center,
                             ),
                           ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0, left: 50.0, right: 50.0),
+                        child: Row(
+                          children: const [
+                            Expanded(
+                              child: Text(
+                                'Please check your inbox (also in Spam)',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 12.0),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 50.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                canResendEmailVerification
+                                    ? sendVerificationEmail()
+                                    : null;
+                              },
+                              child: const Text(
+                                'Resend email',
+                              ),
+                              style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      const EdgeInsets.all(15)),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)))),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
-                ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       );
     }

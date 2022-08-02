@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:new_client_app/pages/app_pages/services/my_services_pending.dart';
 import 'package:new_client_app/pages/app_pages/services/preview_doc.dart';
 import 'package:new_client_app/pages/app_pages/services/services_pending/pending_service_page.dart';
+import 'package:new_client_app/utils/errors/error_no_docs.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 
 class EuVisaPage extends StatefulWidget {
@@ -46,14 +47,85 @@ class _EuVisaPageState extends State<EuVisaPage> {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    'EU visa',
-                    style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromRGBO(15, 48, 65, 1)),
+                children: [
+                  Expanded(
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 10.0, right: 15.0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    height: 45,
+                                    width: 45,
+                                    decoration: BoxDecoration(
+                                        color: Color.fromARGB(30, 250, 170, 22),
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Icon(
+                                      Icons.miscellaneous_services,
+                                      color: Color.fromRGBO(250, 169, 22, 1),
+                                      size: 30.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Text(
+                                'EU Visa',
+                                style: TextStyle(
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: Card(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Eu Visa',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fermentum justo turpis, consequat mollis ex congue ut. Nam sagittis lacinia ipsum, id semper tellus.',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 12.0),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -61,169 +133,226 @@ class _EuVisaPageState extends State<EuVisaPage> {
                 height: 10.0,
               ),
               Row(
-                children: const [
-                  Expanded(
-                    child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fermentum justo turpis, consequat mollis ex congue ut. Nam sagittis lacinia ipsum, id semper tellus.',
-                      style: TextStyle(fontSize: 12.0),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
-              const Divider(
-                height: 20.0,
-              ),
-              Row(
-                children: const [
-                  Text(
-                    'Requirements',
-                    style: TextStyle(
-                      color: Color.fromRGBO(15, 48, 65, 1),
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20.0,
-              ),
-              Row(
                 children: [
                   Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Sufficient economic resources',
-                        ),
-                        const Text(
-                          'This can be demonstrated in various ways for example payslips or bank statements',
-                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
-                        ),
-                        Row(
+                    child: Card(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(10.0, 12.0, 10.0, 12.0),
+                        child: Column(
                           children: [
-                            TextButton(
-                              onPressed: () {
-                                _showSelectFile(context, doc1Name, previewdoc1,
-                                    'Bank Statement', doc1Url);
-                              },
-                              style: const ButtonStyle(
-                                  visualDensity: VisualDensity.compact),
-                              child: const Text('Upload'),
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            Expanded(
-                              child: Text(
-                                doc1Name,
-                                style: const TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 12.0,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    'Requirements',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                            Visibility(
-                              visible: previewdoc1,
-                              child: TextButton(
-                                style: ButtonStyle(
-                                    tapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    minimumSize:
-                                        MaterialStateProperty.all(Size.zero),
-                                    padding: MaterialStateProperty.all(
-                                        EdgeInsets.zero)),
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: ((context) => PreviewDoc(
-                                            file: link!,
-                                            docUrl: '',
-                                          ))));
-                                },
-                                child: const Text(
-                                  'Preview',
-                                  style: TextStyle(fontSize: 12.0),
+                            const Divider(),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.label,
+                                            size: 16.0,
+                                            color:
+                                                Color.fromRGBO(250, 169, 22, 1),
+                                          ),
+                                          const SizedBox(
+                                            width: 5.0,
+                                          ),
+                                          const Text(
+                                            'Sufficient economic resources',
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      const Text(
+                                        'This can be demonstrated in various ways for example payslips or bank statements',
+                                        style: TextStyle(
+                                            fontSize: 11.0, color: Colors.grey),
+                                      ),
+                                      Row(
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              _showSelectFile(
+                                                  context,
+                                                  doc1Name,
+                                                  previewdoc1,
+                                                  'Bank Statement',
+                                                  doc1Url);
+                                            },
+                                            style: const ButtonStyle(
+                                                visualDensity:
+                                                    VisualDensity.compact),
+                                            child: const Text('Upload'),
+                                          ),
+                                          const SizedBox(
+                                            width: 10.0,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              doc1Name,
+                                              style: const TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                fontSize: 12.0,
+                                              ),
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: previewdoc1,
+                                            child: TextButton(
+                                              style: ButtonStyle(
+                                                  tapTargetSize:
+                                                      MaterialTapTargetSize
+                                                          .shrinkWrap,
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          Size.zero),
+                                                  padding:
+                                                      MaterialStateProperty.all(
+                                                          EdgeInsets.zero)),
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: ((context) =>
+                                                            PreviewDoc(
+                                                              file: link!,
+                                                              docUrl: '',
+                                                            ))));
+                                              },
+                                              child: const Text(
+                                                'Preview',
+                                                style:
+                                                    TextStyle(fontSize: 12.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
+                              ],
+                            ),
+                            const Divider(),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.label,
+                                            size: 16.0,
+                                            color:
+                                                Color.fromRGBO(250, 169, 22, 1),
+                                          ),
+                                          const SizedBox(
+                                            width: 5.0,
+                                          ),
+                                          const Text(
+                                            'Empadronamiento',
+                                          ),
+                                        ],
+                                      ),
+                                      const SizedBox(
+                                        height: 5.0,
+                                      ),
+                                      const Text(
+                                        'This can be demonstrated in various ways for example payslips or bank statements',
+                                        style: TextStyle(
+                                            fontSize: 11.0, color: Colors.grey),
+                                      ),
+                                      Row(
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              _showSelectFile(
+                                                  context,
+                                                  doc2Name,
+                                                  previewdoc2,
+                                                  'Empadronamiento',
+                                                  doc2Url);
+                                            },
+                                            child: const Text('Upload'),
+                                          ),
+                                          const SizedBox(
+                                            width: 10.0,
+                                          ),
+                                          const SizedBox(width: 5.0),
+                                          Expanded(
+                                            child: Text(
+                                              doc2Name,
+                                              style: const TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                                fontSize: 12.0,
+                                              ),
+                                            ),
+                                          ),
+                                          Visibility(
+                                            visible: previewdoc2,
+                                            child: TextButton(
+                                              style: ButtonStyle(
+                                                  tapTargetSize:
+                                                      MaterialTapTargetSize
+                                                          .shrinkWrap,
+                                                  minimumSize:
+                                                      MaterialStateProperty.all(
+                                                          Size.zero),
+                                                  padding:
+                                                      MaterialStateProperty.all(
+                                                          EdgeInsets.zero)),
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: ((context) =>
+                                                            PreviewDoc(
+                                                              file: link!,
+                                                              docUrl: '',
+                                                            ))));
+                                              },
+                                              child: const Text(
+                                                'Preview',
+                                                style:
+                                                    TextStyle(fontSize: 12.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      // Row(
+                                      //   children: [
+                                      //     ElevatedButton(
+                                      //       onPressed: cameraFile,
+                                      //       child: Text('Camera'),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              const Divider(),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Empadronamiento',
                         ),
-                        const Text(
-                          'Proof of your place of residence in Spain',
-                          style: TextStyle(fontSize: 12.0, color: Colors.grey),
-                        ),
-                        Row(
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                _showSelectFile(context, doc2Name, previewdoc2,
-                                    'Empadronamiento', doc2Url);
-                              },
-                              child: const Text('Upload'),
-                            ),
-                            const SizedBox(
-                              width: 10.0,
-                            ),
-                            const SizedBox(width: 5.0),
-                            Expanded(
-                              child: Text(
-                                doc2Name,
-                                style: const TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 12.0,
-                                ),
-                              ),
-                            ),
-                            Visibility(
-                              visible: previewdoc2,
-                              child: TextButton(
-                                style: ButtonStyle(
-                                    tapTargetSize:
-                                        MaterialTapTargetSize.shrinkWrap,
-                                    minimumSize:
-                                        MaterialStateProperty.all(Size.zero),
-                                    padding: MaterialStateProperty.all(
-                                        EdgeInsets.zero)),
-                                onPressed: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: ((context) => PreviewDoc(
-                                            file: link!,
-                                            docUrl: '',
-                                          ))));
-                                },
-                                child: const Text(
-                                  'Preview',
-                                  style: TextStyle(fontSize: 12.0),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        // Row(
-                        //   children: [
-                        //     ElevatedButton(
-                        //       onPressed: cameraFile,
-                        //       child: Text('Camera'),
-                        //     ),
-                        //   ],
-                        // ),
-                      ],
+                      ),
                     ),
                   ),
                 ],
@@ -236,7 +365,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                     onPressed: () {
                       if (doc1Name == 'No document selected1' ||
                           doc2Name == 'No document selected') {
-                        errorPopUp();
+                        ErrorNoDocs().errorNoDocuments(context);
                         return;
                       }
                       Navigator.of(context).pop();

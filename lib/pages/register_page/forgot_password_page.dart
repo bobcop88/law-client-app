@@ -18,153 +18,185 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        body: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/img_start_page.png',
+        backgroundColor: const Color.fromARGB(255, 224, 224, 224),
+        body: Column(
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+              child: Row(
+                children: [Expanded(child: Image.asset('assets/logo.png'))],
               ),
-              fit: BoxFit.cover,
-              opacity: 0.2,
             ),
-          ),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
+            const SizedBox(
+              height: 30.0,
+            ),
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: Text(
-                          AppLocalizations.of(context)!.forgot_passw_title,
-                          style: const TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                            color: Color.fromRGBO(15, 48, 65, 1),
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
+                      const SizedBox(
+                        height: 100.0,
                       ),
-                    ],
-                  ),
-                  const Divider(
-                    thickness: 5.0,
-                    color: Color.fromRGBO(15, 48, 65, 1),
-                    indent: 100,
-                    endIndent: 100,
-                    height: 30,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          AppLocalizations.of(context)!.forgot_passw_sub_title,
-                          style: TextStyle(
-                            color: Color.fromRGBO(15, 48, 65, 1),
-                            fontSize: 17.0,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.w700,
+                                letterSpacing: -1),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
+                        ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: TextFormField(
-                          controller: emailController,
-                          textInputAction: TextInputAction.next,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            prefixIcon: const Icon(
-                              Icons.email_outlined,
-                              color: Color.fromRGBO(15, 48, 65, 1),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 6.0, left: 50.0, right: 50.0),
+                        child: Row(
+                          children: const [
+                            Expanded(
+                              child: Text(
+                                'Enter your email address and reset your password',
+                                style: TextStyle(
+                                    color: Colors.grey, fontSize: 12.0),
+                                textAlign: TextAlign.center,
+                              ),
                             ),
-                            labelText:
-                                AppLocalizations.of(context)!.loginp_email,
-                            labelStyle: const TextStyle(
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 50.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: Row(
+                          children: const [
+                            Text(
+                              'Email Address',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 14.0),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 8.0,
+                      ),
+                      TextFormField(
+                        controller: emailController,
+                        textInputAction: TextInputAction.next,
+                        decoration: const InputDecoration(
+                          isDense: true,
+                          prefixIcon: Icon(
+                            Icons.email_outlined,
+                            color: Colors.grey,
+                          ),
+                          hintText: 'Email address',
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
+                            borderSide: BorderSide(
                                 color: Color.fromRGBO(15, 48, 65, 1),
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.bold),
-                            focusedBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0)),
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(15, 48, 65, 1),
-                                  width: 1.0,
-                                  style: BorderStyle.solid),
+                                width: 1.0,
+                                style: BorderStyle.solid),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
+                            borderSide: BorderSide(
+                                color: Colors.grey,
+                                width: 1.0,
+                                style: BorderStyle.solid),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
+                            borderSide: BorderSide(
+                                color: Colors.red,
+                                width: 1.0,
+                                style: BorderStyle.solid),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15.0)),
+                            borderSide: BorderSide(
+                                color: Colors.red,
+                                width: 1.0,
+                                style: BorderStyle.solid),
+                          ),
+                          errorStyle: TextStyle(
+                            color: Colors.red,
+                          ),
+                        ),
+                        style: const TextStyle(
+                            color: Color.fromRGBO(15, 48, 65, 1),
+                            fontSize: 14.0),
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (email) =>
+                            email != null && !EmailValidator.validate(email)
+                                ? 'Enter a valid email address'
+                                : null,
+                      ),
+                      const SizedBox(
+                        height: 30.0,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ElevatedButton(
+                              onPressed: resetPassword,
+                              child: const Text(
+                                'Submit',
+                              ),
+                              style: ButtonStyle(
+                                  padding: MaterialStateProperty.all(
+                                      const EdgeInsets.all(15)),
+                                  shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(20)))),
                             ),
-                            enabledBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0)),
-                              borderSide: BorderSide(
-                                  color: Color.fromRGBO(15, 48, 65, 1),
-                                  width: 1.0,
-                                  style: BorderStyle.solid),
-                            ),
-                            focusedErrorBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0)),
-                              borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width: 1.0,
-                                  style: BorderStyle.solid),
-                            ),
-                            errorBorder: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15.0)),
-                              borderSide: BorderSide(
-                                  color: Colors.red,
-                                  width: 1.0,
-                                  style: BorderStyle.solid),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 0.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () {
+                              navigatorKey.currentState!
+                                  .popUntil((route) => route.isFirst);
+                            },
+                            child: Text(
+                              'Back',
+                              style: TextStyle(color: Colors.black),
                             ),
                           ),
-                          style: const TextStyle(
-                              color: Color.fromRGBO(15, 48, 65, 1),
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17.0),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (email) =>
-                              email != null && !EmailValidator.validate(email)
-                                  ? 'Enter a valid email address'
-                                  : null,
-                        ),
+                        ],
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20.0,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15.0, right: 15.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ElevatedButton(
-                          onPressed: resetPassword,
-                          child: const Text(
-                            'Submit',
-                          ),
-                          style: ButtonStyle(
-                            shape: MaterialStateProperty.all(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20))),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );
@@ -186,6 +218,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      navigatorKey.currentState!.popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -199,8 +232,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
           backgroundColor: Colors.black,
         ),
       );
+      navigatorKey.currentState?.pop();
     }
-
-    navigatorKey.currentState!.popUntil((route) => route.isFirst);
   }
 }

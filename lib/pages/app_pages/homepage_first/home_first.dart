@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_client_app/pages/app_pages/homepage_first/widgets/categories_scrolling.dart';
 import 'package:new_client_app/pages/app_pages/homepage_first/widgets/news_scrolling.dart';
 import 'package:new_client_app/pages/app_pages/homepage_first/widgets/team_scrolling.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
@@ -262,161 +263,162 @@ class _HomeFirstState extends State<HomeFirst> {
           const SizedBox(
             height: 40.0,
           ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, right: 8.0),
-            child: Column(
-              children: [
-                Row(
-                  children: const [
-                    Text(
-                      'Categories',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15.0,
-                ),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const ImmigrationPage()));
-                        },
-                        child: Container(
-                          height: 150,
-                          width: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            image: DecorationImage(
-                                image: const AssetImage(
-                                    'assets/images/immigration.jpg'),
-                                fit: BoxFit.cover,
-                                colorFilter: ColorFilter.mode(
-                                    Colors.black.withOpacity(0.3),
-                                    BlendMode.darken)),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Text(
-                                'Immigration',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0,
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 10.0),
-                      Container(
-                        height: 150,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: const AssetImage(
-                                  'assets/images/business.jpg'),
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.3),
-                                  BlendMode.darken)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Text(
-                              'Business',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10.0),
-                      Container(
-                        height: 150,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: const AssetImage(
-                                  'assets/images/mobility.jpg'),
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.3),
-                                  BlendMode.darken)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Text(
-                              'Mobility',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 10.0),
-                      Container(
-                        height: 150,
-                        width: 150,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
-                              image: const AssetImage(
-                                  'assets/images/passport_img.jpg'),
-                              fit: BoxFit.cover,
-                              colorFilter: ColorFilter.mode(
-                                  Colors.black.withOpacity(0.3),
-                                  BlendMode.darken)),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Text(
-                              'Nationality & Citizenship',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20.0,
-                              ),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          categoriesScrolling(context),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+          //   child: Column(
+          //     children: [
+          //       Row(
+          //         children: const [
+          //           Text(
+          //             'Categories',
+          //             style: TextStyle(fontWeight: FontWeight.bold),
+          //           ),
+          //         ],
+          //       ),
+          //       const SizedBox(
+          //         height: 15.0,
+          //       ),
+          //       SingleChildScrollView(
+          //         scrollDirection: Axis.horizontal,
+          //         child: Row(
+          //           children: [
+          //             GestureDetector(
+          //               onTap: () {
+          //                 Navigator.of(context).push(MaterialPageRoute(
+          //                     builder: (context) => const ImmigrationPage()));
+          //               },
+          //               child: Container(
+          //                 height: 150,
+          //                 width: 150,
+          //                 decoration: BoxDecoration(
+          //                   borderRadius: BorderRadius.circular(20),
+          //                   image: DecorationImage(
+          //                       image: const AssetImage(
+          //                           'assets/images/immigration.jpg'),
+          //                       fit: BoxFit.cover,
+          //                       colorFilter: ColorFilter.mode(
+          //                           Colors.black.withOpacity(0.3),
+          //                           BlendMode.darken)),
+          //                 ),
+          //                 child: Column(
+          //                   mainAxisAlignment: MainAxisAlignment.end,
+          //                   children: const [
+          //                     Text(
+          //                       'Immigration',
+          //                       style: TextStyle(
+          //                         color: Colors.white,
+          //                         fontWeight: FontWeight.bold,
+          //                         fontSize: 20.0,
+          //                       ),
+          //                     ),
+          //                     SizedBox(
+          //                       height: 10.0,
+          //                     ),
+          //                   ],
+          //                 ),
+          //               ),
+          //             ),
+          //             const SizedBox(width: 10.0),
+          //             Container(
+          //               height: 150,
+          //               width: 150,
+          //               decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(20),
+          //                 image: DecorationImage(
+          //                     image: const AssetImage(
+          //                         'assets/images/business.jpg'),
+          //                     fit: BoxFit.cover,
+          //                     colorFilter: ColorFilter.mode(
+          //                         Colors.black.withOpacity(0.3),
+          //                         BlendMode.darken)),
+          //               ),
+          //               child: Column(
+          //                 mainAxisAlignment: MainAxisAlignment.end,
+          //                 children: const [
+          //                   Text(
+          //                     'Business',
+          //                     style: TextStyle(
+          //                       color: Colors.white,
+          //                       fontWeight: FontWeight.bold,
+          //                       fontSize: 20.0,
+          //                     ),
+          //                   ),
+          //                   SizedBox(
+          //                     height: 10.0,
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //             const SizedBox(width: 10.0),
+          //             Container(
+          //               height: 150,
+          //               width: 150,
+          //               decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(20),
+          //                 image: DecorationImage(
+          //                     image: const AssetImage(
+          //                         'assets/images/mobility.jpg'),
+          //                     fit: BoxFit.cover,
+          //                     colorFilter: ColorFilter.mode(
+          //                         Colors.black.withOpacity(0.3),
+          //                         BlendMode.darken)),
+          //               ),
+          //               child: Column(
+          //                 mainAxisAlignment: MainAxisAlignment.end,
+          //                 children: const [
+          //                   Text(
+          //                     'Mobility',
+          //                     style: TextStyle(
+          //                       color: Colors.white,
+          //                       fontWeight: FontWeight.bold,
+          //                       fontSize: 20.0,
+          //                     ),
+          //                   ),
+          //                   SizedBox(
+          //                     height: 10.0,
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //             const SizedBox(width: 10.0),
+          //             Container(
+          //               height: 150,
+          //               width: 150,
+          //               decoration: BoxDecoration(
+          //                 borderRadius: BorderRadius.circular(20),
+          //                 image: DecorationImage(
+          //                     image: const AssetImage(
+          //                         'assets/images/passport_img.jpg'),
+          //                     fit: BoxFit.cover,
+          //                     colorFilter: ColorFilter.mode(
+          //                         Colors.black.withOpacity(0.3),
+          //                         BlendMode.darken)),
+          //               ),
+          //               child: Column(
+          //                 mainAxisAlignment: MainAxisAlignment.end,
+          //                 children: const [
+          //                   Text(
+          //                     'Nationality & Citizenship',
+          //                     style: TextStyle(
+          //                       color: Colors.white,
+          //                       fontWeight: FontWeight.bold,
+          //                       fontSize: 20.0,
+          //                     ),
+          //                     textAlign: TextAlign.center,
+          //                   ),
+          //                   SizedBox(
+          //                     height: 10.0,
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           const SizedBox(
             height: 40.0,
           ),

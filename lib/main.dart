@@ -50,6 +50,7 @@ Future main() async {
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
+final scaffolKey = GlobalKey<ScaffoldState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
