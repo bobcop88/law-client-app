@@ -204,22 +204,34 @@ class _HomePageState extends State<HomePage> {
   }
 
   void checkNewChat() {
-    FirebaseFirestore.instance
-        .collection('chats')
-        .doc(userId)
-        .get()
-        .then((value) {
-      if (value.data()!['isRead'] == false &&
-          value.data()!['senderLastMessage'] != userId) {
-        setState(() {
-          showNewChatMessage = true;
-        });
-      } else {
-        setState(() {
-          showNewChatMessage = false;
-        });
-      }
-    });
+    if (FirebaseFirestore.instance
+            .collection('chats')
+            .doc(userId)
+            .get()
+            .then((value) => value.exists) ==
+        true) {
+      FirebaseFirestore.instance
+          .collection('chats')
+          .doc(userId)
+          .get()
+          .then((value) {
+        if (value.data()!['isRead'] == false &&
+            value.data()!['senderLastMessage'] != userId) {
+          setState(() {
+            showNewChatMessage = true;
+          });
+        } else {
+          setState(() {
+            showNewChatMessage = false;
+          });
+        }
+      });
+    } else {
+      FirebaseFirestore.instance
+          .collection('chats')
+          .doc(userId)
+          .set({'started': true});
+    }
   }
 
   void updateLastMessage() {
