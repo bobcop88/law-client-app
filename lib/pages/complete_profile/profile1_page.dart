@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/complete_profile/profile_class.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

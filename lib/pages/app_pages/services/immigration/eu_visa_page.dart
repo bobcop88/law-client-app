@@ -461,7 +461,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
               children: [
                 ListTile(
                   leading: Icon(Icons.folder),
-                  title: Text('Select from Gallery'),
+                  title: Text('Select from Device'),
                   onTap: () {
                     selectFile(doc, preview, folder, docUrl);
                     Navigator.of(context).pop();

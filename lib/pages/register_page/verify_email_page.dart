@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/pages/complete_profile/complete_profile_page.dart';
+import 'package:new_client_app/pages/login_page/login_page.dart';
 import 'package:new_client_app/utils/logs/database_logs.dart';
 
 class VerifyEmailPage extends StatefulWidget {
@@ -129,10 +130,10 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
+                        children: [
                           Expanded(
                             child: Text(
-                              'The verification email has been sent to your email address',
+                              'The verification email has been sent to $email',
                               style: TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w700,
@@ -185,6 +186,26 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                             ),
                           ],
                         ),
+                      ),
+                      const SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                            onPressed: () async {
+                              Navigator.of(context).pop();
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LoginPage()));
+                              await FirebaseAuth.instance.currentUser!.delete();
+                            },
+                            child: Text(
+                              'It\u0027s not my email address',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),

@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     checkUserComplete();
-    timer = Timer.periodic(const Duration(seconds: 2), (_) {
+    timer = Timer.periodic(const Duration(seconds: 4), (_) {
       checkNewChat();
       checkNewNotification(userId);
     });
@@ -203,13 +203,11 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void checkNewChat() {
-    if (FirebaseFirestore.instance
-            .collection('chats')
-            .doc(userId)
-            .get()
-            .then((value) => value.exists) ==
-        true) {
+  void checkNewChat() async {
+    final chat =
+        FirebaseFirestore.instance.collection('chats').doc(userId).get();
+
+    if (await chat.then((value) => value.exists) == true) {
       FirebaseFirestore.instance
           .collection('chats')
           .doc(userId)
