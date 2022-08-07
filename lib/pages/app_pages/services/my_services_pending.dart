@@ -44,7 +44,8 @@ class _PendingServicesState extends State<PendingServices> {
                   Expanded(
                     child: ListView(
                       children: services
-                          .map(BuildServiceWidget().buildService)
+                          .map(
+                              BuildServiceWidget(context: context).buildService)
                           .toList(),
                     ),
                   ),

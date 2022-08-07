@@ -19,8 +19,23 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
         elevation: 0,
         title: Text('Personal Profile'),
       ),
-      body: ProfilePage(
-        controller: menuController,
+      body: Column(
+        children: [
+          Expanded(
+            child: Row(
+              children: [
+                Expanded(
+                  child: ProfilePage(
+                    controller: menuController,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 40.0,
+          )
+        ],
       ),
     );
   }

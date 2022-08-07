@@ -103,7 +103,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const Icon(
                           CupertinoIcons.phone_fill,
-                          color: Color.fromRGBO(15, 48, 65, 1),
+                          color: Color.fromRGBO(250, 169, 22, 1),
                         ),
                         const SizedBox(width: 10.0),
                         Column(
@@ -133,7 +133,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const Icon(
                           Icons.email_outlined,
-                          color: Color.fromRGBO(15, 48, 65, 1),
+                          color: Color.fromRGBO(250, 169, 22, 1),
                         ),
                         const SizedBox(width: 10.0),
                         Column(
@@ -162,7 +162,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const Icon(
                           Icons.calendar_month_outlined,
-                          color: Color.fromRGBO(15, 48, 65, 1),
+                          color: Color.fromRGBO(250, 169, 22, 1),
                         ),
                         const SizedBox(width: 10.0),
                         Column(
@@ -193,7 +193,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const Icon(
                           Icons.flag,
-                          color: Color.fromRGBO(15, 48, 65, 1),
+                          color: Color.fromRGBO(250, 169, 22, 1),
                         ),
                         const SizedBox(width: 10.0),
                         Column(
@@ -222,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         const Icon(
                           Icons.public_sharp,
-                          color: Color.fromRGBO(15, 48, 65, 1),
+                          color: Color.fromRGBO(250, 169, 22, 1),
                         ),
                         const SizedBox(width: 10.0),
                         Column(

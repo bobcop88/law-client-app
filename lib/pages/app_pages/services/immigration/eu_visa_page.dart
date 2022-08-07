@@ -63,22 +63,24 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                     height: 45,
                                     width: 45,
                                     decoration: BoxDecoration(
-                                        color: Color.fromARGB(30, 250, 170, 22),
+                                        color: const Color.fromARGB(
+                                            30, 250, 170, 22),
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.miscellaneous_services,
-                                      color: Color.fromRGBO(250, 169, 22, 1),
+                                      color:
+                                          const Color.fromRGBO(250, 169, 22, 1),
                                       size: 30.0,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               child: Text(
                                 'EU Visa',
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -100,7 +102,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                         child: Column(
                           children: [
                             Row(
-                              children: [
+                              children: const [
                                 Expanded(
                                   child: Text(
                                     'Eu Visa',
@@ -112,7 +114,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                             ),
                             const Divider(),
                             Row(
-                              children: [
+                              children: const [
                                 Expanded(
                                   child: Text(
                                     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fermentum justo turpis, consequat mollis ex congue ut. Nam sagittis lacinia ipsum, id semper tellus.',
@@ -142,7 +144,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                         child: Column(
                           children: [
                             Row(
-                              children: [
+                              children: const [
                                 Expanded(
                                   child: Text(
                                     'Requirements',
@@ -161,17 +163,17 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        children: [
+                                        children: const [
                                           Icon(
                                             Icons.label,
                                             size: 16.0,
                                             color:
                                                 Color.fromRGBO(250, 169, 22, 1),
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 5.0,
                                           ),
-                                          const Text(
+                                          Text(
                                             'Sufficient economic resources',
                                           ),
                                         ],
@@ -257,17 +259,17 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Row(
-                                        children: [
+                                        children: const [
                                           Icon(
                                             Icons.label,
                                             size: 16.0,
                                             color:
                                                 Color.fromRGBO(250, 169, 22, 1),
                                           ),
-                                          const SizedBox(
+                                          SizedBox(
                                             width: 5.0,
                                           ),
-                                          const Text(
+                                          Text(
                                             'Empadronamiento',
                                           ),
                                         ],
@@ -448,7 +450,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                     cameraFile(doc, preview, folder, docUrl);
                     Navigator.of(context).pop();
                   },
-                  child: Text('Camera'),
+                  child: const Text('Camera'),
                 ),
               ],
             );
@@ -460,16 +462,16 @@ class _EuVisaPageState extends State<EuVisaPage> {
             return Wrap(
               children: [
                 ListTile(
-                  leading: Icon(Icons.folder),
-                  title: Text('Select from Device'),
+                  leading: const Icon(Icons.folder),
+                  title: const Text('Select from Device'),
                   onTap: () {
                     selectFile(doc, preview, folder, docUrl);
                     Navigator.of(context).pop();
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.camera_alt),
-                  title: Text('Camera'),
+                  leading: const Icon(Icons.camera_alt),
+                  title: const Text('Camera'),
                   onTap: () {
                     cameraFile(doc, preview, folder, docUrl);
                     Navigator.of(context).pop();
@@ -524,10 +526,31 @@ class _EuVisaPageState extends State<EuVisaPage> {
         context: context,
         builder: (BuildContext context) {
           return SimpleDialog(
-            title: Text('Your request has been sent'),
+            title: Column(
+              children: const [
+                Icon(
+                  Icons.check_circle_outline,
+                  color: Color.fromRGBO(250, 169, 22, 1),
+                ),
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  'Your request has been sent',
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Close'),
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -536,31 +559,11 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                 userId: user,
                               )));
                     },
-                    child: Text('Go to Service'),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text('Close'),
+                    child: const Text('Go to Service'),
                   ),
                 ],
               ),
             ],
-          );
-        });
-  }
-
-  errorPopUp() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-            title: Text('Please upload a document'),
           );
         });
   }
@@ -570,23 +573,50 @@ class _EuVisaPageState extends State<EuVisaPage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Do you want to qui?'),
+            title: const Text(
+              'Are you leaving?',
+              textAlign: TextAlign.center,
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: const [
+                    Expanded(
+                      child: Text(
+                        'Your request has not been completed. If you leave this page, your request will not be processed and you will need to resubmit all documents',
+                        style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
             actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context, true);
-                  if (doc1Url != '1') {
-                    FirebaseStorage.instance.refFromURL(doc1Url).delete();
-                  }
-                  if (doc2Url != '2') {
-                    FirebaseStorage.instance.refFromURL(doc2Url).delete();
-                  }
-                },
-                child: Text('Exit'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pop(context, false),
-                child: Text('Continue request'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                      if (doc1Url != '1') {
+                        FirebaseStorage.instance.refFromURL(doc1Url).delete();
+                      }
+                      if (doc2Url != '2') {
+                        FirebaseStorage.instance.refFromURL(doc2Url).delete();
+                      }
+                    },
+                    child: const Text(
+                      'Exit',
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context, false),
+                    child: const Text('Continue'),
+                  ),
+                ],
               ),
             ],
           );

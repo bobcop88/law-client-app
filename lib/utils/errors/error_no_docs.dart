@@ -7,20 +7,38 @@ class ErrorNoDocs {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Please upload all requested documents'),
+            title: Text(
+              'Documents are missing',
+              textAlign: TextAlign.center,
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                    'You need to upload all documents in order to request the service')
+                  'You need to upload all documents in order to request the service',
+                  style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
             actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('Upload now'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ButtonStyle(
+                      visualDensity: VisualDensity.compact,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Text(
+                      'Upload now',
+                      style: TextStyle(color: Color.fromRGBO(250, 169, 22, 1)),
+                    ),
+                  ),
+                ],
               ),
               // TextButton(
               //   onPressed: () {

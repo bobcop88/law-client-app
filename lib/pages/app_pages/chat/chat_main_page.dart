@@ -162,7 +162,7 @@ class _ChatPageState extends State<ChatPage> {
                       padding: const EdgeInsets.all(8),
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Color.fromRGBO(253, 69, 77, 1),
+                        color: Color.fromRGBO(250, 169, 22, 1),
                       ),
                       child: const Icon(Icons.send, color: Colors.white),
                     ),

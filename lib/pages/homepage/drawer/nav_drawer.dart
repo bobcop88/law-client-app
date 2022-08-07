@@ -3,7 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
+import 'package:new_client_app/pages/app_pages/company_details_drawer/about_us_page.dart';
+import 'package:new_client_app/pages/app_pages/company_details_drawer/terms_page.dart';
 import 'package:new_client_app/pages/app_pages/profile_page/profile_page.dart';
+import 'package:new_client_app/pages/homepage/drawer/my_services_drawer.dart';
 import 'package:new_client_app/pages/homepage/drawer/profile_drawer.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
 
@@ -56,6 +59,10 @@ class _SideMenuState extends State<SideMenu> {
             },
           ),
           ListTile(
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => MyServicesDrawer()));
+            },
             leading: CircleAvatar(
                 radius: 18,
                 backgroundColor: Colors.grey[200],
@@ -109,12 +116,15 @@ class _SideMenuState extends State<SideMenu> {
             title: Text('About us'),
             contentPadding: EdgeInsets.only(left: 12.0),
             onTap: () {
-              // Navigator.of(context).push(MaterialPageRoute(
-              //     builder: (context) =>
-              //         ProfilePage(controller: menuController)));
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => AboutUsPage()));
             },
           ),
           ListTile(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => TermsConditionsPage()));
+            },
             leading: CircleAvatar(
                 radius: 18,
                 backgroundColor: Colors.grey[200],
@@ -145,7 +155,9 @@ class _SideMenuState extends State<SideMenu> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    FirebaseAuth.instance.signOut();
+                  },
                   child: Row(
                     children: [
                       Icon(

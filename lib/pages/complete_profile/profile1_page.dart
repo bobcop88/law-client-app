@@ -31,7 +31,8 @@ class _ProfileOneState extends State<ProfileOne> {
                 height: 40.0,
               ),
               const Image(
-                image: AssetImage('assets/details.png'),
+                image:
+                    AssetImage('assets/complete_profile/complete_profile.png'),
                 // height: 100.0,
                 width: 150.0,
                 fit: BoxFit.contain,
@@ -45,9 +46,7 @@ class _ProfileOneState extends State<ProfileOne> {
                     child: Text(
                       AppLocalizations.of(context)!.profile1_title,
                       style: const TextStyle(
-                          color: Color.fromRGBO(15, 48, 65, 1),
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold),
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -64,23 +63,27 @@ class _ProfileOneState extends State<ProfileOne> {
                 child: TextField(
                   controller: _firstName,
                   decoration: InputDecoration(
-                    label: Text(AppLocalizations.of(context)!.profile1_name),
-                    labelStyle: const TextStyle(
-                      color: Colors.black,
-                    ),
+                    // label: Text(AppLocalizations.of(context)!.profile1_name),
+                    // labelStyle: const TextStyle(
+                    //   color: Colors.black,
+                    // ),
                     hintText: AppLocalizations.of(context)!.profile1_enter_name,
-                    enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(15, 48, 65, 1),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
                     focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(15, 48, 65, 1),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(15.0)),
+                      borderSide: BorderSide(
+                          color: const Color.fromRGBO(15, 48, 65, 1),
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderRadius:
+                          const BorderRadius.all(const Radius.circular(15.0)),
+                      borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                    ),
                   ),
                 ),
               ),
@@ -92,24 +95,28 @@ class _ProfileOneState extends State<ProfileOne> {
                 child: TextField(
                   controller: _lastName,
                   decoration: InputDecoration(
-                    label: Text(AppLocalizations.of(context)!.profile1_surname),
-                    labelStyle: const TextStyle(
-                      color: Colors.black,
-                    ),
+                    // label: Text(AppLocalizations.of(context)!.profile1_surname),
+                    // labelStyle: const TextStyle(
+                    //   color: Colors.black,
+                    // ),
                     hintText:
                         AppLocalizations.of(context)!.profile1_enter_surname,
-                    enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(15, 48, 65, 1),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
                     focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(15, 48, 65, 1),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(15.0)),
+                      borderSide: BorderSide(
+                          color: const Color.fromRGBO(15, 48, 65, 1),
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderRadius:
+                          const BorderRadius.all(const Radius.circular(15.0)),
+                      borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                    ),
                   ),
                 ),
               ),
@@ -122,24 +129,28 @@ class _ProfileOneState extends State<ProfileOne> {
                   controller: _phoneNumber,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    label: Text(AppLocalizations.of(context)!.profile1_phone),
-                    labelStyle: const TextStyle(
-                      color: Colors.black,
-                    ),
+                    // label: Text(AppLocalizations.of(context)!.profile1_phone),
+                    // labelStyle: const TextStyle(
+                    //   color: Colors.black,
+                    // ),
                     hintText:
                         AppLocalizations.of(context)!.profile1_enter_phone,
-                    enabledBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(15, 48, 65, 1),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
                     focusedBorder: const OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Color.fromRGBO(15, 48, 65, 1),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
+                      borderRadius:
+                          const BorderRadius.all(Radius.circular(15.0)),
+                      borderSide: BorderSide(
+                          color: const Color.fromRGBO(15, 48, 65, 1),
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                    ),
+                    enabledBorder: const OutlineInputBorder(
+                      borderRadius:
+                          const BorderRadius.all(const Radius.circular(15.0)),
+                      borderSide: BorderSide(
+                          color: Colors.grey,
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                    ),
                   ),
                 ),
               ),
@@ -152,36 +163,35 @@ class _ProfileOneState extends State<ProfileOne> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_firstName.text.isEmpty ||
-                                  _lastName.text.isEmpty ||
-                                  _phoneNumber.text.isEmpty) {
-                                // errorFieldMissing();
-                                ErrorDialog().errorFieldMissing(context);
-                              } else {
-                                widget.controller.jumpToPage(2);
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_firstName.text.isEmpty ||
+                                _lastName.text.isEmpty ||
+                                _phoneNumber.text.isEmpty) {
+                              // errorFieldMissing();
+                              ErrorDialog().errorFieldMissing(context);
+                            } else {
+                              widget.controller.jumpToPage(2);
 
-                                ProfileDatas.firstName = _firstName.text;
-                                ProfileDatas.lastName = _lastName.text;
-                                ProfileDatas.phoneNumber = _phoneNumber.text;
-                              }
-                            },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  AppLocalizations.of(context)!
-                                      .profile1_continue_btn,
-                                  style: const TextStyle(
+                              ProfileDatas.firstName = _firstName.text;
+                              ProfileDatas.lastName = _lastName.text;
+                              ProfileDatas.phoneNumber = _phoneNumber.text;
+                            }
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                AppLocalizations.of(context)!
+                                    .profile1_continue_btn,
+                                style: const TextStyle(
                                     color: Colors.white,
-                                  ),
-                                ),
-                                const Icon(Icons.arrow_forward_rounded),
-                              ],
-                            ),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const Icon(Icons.keyboard_arrow_right_outlined),
+                            ],
                           ),
                         ),
                       ],
@@ -201,24 +211,24 @@ class _ProfileOneState extends State<ProfileOne> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Missing fields'),
+            title: const Text('Missing fields'),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Text('Some fields are missing')],
+              children: [const Text('Some fields are missing')],
             ),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('Complete now'),
+                child: const Text('Complete now'),
               ),
               TextButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                   FirebaseAuth.instance.currentUser!.delete();
                 },
-                child: Text('Exit'),
+                child: const Text('Exit'),
               ),
             ],
           );

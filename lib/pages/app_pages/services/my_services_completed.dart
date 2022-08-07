@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/services/widgets/builService_widget.dart';
+import 'package:new_client_app/pages/app_pages/test/profile1_test.dart';
+import 'package:new_client_app/pages/complete_profile/profile1_page.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 import 'package:new_client_app/utils/services/my_service_class.dart';
 
@@ -30,6 +32,13 @@ class _CompletedServicesState extends State<CompletedServices> {
                     Text('No Completed Services'),
                   ],
                 ),
+                // TextButton(
+                //   onPressed: () {
+                //     Navigator.of(context).push(MaterialPageRoute(
+                //         builder: (context) => ProfileOneTest()));
+                //   },
+                //   child: Text('complete'),
+                // ),
               ],
             );
           } else {
@@ -41,7 +50,8 @@ class _CompletedServicesState extends State<CompletedServices> {
                   Expanded(
                     child: ListView(
                       children: services
-                          .map(BuildServiceWidget().buildService)
+                          .map(
+                              BuildServiceWidget(context: context).buildService)
                           .toList(),
                     ),
                   ),

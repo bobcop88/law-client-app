@@ -23,17 +23,37 @@ class ErrorServiceExists {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Service already requested'),
+            title: Expanded(
+              child: Text(
+                'Service already requested',
+                textAlign: TextAlign.center,
+              ),
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Text('You have already requested the service')],
+              children: [
+                Text(
+                  'You have already requested the service',
+                  style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                ),
+              ],
             ),
             actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('Close'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      'Close',
+                      style: TextStyle(
+                        color: Color.fromRGBO(250, 169, 22, 1),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               // TextButton(
               //   onPressed: () {

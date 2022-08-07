@@ -26,6 +26,38 @@ class _NotificationsPageState extends State<NotificationsPage> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const CircularProgressIndicator();
+          } else if (snapshot.data!.isEmpty) {
+            return Column(
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            height: 50.0,
+                          ),
+                          Icon(
+                            Icons.notifications_off,
+                            color: Color.fromRGBO(250, 169, 22, 1),
+                            size: 40,
+                          ),
+                          const SizedBox(
+                            height: 20.0,
+                          ),
+                          Text(
+                            'No Notifications Available',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
           } else {
             final notification = snapshot.data!;
             return Column(

@@ -39,7 +39,7 @@ class _ProfileTwoState extends State<ProfileTwo> {
               height: 40.0,
             ),
             const Image(
-              image: AssetImage('assets/details.png'),
+              image: AssetImage('assets/complete_profile/complete_profile.png'),
               width: 150.0,
               fit: BoxFit.contain,
             ),
@@ -49,14 +49,12 @@ class _ProfileTwoState extends State<ProfileTwo> {
             Text(
               AppLocalizations.of(context)!.profile2_title,
               style: const TextStyle(
-                color: Color.fromRGBO(15, 48, 65, 1),
-                fontSize: 25.0,
+                fontSize: 20.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
             const Divider(
-              thickness: 2,
-              color: Colors.black,
+              thickness: 1,
               indent: 100.0,
               endIndent: 100.0,
               height: 50.0,
@@ -72,23 +70,26 @@ class _ProfileTwoState extends State<ProfileTwo> {
                 keyboardType: TextInputType.none,
                 // textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                  label: Text(AppLocalizations.of(context)!.profile2_dob),
-                  labelStyle: const TextStyle(
-                    color: Colors.black,
-                  ),
+                  // label: Text(AppLocalizations.of(context)!.profile2_dob),
+                  // labelStyle: const TextStyle(
+                  //   color: Colors.black,
+                  // ),
                   hintText: AppLocalizations.of(context)!.profile2_enter_dob,
-                  enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromRGBO(15, 48, 65, 1),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromRGBO(15, 48, 65, 1),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                    borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                    borderSide: BorderSide(
+                        color: const Color.fromRGBO(15, 48, 65, 1),
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderRadius:
+                        const BorderRadius.all(const Radius.circular(15.0)),
+                    borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
                 ),
                 onTap: () {
                   // FocusScope.of(context).unfocus();
@@ -106,24 +107,27 @@ class _ProfileTwoState extends State<ProfileTwo> {
                 controller: _nationality,
                 keyboardType: TextInputType.none,
                 decoration: InputDecoration(
-                  label: Text(AppLocalizations.of(context)!.profile2_country),
-                  labelStyle: const TextStyle(
-                    color: Colors.black,
-                  ),
+                  // label: Text(AppLocalizations.of(context)!.profile2_country),
+                  // labelStyle: const TextStyle(
+                  //   color: Colors.black,
+                  // ),
                   hintText:
                       AppLocalizations.of(context)!.profile2_enter_country,
-                  enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromRGBO(15, 48, 65, 1),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromRGBO(15, 48, 65, 1),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                    borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                    borderSide: BorderSide(
+                        color: const Color.fromRGBO(15, 48, 65, 1),
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderRadius:
+                        const BorderRadius.all(const Radius.circular(15.0)),
+                    borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
                 ),
                 onTap: () {
                   _showCountries();
@@ -138,23 +142,26 @@ class _ProfileTwoState extends State<ProfileTwo> {
               child: TextField(
                 controller: _documentNumber,
                 decoration: InputDecoration(
-                  label: Text(AppLocalizations.of(context)!.profile2_id),
-                  labelStyle: const TextStyle(
-                    color: Colors.black,
-                  ),
+                  // label: Text(AppLocalizations.of(context)!.profile2_id),
+                  // labelStyle: const TextStyle(
+                  //   color: Colors.black,
+                  // ),
                   hintText: AppLocalizations.of(context)!.profile2_enter_id,
-                  enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromRGBO(15, 48, 65, 1),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
                   focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Color.fromRGBO(15, 48, 65, 1),
-                        width: 2.0,
-                      ),
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                    borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                    borderSide: BorderSide(
+                        color: const Color.fromRGBO(15, 48, 65, 1),
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderRadius:
+                        const BorderRadius.all(const Radius.circular(15.0)),
+                    borderSide: BorderSide(
+                        color: Colors.grey,
+                        width: 1.0,
+                        style: BorderStyle.solid),
+                  ),
                 ),
               ),
             ),
@@ -167,33 +174,31 @@ class _ProfileTwoState extends State<ProfileTwo> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (dateOfBirthValue == 0 ||
-                                _nationality.text.isEmpty ||
-                                _documentNumber.text.isEmpty) {
-                              ErrorDialog().errorFieldMissing(context);
-                            } else {
-                              completeProfile();
-                              Navigator.of(context).pop();
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const HomePage()));
-                            }
-                          },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context)!
-                                    .profile2_finish_btn,
-                                style: const TextStyle(
+                      ElevatedButton(
+                        onPressed: () {
+                          if (dateOfBirthValue == 0 ||
+                              _nationality.text.isEmpty ||
+                              _documentNumber.text.isEmpty) {
+                            ErrorDialog().errorFieldMissing(context);
+                          } else {
+                            completeProfile();
+                            Navigator.of(context).pop();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const HomePage()));
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              AppLocalizations.of(context)!.profile2_finish_btn,
+                              style: const TextStyle(
                                   color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -251,9 +256,9 @@ class _ProfileTwoState extends State<ProfileTwo> {
             title: Text(
               AppLocalizations.of(context)!.profile2_select_country_title,
               style: const TextStyle(
-                  color: Color.fromRGBO(15, 48, 65, 1),
-                  fontSize: 25.0,
-                  fontWeight: FontWeight.bold),
+                color: Color.fromRGBO(15, 48, 65, 1),
+                fontSize: 20.0,
+              ),
               textAlign: TextAlign.center,
             ),
             children: [
@@ -269,49 +274,55 @@ class _ProfileTwoState extends State<ProfileTwo> {
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       } else {
-                        return ListView.separated(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          separatorBuilder: (BuildContext context, int index) =>
-                              const Divider(
-                            thickness: 1,
-                            color: Color.fromRGBO(15, 48, 65, 1),
-                          ),
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) {
-                            return SimpleDialogOption(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    snapshot.data![index].flag ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 17.0,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      snapshot.data![index].name,
+                        return Container(
+                          decoration: BoxDecoration(
+                              border: Border(
+                                  top:
+                                      BorderSide(color: Colors.grey.shade300))),
+                          child: ListView.separated(
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            separatorBuilder:
+                                (BuildContext context, int index) =>
+                                    const Divider(
+                              thickness: 1,
+                            ),
+                            itemCount: snapshot.data!.length,
+                            itemBuilder: (context, index) {
+                              return SimpleDialogOption(
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      snapshot.data![index].flag ?? '',
                                       style: const TextStyle(
                                         fontSize: 17.0,
-                                        // color: Color.fromRGBO(253, 69, 77, 1),
-                                        // fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              onPressed: () {
-                                Navigator.pop(context);
-                                _nationality.value = TextEditingValue(
-                                    text: snapshot.data![index].name);
-                                FocusScope.of(context).unfocus();
-                              },
-                            );
-                          },
+                                    const SizedBox(
+                                      width: 5.0,
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                        snapshot.data![index].name,
+                                        style: const TextStyle(
+                                          fontSize: 17.0,
+                                          // color: Color.fromRGBO(253, 69, 77, 1),
+                                          // fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  _nationality.value = TextEditingValue(
+                                      text: snapshot.data![index].name);
+                                  FocusScope.of(context).unfocus();
+                                },
+                              );
+                            },
+                          ),
                         );
                       }
                     }),
