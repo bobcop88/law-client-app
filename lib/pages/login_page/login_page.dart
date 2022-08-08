@@ -42,17 +42,16 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: const Color.fromARGB(255, 224, 224, 224),
         body: Column(
           children: [
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+            Expanded(
               child: Row(
                 children: [Expanded(child: Image.asset('assets/logo.png'))],
               ),
             ),
             const SizedBox(
-              height: 30.0,
+              height: 10.0,
             ),
             Expanded(
+              flex: 3,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -67,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         const SizedBox(
-                          height: 50.0,
+                          height: 30.0,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

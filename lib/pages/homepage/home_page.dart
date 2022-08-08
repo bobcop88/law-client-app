@@ -70,9 +70,11 @@ class _HomePageState extends State<HomePage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/logo.png',
-              height: 50.0,
+            Expanded(
+              child: Image.asset(
+                'assets/logo.png',
+                height: 50.0,
+              ),
             ),
           ],
         ),

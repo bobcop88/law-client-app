@@ -21,6 +21,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
   String email = FirebaseAuth.instance.currentUser!.email!;
 
   Timer? timer;
+  Timer? timerResendEmail;
 
   @override
   void initState() {
@@ -29,12 +30,15 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
 
     if (!isEmailVerified) {
-      sendVerificationEmail();
+      // sendVerificationEmail();
 
       timer = Timer.periodic(
         const Duration(seconds: 3),
         (_) => checkEmailVerified(),
       );
+
+      timerResendEmail =
+          Timer(const Duration(minutes: 1), () => setTimerResendEmail());
     }
 
     if (isEmailVerified) {
@@ -48,6 +52,12 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     super.dispose();
   }
 
+  setTimerResendEmail() {
+    setState(() {
+      canResendEmailVerification = true;
+    });
+  }
+
   Future checkEmailVerified() async {
     await FirebaseAuth.instance.currentUser!.reload();
     setState(() {
@@ -59,32 +69,32 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
     try {
       final user = FirebaseAuth.instance.currentUser!;
       await user.sendEmailVerification();
-      setState(() {
-        canResendEmailVerification = false;
-      });
-      await Future.delayed(const Duration(seconds: 10));
-      setState(() {
-        canResendEmailVerification = true;
-      });
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('The email has been sent again'),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [Text('Please verify your email address')],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Close'),
-                ),
-              ],
-            );
-          });
+      // setState(() {
+      //   canResendEmailVerification = false;
+      // });
+      // await Future.delayed(const Duration(seconds: 10));
+      // setState(() {
+      //   canResendEmailVerification = true;
+      // });
+      // showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return AlertDialog(
+      //         title: Text('The email has been sent again'),
+      //         content: Column(
+      //           mainAxisSize: MainAxisSize.min,
+      //           children: [Text('Please verify your email address')],
+      //         ),
+      //         actions: [
+      //           TextButton(
+      //             onPressed: () {
+      //               Navigator.of(context).pop();
+      //             },
+      //             child: Text('Close'),
+      //           ),
+      //         ],
+      //       );
+      //     });
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString()),
@@ -115,7 +125,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
             ),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
@@ -134,7 +144,7 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                           Expanded(
                             child: Text(
                               'The verification email has been sent to $email',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 20.0,
                                   fontWeight: FontWeight.w700,
                                   letterSpacing: -1),
@@ -169,9 +179,22 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                           children: [
                             ElevatedButton(
                               onPressed: () {
-                                canResendEmailVerification
-                                    ? sendVerificationEmail()
-                                    : null;
+                                if (canResendEmailVerification) {
+                                  sendVerificationEmail();
+                                  dialogResentVerificationEmail();
+                                  setState(() {
+                                    canResendEmailVerification = false;
+                                  });
+                                  Timer(const Duration(minutes: 1),
+                                      () => setTimerResendEmail());
+                                } else {
+                                  errorResendNotAvailable();
+                                }
+
+                                // canResendEmailVerification
+                                //     ? sendVerificationEmail()
+                                //     : null;
+                                // dialogResentVerificationEmail();
                               },
                               child: const Text(
                                 'Resend email',
@@ -197,10 +220,10 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                             onPressed: () async {
                               Navigator.of(context).pop();
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => LoginPage()));
+                                  builder: (context) => const LoginPage()));
                               await FirebaseAuth.instance.currentUser!.delete();
                             },
-                            child: Text(
+                            child: const Text(
                               'It\u0027s not my email address',
                               style: TextStyle(color: Colors.black),
                             ),
@@ -216,5 +239,76 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
         ),
       );
     }
+  }
+
+  dialogResentVerificationEmail() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('The email has been sent again'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                Text(
+                  'Please verify your email address',
+                  style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                )
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'Close',
+                  style: TextStyle(
+                    color: Color.fromRGBO(250, 169, 22, 1),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
+  }
+
+  errorResendNotAvailable() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Please check your inbox'),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  children: const [
+                    Expanded(
+                      child: Text(
+                        'The email verification has been sent to your email address. Please check also in Spam. You can request a new verification email in 2 minutes.',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'Close',
+                  style: TextStyle(
+                    color: Color.fromRGBO(250, 169, 22, 1),
+                  ),
+                ),
+              ),
+            ],
+          );
+        });
   }
 }

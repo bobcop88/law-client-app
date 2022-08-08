@@ -23,11 +23,9 @@ class ErrorServiceExists {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Expanded(
-              child: Text(
-                'Service already requested',
-                textAlign: TextAlign.center,
-              ),
+            title: Text(
+              'Service already requested',
+              textAlign: TextAlign.center,
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,

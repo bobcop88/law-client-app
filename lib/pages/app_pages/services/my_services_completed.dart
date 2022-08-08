@@ -21,7 +21,12 @@ class _CompletedServicesState extends State<CompletedServices> {
         stream: DatabaseService(uid: userId).readAllMyServicesCompleted(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const CircularProgressIndicator();
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(child: CircularProgressIndicator.adaptive()),
+              ],
+            );
           } else if (snapshot.data!.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,

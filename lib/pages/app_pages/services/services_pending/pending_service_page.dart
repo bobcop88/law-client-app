@@ -28,7 +28,11 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
             .readMyService(widget.serviceName),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return CircularProgressIndicator();
+            return Column(
+              children: [
+                Center(child: CircularProgressIndicator.adaptive()),
+              ],
+            );
           } else {
             final service = snapshot.data!;
             return SingleChildScrollView(

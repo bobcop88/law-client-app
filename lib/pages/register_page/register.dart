@@ -34,14 +34,13 @@ class _RegisterPageState extends State<RegisterPage> {
         body: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [Expanded(child: Image.asset('assets/logo.png'))],
               ),
             ),
             const SizedBox(
-              height: 30.0,
+              height: 10.0,
             ),
             Expanded(
               child: Container(
@@ -89,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         const SizedBox(
-                          height: 30.0,
+                          height: 10.0,
                         ),
                         Form(
                           key: loginFormKey,
@@ -410,7 +409,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ],
                               ),
                               const SizedBox(
-                                height: 20.0,
+                                height: 15.0,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -488,6 +487,7 @@ class _RegisterPageState extends State<RegisterPage> {
           emailController.text.trim(),
           'Registration with email',
           'Registration');
+      await user.sendEmailVerification();
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString() ==

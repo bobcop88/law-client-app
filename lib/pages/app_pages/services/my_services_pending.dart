@@ -20,7 +20,12 @@ class _PendingServicesState extends State<PendingServices> {
         stream: DatabaseService(uid: userId).readAllMyServicesPending(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return const CircularProgressIndicator();
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(child: CircularProgressIndicator.adaptive()),
+              ],
+            );
           } else if (snapshot.data!.isEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,

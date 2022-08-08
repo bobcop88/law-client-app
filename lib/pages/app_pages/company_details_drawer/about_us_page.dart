@@ -192,9 +192,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           ),
                           Expanded(
                               child: GestureDetector(
-                            onTap: () => launchUrl(Uri(
-                                scheme: 'https',
-                                path: 'https://inscalemedia.com')),
+                            onTap: () => launchUrl(
+                                Uri(scheme: 'https', path: 'inscalemedia.com')),
                             child: Text(
                                 '25 Example Street, 00000 London, England'),
                           ))
