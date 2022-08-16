@@ -1,15 +1,17 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:new_client_app/pages/app_pages/services/my_services_pending.dart';
 import 'package:new_client_app/pages/app_pages/services/preview_doc.dart';
-import 'package:new_client_app/pages/app_pages/services/services_pending/pending_service_page.dart';
 import 'package:new_client_app/utils/errors/error_no_docs.dart';
+import 'package:new_client_app/utils/logs/database_logs.dart';
+import 'package:new_client_app/utils/notifications/database_notifications.dart';
+import 'package:new_client_app/utils/popUps/service_requested_popUp.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 
 class EuVisaPage extends StatefulWidget {
@@ -23,13 +25,25 @@ class _EuVisaPageState extends State<EuVisaPage> {
   PlatformFile? pickedFile;
   UploadTask? uploadTask;
   final user = FirebaseAuth.instance.currentUser!.uid;
-  var doc1Name = 'No document selected1';
+  String userName = '';
+  String userEmail = '';
+  var doc1Name = 'No bank statement selected';
   var doc2Name = 'No document selected';
   var previewdoc1 = false;
   var previewdoc2 = false;
   String? link = '';
   var doc1Url = '1';
   var doc2Url = '2';
+  bool loadingDoc1 = false;
+  bool loadingDoc2 = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchUserData(user);
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -232,8 +246,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                                     MaterialPageRoute(
                                                         builder: ((context) =>
                                                             PreviewDoc(
-                                                              file: link!,
-                                                              docUrl: '',
+                                                              docUrl: doc1Url,
                                                             ))));
                                               },
                                               child: const Text(
@@ -244,7 +257,15 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                             ),
                                           ),
                                         ],
-                                      )
+                                      ),
+                                      Visibility(
+                                        visible: loadingDoc1,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [buildProgress()],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -326,8 +347,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                                     MaterialPageRoute(
                                                         builder: ((context) =>
                                                             PreviewDoc(
-                                                              file: link!,
-                                                              docUrl: '',
+                                                              docUrl: doc2Url,
                                                             ))));
                                               },
                                               child: const Text(
@@ -339,14 +359,14 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                           ),
                                         ],
                                       ),
-                                      // Row(
-                                      //   children: [
-                                      //     ElevatedButton(
-                                      //       onPressed: cameraFile,
-                                      //       child: Text('Camera'),
-                                      //     ),
-                                      //   ],
-                                      // ),
+                                      Visibility(
+                                        visible: loadingDoc2,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [buildProgress()],
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -368,12 +388,22 @@ class _EuVisaPageState extends State<EuVisaPage> {
                       if (doc1Name == 'No document selected1' ||
                           doc2Name == 'No document selected') {
                         ErrorNoDocs().errorNoDocuments(context);
+
                         return;
                       }
                       Navigator.of(context).pop();
-                      DatabaseService(uid: user)
-                          .createMyServices('EU Visa', doc1Url, doc2Url);
-                      requestSentPopUp();
+                      DatabaseService(uid: user).createMyServices(
+                          'EU Visa',
+                          doc1Url,
+                          doc2Url,
+                          'not-applicable',
+                          'not-applicable',
+                          'not-applicable');
+                      EmailNotification().sendEmailServiceRequested(
+                          userName, 'EU Visa', userEmail);
+                      DatabaseLogUser().createLogUser(user, 'client', userEmail,
+                          'Request service EU Visa', 'Request');
+                      PopUps().requestSentPopUp(context, 'EU Visa', user);
                     },
                     child: const Text('Send request'),
                   ),
@@ -386,6 +416,25 @@ class _EuVisaPageState extends State<EuVisaPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildProgress() {
+    return StreamBuilder<TaskSnapshot>(
+      stream: uploadTask?.snapshotEvents,
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return Text('');
+        } else {
+          // final data = snapshot.data!;
+          // double progress = data.bytesTransferred / data.totalBytes;
+          return CircularProgressIndicator.adaptive();
+          // return Text(
+          //   'Loading ${(100 * progress).roundToDouble()}%',
+          //   style: TextStyle(fontSize: 11.0),
+          // );
+        }
+      },
     );
   }
 
@@ -403,19 +452,25 @@ class _EuVisaPageState extends State<EuVisaPage> {
     final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
-    uploadTask = ref.putFile(file);
+    setState(() {
+      fileName == doc1Name ? loadingDoc1 = true : loadingDoc2 = true;
+      uploadTask = ref.putFile(file);
+    });
 
     final snapshot = await uploadTask!.whenComplete(() {
       setState(() {
         if (fileName == doc1Name) {
           doc1Name = pickedFile!.name;
           previewdoc1 = true;
+          loadingDoc1 = false;
         }
         if (fileName == doc2Name) {
           doc2Name = pickedFile!.name;
           previewdoc2 = true;
+          loadingDoc2 = false;
         }
         link = pickedFile!.path;
+
         // print('finished');
       });
     });
@@ -428,6 +483,9 @@ class _EuVisaPageState extends State<EuVisaPage> {
       if (docUrl == doc2Url) {
         doc2Url = docUrlTemp;
       }
+    });
+    setState(() {
+      uploadTask = null;
     });
   }
 
@@ -521,53 +579,6 @@ class _EuVisaPageState extends State<EuVisaPage> {
     });
   }
 
-  requestSentPopUp() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return SimpleDialog(
-            title: Column(
-              children: const [
-                Icon(
-                  Icons.check_circle_outline,
-                  color: Color.fromRGBO(250, 169, 22, 1),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  'Your request has been sent',
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Close'),
-                  ),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ServicePendingPage(
-                                serviceName: 'EU Visa',
-                                userId: user,
-                              )));
-                    },
-                    child: const Text('Go to Service'),
-                  ),
-                ],
-              ),
-            ],
-          );
-        });
-  }
-
   Future<bool?> showBackPopUp() {
     return showDialog<bool>(
         context: context,
@@ -621,5 +632,18 @@ class _EuVisaPageState extends State<EuVisaPage> {
             ],
           );
         });
+  }
+
+  fetchUserData(uid) async {
+    await FirebaseFirestore.instance
+        .collection('clients')
+        .doc(uid)
+        .get()
+        .then((value) {
+      setState(() {
+        userName = value['firstName'] + ' ' + value['lastName'];
+        userEmail = value['email'];
+      });
+    });
   }
 }

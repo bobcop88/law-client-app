@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_client_app/pages/app_pages/services/business/business_main_page.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/immigration_page.dart';
 
 Widget categoriesScrolling(BuildContext context) {
@@ -58,33 +59,39 @@ Widget categoriesScrolling(BuildContext context) {
                 ),
               ),
               const SizedBox(width: 10.0),
-              Container(
-                height: 150,
-                width: 150,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  image: DecorationImage(
-                      image: const AssetImage(
-                          'assets/images/categories/Corporate.jpg'),
-                      fit: BoxFit.cover,
-                      colorFilter: ColorFilter.mode(
-                          Colors.black.withOpacity(0.3), BlendMode.darken)),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Text(
-                      'Business',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const BusinessMainPage()));
+                },
+                child: Container(
+                  height: 150,
+                  width: 150,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    image: DecorationImage(
+                        image: const AssetImage(
+                            'assets/images/categories/Corporate.jpg'),
+                        fit: BoxFit.cover,
+                        colorFilter: ColorFilter.mode(
+                            Colors.black.withOpacity(0.3), BlendMode.darken)),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: const [
+                      Text(
+                        'Business',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20.0,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                  ],
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(width: 10.0),

@@ -22,19 +22,34 @@ class _PendingServicesState extends State<PendingServices> {
           if (!snapshot.hasData) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Center(child: CircularProgressIndicator.adaptive()),
               ],
             );
           } else if (snapshot.data!.isEmpty) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('No Pending Services'),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.content_paste,
+                            size: 30.0,
+                            color: Color.fromRGBO(250, 169, 22, 1),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            'No Pending Services',
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ),

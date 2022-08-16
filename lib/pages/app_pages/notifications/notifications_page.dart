@@ -14,6 +14,7 @@ class NotificationsPage extends StatefulWidget {
 }
 
 class _NotificationsPageState extends State<NotificationsPage> {
+  bool notificationVisible = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +36,8 @@ class _NotificationsPageState extends State<NotificationsPage> {
                     children: [
                       Column(
                         // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
+                        children: const [
+                          SizedBox(
                             height: 50.0,
                           ),
                           Icon(
@@ -44,7 +45,7 @@ class _NotificationsPageState extends State<NotificationsPage> {
                             color: Color.fromRGBO(250, 169, 22, 1),
                             size: 40,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 20.0,
                           ),
                           Text(
@@ -76,84 +77,97 @@ class _NotificationsPageState extends State<NotificationsPage> {
   }
 
   Widget buildNotification(NotificationAdminDetails notification) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(50),
+    return Visibility(
+      visible: notificationVisible,
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    width: 8,
+                    height: 8,
                   ),
-                  width: 8,
-                  height: 8,
-                ),
-                const SizedBox(
-                  width: 5.0,
-                ),
-                Text(
-                  dateFormat(notification.notificationDate),
-                  style: const TextStyle(
-                    fontSize: 12.0,
-                    color: Colors.grey,
+                  const SizedBox(
+                    width: 5.0,
                   ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 5.0,
-            ),
-            Row(
-              children: [
-                const Text('Update for '),
-                GestureDetector(
-                  child: Text(
-                    notification.notificationType,
+                  Text(
+                    dateFormat(notification.notificationDate),
                     style: const TextStyle(
-                      color: Colors.blueAccent,
-                      decoration: TextDecoration.underline,
+                      fontSize: 12.0,
+                      color: Colors.grey,
                     ),
                   ),
-                  onTap: () {
-                    Navigator.of(context).pop();
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ServicePendingPage(
-                            serviceName: notification.notificationType,
-                            userId: widget.id)));
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  style: const ButtonStyle(
-                    visualDensity: VisualDensity.compact,
-                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  ),
-                  onPressed: () {},
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.delete,
-                        size: 14.0,
-                      ),
-                      Text(
-                        'Delete',
-                        style: TextStyle(
-                          fontSize: 12.0,
+                ],
+              ),
+              const SizedBox(
+                height: 5.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Row(
+                      children: [
+                        const Text('Update for '),
+                        GestureDetector(
+                          child: Text(
+                            notification.notificationType,
+                            style: const TextStyle(
+                              color: Colors.blueAccent,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => ServicePendingPage(
+                                    serviceName: notification.notificationType,
+                                    userId: widget.id)));
+                          },
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  TextButton(
+                    style: const ButtonStyle(
+                      visualDensity: VisualDensity.compact,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    onPressed: () {
+                      DatabaseNotifications().deleteNotification(
+                          widget.id, notification.notificationDate.toString());
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(
+                          Icons.delete,
+                          size: 14.0,
+                          color: Color.fromRGBO(250, 169, 22, 1),
+                        ),
+                        Text(
+                          'Delete',
+                          style: TextStyle(
+                              fontSize: 12.0,
+                              color: Color.fromRGBO(250, 169, 22, 1)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [],
+              ),
+            ],
+          ),
         ),
       ),
     );

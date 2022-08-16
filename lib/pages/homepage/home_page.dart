@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.sort,
             color: Colors.black,
           ),
@@ -130,7 +130,7 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).primaryColor,
       body: Scaffold(
         key: scaffolKey,
-        drawer: SideMenu(),
+        drawer: const SideMenu(),
         body: SafeArea(
           child: Row(
             children: [
@@ -178,7 +178,7 @@ class _HomePageState extends State<HomePage> {
               selectedColor: const Color.fromRGBO(250, 169, 22, 1),
             ),
             SalomonBottomBarItem(
-                icon: ImageIcon(
+                icon: const ImageIcon(
                     AssetImage('assets/icons/Servicios-BottomMenu.png')),
                 title: const Text('Services'),
                 selectedColor: const Color.fromRGBO(250, 169, 22, 1)),
@@ -284,22 +284,22 @@ class _HomePageState extends State<HomePage> {
         context: context,
         builder: (BuildContext content) {
           return AlertDialog(
-            title: Text('Please complete your profile'),
+            title: const Text('Please complete your profile'),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => CompleteProfilePage()));
+                      builder: (context) => const CompleteProfilePage()));
                 },
-                child: Text('Complete now'),
+                child: const Text('Complete now'),
               ),
               TextButton(
                 onPressed: () {
                   FirebaseAuth.instance.signOut();
                   Navigator.of(context).pop();
                 },
-                child: Text('Not now'),
+                child: const Text('Not now'),
               ),
             ],
           );

@@ -7,8 +7,8 @@ class DatabaseService {
 
   DatabaseService({required this.uid});
 
-  Future createMyServices(
-      String serviceName, String doc1Url, String doc2Url) async {
+  Future createMyServices(String serviceName, String doc1Url, String doc2Url,
+      String field1, String field2, String field3) async {
     final CollectionReference addMyService = FirebaseFirestore.instance
         .collection('clients')
         .doc(uid)
@@ -17,12 +17,45 @@ class DatabaseService {
     final userMyService = addMyService.doc(serviceName);
 
     final myService = UserMyServices(
-        currentState: 'Started',
+      currentState: 'Started',
+      serviceName: serviceName,
+      doc1Status: 'Pending',
+      doc2Status: 'Pending',
+      doc1Url: doc1Url,
+      doc2Url: doc2Url,
+      field1: field1,
+      field2: field2,
+      field3: field3,
+      field1Status: 'Pending',
+      field2Status: 'Pending',
+      field3Status: 'Pending',
+      creationDate: DateTime.now().microsecondsSinceEpoch,
+      emailUser: FirebaseAuth.instance.currentUser!.email.toString(),
+      userId: FirebaseAuth.instance.currentUser!.uid,
+    );
+
+    final json = myService.toJson();
+    await userMyService.set(json);
+  }
+
+  Future createBusinessService(
+      String serviceName, String field1, String field2, String field3) async {
+    final CollectionReference addMyService = FirebaseFirestore.instance
+        .collection('clients')
+        .doc(uid)
+        .collection('myServices');
+
+    final userMyService = addMyService.doc(serviceName);
+
+    final myService = BusinessServiceClass(
         serviceName: serviceName,
-        doc1Status: 'Pending',
-        doc2Status: 'Pending',
-        doc1Url: doc1Url,
-        doc2Url: doc2Url,
+        currentState: 'Started',
+        field1: field1,
+        field2: field2,
+        field3: field3,
+        field1Status: 'Pending',
+        field2Status: 'Pending',
+        field3Status: 'Pending',
         creationDate: DateTime.now().microsecondsSinceEpoch,
         emailUser: FirebaseAuth.instance.currentUser!.email.toString(),
         userId: FirebaseAuth.instance.currentUser!.uid);
@@ -63,6 +96,16 @@ class DatabaseService {
         .snapshots()
         .map((snapshot) => snapshot.docs
             .map((doc) => UserMyServices.fromJson(doc.data()))
+            .toList());
+  }
+
+  Stream<List<BusinessServiceClass>> readBusinessService() {
+    return FirebaseFirestore.instance
+        .collection('clients/$uid/myServices')
+        .where('currentState', isNotEqualTo: 'Completed')
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => BusinessServiceClass.fromJson(doc.data()))
             .toList());
   }
 

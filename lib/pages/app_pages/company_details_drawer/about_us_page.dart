@@ -80,47 +80,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
                   ],
                 ),
               ),
-              // Card(
-              //   child: Column(
-              //     children: [
-              //       Padding(
-              //         padding: const EdgeInsets.all(8.0),
-              //         child: Row(
-              //           children: const [
-              //             Icon(
-              //               Icons.assignment_turned_in,
-              //               color: Color.fromRGBO(250, 169, 22, 1),
-              //               size: 20,
-              //             ),
-              //             SizedBox(
-              //               width: 5.0,
-              //             ),
-              //             Text(
-              //               'Services & Results',
-              //               style: TextStyle(
-              //                   fontSize: 17.0, fontWeight: FontWeight.bold),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //       const Divider(),
-              //       Padding(
-              //         padding: const EdgeInsets.all(8.0),
-              //         child: Row(
-              //           children: [
-              //             Expanded(
-              //               child: Text(
-              //                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique eleifend dui, ac iaculis erat rutrum vel. Duis aliquam consequat urna, eu imperdiet lacus egestas ac.',
-              //                 style:
-              //                     TextStyle(color: Colors.grey, fontSize: 12.0),
-              //               ),
-              //             ),
-              //           ],
-              //         ),
-              //       ),
-              //     ],
-              //   ),
-              // ),
               Card(
                 child: Column(
                   children: [
@@ -193,7 +152,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
                           Expanded(
                               child: GestureDetector(
                             onTap: () => launchUrl(
-                                Uri(scheme: 'https', path: 'inscalemedia.com')),
+                                Uri(scheme: 'https', path: 'inscalemedia.com'),
+                                mode: LaunchMode.externalApplication),
                             child: Text(
                                 '25 Example Street, 00000 London, England'),
                           ))

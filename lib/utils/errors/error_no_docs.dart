@@ -52,4 +52,55 @@ class ErrorNoDocs {
           );
         });
   }
+
+  errorNoFields(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(
+              'One or more fields are not completed',
+              textAlign: TextAlign.center,
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'You need to complete all required fields in order to request the service',
+                  style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    style: ButtonStyle(
+                      visualDensity: VisualDensity.compact,
+                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                    ),
+                    child: Text(
+                      'Complete now',
+                      style: TextStyle(color: Color.fromRGBO(250, 169, 22, 1)),
+                    ),
+                  ),
+                ],
+              ),
+              // TextButton(
+              //   onPressed: () {
+              //     Navigator.of(context).pop();
+              //     FirebaseAuth.instance.currentUser!.delete();
+              //     // FirebaseAuth.instance.signOut();
+              //   },
+              //   child: Text('Exit'),
+              // ),
+            ],
+          );
+        });
+  }
 }

@@ -29,13 +29,30 @@ class _CompletedServicesState extends State<CompletedServices> {
             );
           } else if (snapshot.data!.isEmpty) {
             return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('No Completed Services'),
-                  ],
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.content_paste,
+                            size: 30.0,
+                            color: Color.fromRGBO(250, 169, 22, 1),
+                          ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Text(
+                            'No Completed Services',
+                            style: TextStyle(fontSize: 20.0),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 // TextButton(
                 //   onPressed: () {

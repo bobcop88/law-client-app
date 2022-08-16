@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
+import 'package:new_client_app/pages/register_page/register_terms_page.dart';
 import 'package:new_client_app/pages/register_page/verify_email_page.dart';
 import 'package:new_client_app/utils/logs/database_logs.dart';
 import 'package:new_client_app/utils/users/database_users.dart';
@@ -33,16 +34,19 @@ class _RegisterPageState extends State<RegisterPage> {
         backgroundColor: const Color.fromARGB(255, 224, 224, 224),
         body: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [Expanded(child: Image.asset('assets/logo.png'))],
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [Expanded(child: Image.asset('assets/logo.png'))],
+                ),
               ),
             ),
             const SizedBox(
               height: 10.0,
             ),
             Expanded(
+              flex: 4,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -195,13 +199,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                     color: Colors.grey,
                                   ),
                                   hintText: 'Password',
-                                  suffix: InkWell(
+                                  suffixIcon: GestureDetector(
                                     onTap: _showPassword,
                                     child: Icon(
                                       _hidePassword
                                           ? Icons.visibility_outlined
                                           : Icons.visibility_off_outlined,
-                                      size: 18.0,
                                       color: Colors.grey,
                                     ),
                                   ),
@@ -352,7 +355,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                   const Text('I accept '),
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TermsConditionsPageRegister()));
+                                    },
                                     child: const Text(
                                       'Terms and Conditions',
                                       style: TextStyle(
@@ -471,7 +479,8 @@ class _RegisterPageState extends State<RegisterPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
+      builder: (context) =>
+          const Center(child: CircularProgressIndicator.adaptive()),
     );
 
     try {

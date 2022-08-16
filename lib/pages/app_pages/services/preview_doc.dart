@@ -2,10 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 class PreviewDoc extends StatefulWidget {
-  String file;
   String docUrl;
-  PreviewDoc({Key? key, required this.file, required this.docUrl})
-      : super(key: key);
+  PreviewDoc({Key? key, required this.docUrl}) : super(key: key);
 
   @override
   State<PreviewDoc> createState() => _PreviewDocState();
@@ -23,17 +21,11 @@ class _PreviewDocState extends State<PreviewDoc> {
       body: Column(
         children: [
           Expanded(
-            child: Row(
-              children: [
-                widget.file == ''
-                    ? Expanded(
-                        child: Image.network(widget.docUrl),
-                      )
-                    : Expanded(
-                        child: Image.file(File(widget.file)),
-                      ),
-              ],
-            ),
+            child: Row(children: [
+              Expanded(
+                child: Image.network(widget.docUrl),
+              )
+            ]),
           ),
         ],
       ),

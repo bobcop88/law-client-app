@@ -43,8 +43,11 @@ class _LoginPageState extends State<LoginPage> {
         body: Column(
           children: [
             Expanded(
-              child: Row(
-                children: [Expanded(child: Image.asset('assets/logo.png'))],
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: Row(
+                  children: [Expanded(child: Image.asset('assets/logo.png'))],
+                ),
               ),
             ),
             const SizedBox(
@@ -119,6 +122,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: emailController,
                           textInputAction: TextInputAction.next,
                           decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.all(0),
                             isDense: true,
                             prefixIcon: Icon(
                               Icons.email_outlined,
@@ -130,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                                   BorderRadius.all(Radius.circular(15.0)),
                               borderSide: BorderSide(
                                   color: Color.fromRGBO(15, 48, 65, 1),
-                                  width: 1.0,
+                                  // width: 1.0,
                                   style: BorderStyle.solid),
                             ),
                             enabledBorder: OutlineInputBorder(
@@ -138,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                                   BorderRadius.all(Radius.circular(15.0)),
                               borderSide: BorderSide(
                                   color: Colors.grey,
-                                  width: 1.0,
+                                  // width: 1.0,
                                   style: BorderStyle.solid),
                             ),
                           ),
@@ -170,19 +174,20 @@ class _LoginPageState extends State<LoginPage> {
                           controller: passwordController,
                           textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(0),
                             isDense: true,
                             prefixIcon: const Icon(
                               Icons.lock,
                               color: Colors.grey,
                             ),
                             hintText: 'Password',
-                            suffix: InkWell(
+                            suffixIcon: GestureDetector(
                               onTap: _showPassword,
                               child: Icon(
                                 _hidePassword
                                     ? Icons.visibility_outlined
                                     : Icons.visibility_off_outlined,
-                                size: 17.0,
+                                // size: 17.0,
                                 color: Colors.grey,
                               ),
                             ),
@@ -300,7 +305,8 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (context) => const Center(child: CircularProgressIndicator()),
+      builder: (context) =>
+          const Center(child: CircularProgressIndicator.adaptive()),
     );
     getDeviceToken();
 
@@ -314,7 +320,11 @@ class _LoginPageState extends State<LoginPage> {
       // print(FirebaseAuth.instance.currentUser!.uid);
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
-        content: Text(e.message.toString()),
+        content: Text(e.code == 'user-not-found'
+            ? 'The username entered does not exist'
+            : e.code == 'wrong-password'
+                ? 'The password entered is not correct, please try again'
+                : 'Your username or password are not valid. Please try again or register a new account'),
       );
 
       ScaffoldMessenger.of(context).showSnackBar(snackBar);

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
 import 'package:new_client_app/pages/app_pages/company_details_drawer/about_us_page.dart';
+import 'package:new_client_app/pages/app_pages/company_details_drawer/faqs_page.dart';
 import 'package:new_client_app/pages/app_pages/company_details_drawer/terms_page.dart';
 import 'package:new_client_app/pages/app_pages/profile_page/profile_page.dart';
 import 'package:new_client_app/pages/homepage/drawer/my_services_drawer.dart';
@@ -32,7 +33,7 @@ class _SideMenuState extends State<SideMenu> {
           Padding(
             padding: const EdgeInsets.only(left: 12.0),
             child: Row(
-              children: [
+              children: const [
                 Text(
                   'Personal details',
                   style: TextStyle(color: Colors.grey),
@@ -44,35 +45,35 @@ class _SideMenuState extends State<SideMenu> {
             leading: CircleAvatar(
                 radius: 18,
                 backgroundColor: Colors.grey[200],
-                child: Icon(
+                child: const Icon(
                   Icons.person_outline,
                   color: Colors.black,
                   size: 18.0,
                 )),
-            title: Text('My Profile'),
-            contentPadding: EdgeInsets.only(left: 12.0),
+            title: const Text('My Profile'),
+            contentPadding: const EdgeInsets.only(left: 12.0),
             onTap: () {
               scaffolKey.currentState!.closeDrawer();
 
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => ProfileDrawer()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const ProfileDrawer()));
             },
           ),
           ListTile(
             onTap: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => MyServicesDrawer()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const MyServicesDrawer()));
             },
             leading: CircleAvatar(
                 radius: 18,
                 backgroundColor: Colors.grey[200],
-                child: Icon(
+                child: const Icon(
                   Icons.assignment_ind_outlined,
                   color: Colors.black,
                   size: 18.0,
                 )),
-            title: Text('My Services'),
-            contentPadding: EdgeInsets.only(left: 12.0),
+            title: const Text('My Services'),
+            contentPadding: const EdgeInsets.only(left: 12.0),
           ),
           ListTile(
             onTap: () {
@@ -82,13 +83,13 @@ class _SideMenuState extends State<SideMenu> {
             leading: CircleAvatar(
                 radius: 18,
                 backgroundColor: Colors.grey[200],
-                child: Icon(
+                child: const Icon(
                   Icons.chat_bubble_outline,
                   color: Colors.black,
                   size: 18.0,
                 )),
-            title: Text('Chat'),
-            contentPadding: EdgeInsets.only(left: 12.0),
+            title: const Text('Chat'),
+            contentPadding: const EdgeInsets.only(left: 12.0),
           ),
           const SizedBox(
             height: 20.0,
@@ -96,7 +97,7 @@ class _SideMenuState extends State<SideMenu> {
           Padding(
             padding: const EdgeInsets.only(left: 12.0),
             child: Row(
-              children: [
+              children: const [
                 Text(
                   'Company Details',
                   style: TextStyle(color: Colors.grey),
@@ -108,45 +109,49 @@ class _SideMenuState extends State<SideMenu> {
             leading: CircleAvatar(
                 radius: 18,
                 backgroundColor: Colors.grey[200],
-                child: Icon(
+                child: const Icon(
                   Icons.people_outline,
                   color: Colors.black,
                   size: 18.0,
                 )),
-            title: Text('About us'),
-            contentPadding: EdgeInsets.only(left: 12.0),
+            title: const Text('About us'),
+            contentPadding: const EdgeInsets.only(left: 12.0),
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => AboutUsPage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const AboutUsPage()));
             },
           ),
           ListTile(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => TermsConditionsPage()));
+                  builder: (context) => const TermsConditionsPage()));
             },
             leading: CircleAvatar(
                 radius: 18,
                 backgroundColor: Colors.grey[200],
-                child: Icon(
+                child: const Icon(
                   Icons.library_books_outlined,
                   color: Colors.black,
                   size: 18.0,
                 )),
-            title: Text('Terms and Conditions'),
-            contentPadding: EdgeInsets.only(left: 12.0),
+            title: const Text('Terms and Conditions'),
+            contentPadding: const EdgeInsets.only(left: 12.0),
           ),
           ListTile(
+            onTap: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => FaqsPage()));
+            },
             leading: CircleAvatar(
                 radius: 18,
                 backgroundColor: Colors.grey[200],
-                child: Icon(
+                child: const Icon(
                   Icons.beenhere_outlined,
                   color: Colors.black,
                   size: 18.0,
                 )),
-            title: Text('FAQs'),
-            contentPadding: EdgeInsets.only(left: 12.0),
+            title: const Text('FAQs'),
+            contentPadding: const EdgeInsets.only(left: 12.0),
           ),
           const Spacer(),
           Padding(
@@ -159,12 +164,12 @@ class _SideMenuState extends State<SideMenu> {
                     FirebaseAuth.instance.signOut();
                   },
                   child: Row(
-                    children: [
+                    children: const [
                       Icon(
                         Icons.logout_outlined,
                         color: Color.fromRGBO(250, 169, 22, 1),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         width: 5.0,
                       ),
                       Text(
@@ -175,7 +180,7 @@ class _SideMenuState extends State<SideMenu> {
                     ],
                   ),
                 ),
-                Text(
+                const Text(
                   'Version 1.0.1',
                   style: TextStyle(color: Colors.grey, fontSize: 12.0),
                 ),
