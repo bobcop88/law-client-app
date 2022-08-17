@@ -52,8 +52,8 @@ class _WelcomePageProfileState extends State<WelcomePageProfile> {
                 ],
               ),
               Row(
-                children: [
-                  const Expanded(
+                children: const [
+                  Expanded(
                     child: Text(
                       'Company Name',
                       style: TextStyle(

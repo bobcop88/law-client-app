@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:new_client_app/main.dart';
-import 'package:new_client_app/pages/homepage/home_page.dart';
 import 'package:new_client_app/pages/register_page/forgot_password_page.dart';
 import 'package:new_client_app/pages/register_page/register.dart';
 import 'package:new_client_app/utils/users/database_users.dart';
@@ -56,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
             Expanded(
               flex: 3,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
@@ -174,7 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: passwordController,
                           textInputAction: TextInputAction.next,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(0),
+                            contentPadding: const EdgeInsets.all(0),
                             isDense: true,
                             prefixIcon: const Icon(
                               Icons.lock,
@@ -241,7 +240,9 @@ class _LoginPageState extends State<LoginPage> {
                           children: [
                             Expanded(
                               child: ElevatedButton(
-                                onPressed: signIn,
+                                onPressed: () {
+                                  signIn(context);
+                                },
                                 style: ButtonStyle(
                                     padding: MaterialStateProperty.all(
                                         const EdgeInsets.all(15)),
@@ -301,7 +302,8 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future signIn() async {
+  Future signIn(context) async {
+    // bool exist = true;
     showDialog(
       context: context,
       barrierDismissible: false,
@@ -317,7 +319,7 @@ class _LoginPageState extends State<LoginPage> {
       );
       DatabaseUsers(uid: FirebaseAuth.instance.currentUser!.uid)
           .updateDeviceToken(deviceToken);
-      // print(FirebaseAuth.instance.currentUser!.uid);
+      // exist = await checkUserComplete();
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.code == 'user-not-found'

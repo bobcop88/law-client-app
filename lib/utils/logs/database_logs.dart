@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:new_client_app/utils/logs/log_class.dart';
 
 class DatabaseLogUser {

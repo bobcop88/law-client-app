@@ -5,7 +5,6 @@ import 'package:new_client_app/pages/app_pages/homepage_first/widgets/categories
 import 'package:new_client_app/pages/app_pages/homepage_first/widgets/news_scrolling.dart';
 import 'package:new_client_app/pages/app_pages/homepage_first/widgets/team_scrolling.dart';
 import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
-import 'package:new_client_app/pages/app_pages/services/immigration/immigration_page.dart';
 import 'package:new_client_app/utils/errors/error_service_exists.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -162,7 +161,7 @@ class _HomeFirstState extends State<HomeFirst> {
                             ),
                             const Text(
                               'Fiscal',
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 17.0,
                                   fontWeight: FontWeight.w500),
@@ -246,7 +245,7 @@ class _HomeFirstState extends State<HomeFirst> {
                             ),
                             const Text(
                               'Litigation',
-                              style: const TextStyle(
+                              style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 17.0,
                                   fontWeight: FontWeight.w500),

@@ -29,7 +29,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Column(
-              children: [
+              children: const [
                 Center(child: CircularProgressIndicator.adaptive()),
               ],
             );
@@ -58,12 +58,14 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                     height: 45,
                                     width: 45,
                                     decoration: BoxDecoration(
-                                        color: Color.fromARGB(30, 250, 170, 22),
+                                        color: const Color.fromARGB(
+                                            30, 250, 170, 22),
                                         borderRadius:
                                             BorderRadius.circular(10)),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.miscellaneous_services,
-                                      color: Color.fromRGBO(250, 169, 22, 1),
+                                      color:
+                                          Color.fromRGBO(250, 169, 22, 1),
                                       size: 30.0,
                                     ),
                                   ),
@@ -73,7 +75,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                             Expanded(
                               child: Text(
                                 service.serviceName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -91,12 +93,12 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                         child: Column(
                           children: [
                             Row(
-                              children: [Text('Details')],
+                              children: const [Text('Details')],
                             ),
                             const Divider(),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.short_text,
                                   color: Color.fromRGBO(250, 169, 22, 1),
                                   size: 15.0,
@@ -119,7 +121,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                             ),
                             Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.short_text,
                                   color: Color.fromRGBO(250, 169, 22, 1),
                                   size: 15.0,
@@ -129,7 +131,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                 ),
                                 const Text(
                                   'Status: ',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 12.0, color: Colors.grey),
                                 ),
                                 Text(service.currentState),
@@ -150,7 +152,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                             children: [
                               Row(
                                 children: [
-                                  Text('Information 1'),
+                                  const Text('Information 1'),
                                   const SizedBox(
                                     width: 8.0,
                                   ),
@@ -160,7 +162,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                         : Icons.check,
                                     size: 15.0,
                                     color: service.field1Status != 'Completed'
-                                        ? Color.fromRGBO(250, 169, 22, 1)
+                                        ? const Color.fromRGBO(250, 169, 22, 1)
                                         : Colors.green,
                                   ),
                                 ],
@@ -168,7 +170,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                               const Divider(),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.short_text,
                                     color: Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
@@ -189,9 +191,10 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                               ),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.short_text,
-                                    color: Color.fromRGBO(250, 169, 22, 1),
+                                    color:
+                                        Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
                                   ),
                                   const SizedBox(
@@ -199,7 +202,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                   ),
                                   const Text(
                                     'Status: ',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 12.0, color: Colors.grey),
                                   ),
                                   Text(service.field1Status),
@@ -221,7 +224,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                             children: [
                               Row(
                                 children: [
-                                  Text('Information 2'),
+                                  const Text('Information 2'),
                                   const SizedBox(
                                     width: 8.0,
                                   ),
@@ -231,7 +234,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                         : Icons.check,
                                     size: 15.0,
                                     color: service.field2Status != 'Completed'
-                                        ? Color.fromRGBO(250, 169, 22, 1)
+                                        ? const Color.fromRGBO(250, 169, 22, 1)
                                         : Colors.green,
                                   ),
                                 ],
@@ -239,9 +242,10 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                               const Divider(),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.short_text,
-                                    color: Color.fromRGBO(250, 169, 22, 1),
+                                    color:
+                                        Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
                                   ),
                                   const SizedBox(
@@ -260,9 +264,10 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                               ),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.short_text,
-                                    color: Color.fromRGBO(250, 169, 22, 1),
+                                    color:
+                                        Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
                                   ),
                                   const SizedBox(
@@ -270,7 +275,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                   ),
                                   const Text(
                                     'Status: ',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 12.0, color: Colors.grey),
                                   ),
                                   Text(service.field2Status),
@@ -292,7 +297,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                             children: [
                               Row(
                                 children: [
-                                  Text('Information 3'),
+                                  const Text('Information 3'),
                                   const SizedBox(
                                     width: 8.0,
                                   ),
@@ -302,7 +307,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                         : Icons.check,
                                     size: 15.0,
                                     color: service.field3Status != 'Completed'
-                                        ? Color.fromRGBO(250, 169, 22, 1)
+                                        ? const Color.fromRGBO(250, 169, 22, 1)
                                         : Colors.green,
                                   ),
                                 ],
@@ -310,9 +315,10 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                               const Divider(),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.short_text,
-                                    color: Color.fromRGBO(250, 169, 22, 1),
+                                    color:
+                                        Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
                                   ),
                                   const SizedBox(
@@ -331,7 +337,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                               ),
                               Row(
                                 children: [
-                                  Icon(
+                                  const Icon(
                                     Icons.short_text,
                                     color: Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
@@ -341,7 +347,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                   ),
                                   const Text(
                                     'Status: ',
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                         fontSize: 12.0, color: Colors.grey),
                                   ),
                                   Text(service.field3Status),
@@ -360,7 +366,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                           child: Column(
                             children: [
                               Row(
-                                children: [Text('Document 1')],
+                                children: const [Text('Document 1')],
                               ),
                               const Divider(),
                               Row(
@@ -371,7 +377,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                       children: [
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.short_text,
                                               color: Color.fromRGBO(
                                                   250, 169, 22, 1),
@@ -430,7 +436,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                           ),
                                         ),
                                       ),
-                                      Text(
+                                      const Text(
                                         'Document 1',
                                         style: TextStyle(
                                             color: Colors.grey, fontSize: 12.0),
@@ -452,7 +458,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                           child: Column(
                             children: [
                               Row(
-                                children: [Text('Document 2')],
+                                children: const [Text('Document 2')],
                               ),
                               const Divider(),
                               Row(
@@ -463,7 +469,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                       children: [
                                         Row(
                                           children: [
-                                            Icon(
+                                            const Icon(
                                               Icons.short_text,
                                               color: Color.fromRGBO(
                                                   250, 169, 22, 1),
@@ -522,7 +528,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                           ),
                                         ),
                                       ),
-                                      Text(
+                                      const Text(
                                         'Document 2',
                                         style: TextStyle(
                                             color: Colors.grey, fontSize: 12.0),

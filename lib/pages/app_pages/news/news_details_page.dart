@@ -11,9 +11,9 @@ class _NewsPageState extends State<NewsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(242, 242, 242, 1),
+      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(19, 38, 63, 1),
+        backgroundColor: const Color.fromRGBO(19, 38, 63, 1),
         title: Row(
           children: const [
             Expanded(child: Text('Nuevo Estado de Alarma')),
@@ -32,7 +32,7 @@ class _NewsPageState extends State<NewsPage> {
                       height: 200,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                             image:
                                 AssetImage('assets/slider_home/slider_3.png')),
                       ),
@@ -85,7 +85,7 @@ class _NewsPageState extends State<NewsPage> {
                         height: 10.0,
                       ),
                       Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor nunc urna, eget aliquam ex convallis vitae. Nullam turpis dolor, auctor vitae orci quis, aliquam volutpat purus. Nulla tristique semper metus, id pellentesque quam volutpat vitae.',
@@ -113,7 +113,7 @@ class _NewsPageState extends State<NewsPage> {
                         height: 10.0,
                       ),
                       Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor nunc urna, eget aliquam ex convallis vitae. Nullam turpis dolor, auctor vitae orci quis, aliquam volutpat purus. Nulla tristique semper metus, id pellentesque quam volutpat vitae.',
@@ -129,11 +129,11 @@ class _NewsPageState extends State<NewsPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children: const [
                           Icon(Icons.arrow_forward,
                               color: Color.fromRGBO(250, 169, 22, 1),
                               size: 18.0),
-                          const SizedBox(
+                          SizedBox(
                             width: 5.0,
                           ),
                           Expanded(
@@ -151,11 +151,11 @@ class _NewsPageState extends State<NewsPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
+                        children: const [
                           Icon(Icons.arrow_forward,
                               color: Color.fromRGBO(250, 169, 22, 1),
                               size: 18.0),
-                          const SizedBox(
+                          SizedBox(
                             width: 5.0,
                           ),
                           Expanded(

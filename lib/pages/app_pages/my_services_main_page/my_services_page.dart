@@ -1,10 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:new_client_app/pages/app_pages/services/my_services_completed.dart';
 import 'package:new_client_app/pages/app_pages/services/my_services_pending.dart';
-import 'package:new_client_app/utils/services/database_services.dart';
-import 'package:new_client_app/utils/services/my_service_class.dart';
 
 class MyServicesPage extends StatefulWidget {
   final PageController controller;
@@ -19,7 +15,6 @@ class _MyServicesPageState extends State<MyServicesPage>
   late TabController tabController;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     tabController = TabController(length: 2, vsync: this);
   }
@@ -29,7 +24,7 @@ class _MyServicesPageState extends State<MyServicesPage>
     return Column(
       children: [
         Container(
-          decoration: BoxDecoration(color: Colors.white),
+          decoration: const BoxDecoration(color: Colors.white),
           child: DefaultTabController(
             length: 2,
             initialIndex: 1,
@@ -45,10 +40,10 @@ class _MyServicesPageState extends State<MyServicesPage>
                   child: Text('Completed'),
                 ),
               ],
-              padding: EdgeInsets.only(top: 10),
+              padding: const EdgeInsets.only(top: 10),
               // unselectedLabelColor: Color.fromRGBO(15, 48, 65, 1),
               // labelColor: Color.fromRGBO(250, 169, 22, 1),
-              indicatorColor: Color.fromRGBO(250, 169, 22, 1),
+              indicatorColor: const Color.fromRGBO(250, 169, 22, 1),
             ),
           ),
         ),

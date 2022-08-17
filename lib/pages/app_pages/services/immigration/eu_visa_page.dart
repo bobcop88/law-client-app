@@ -39,7 +39,6 @@ class _EuVisaPageState extends State<EuVisaPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchUserData(user);
   }
@@ -83,8 +82,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                                             BorderRadius.circular(10)),
                                     child: const Icon(
                                       Icons.miscellaneous_services,
-                                      color:
-                                          const Color.fromRGBO(250, 169, 22, 1),
+                                      color: Color.fromRGBO(250, 169, 22, 1),
                                       size: 30.0,
                                     ),
                                   ),
@@ -94,7 +92,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                             const Expanded(
                               child: Text(
                                 'EU Visa',
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 17.0,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -424,11 +422,11 @@ class _EuVisaPageState extends State<EuVisaPage> {
       stream: uploadTask?.snapshotEvents,
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return Text('');
+          return const Text('');
         } else {
           // final data = snapshot.data!;
           // double progress = data.bytesTransferred / data.totalBytes;
-          return CircularProgressIndicator.adaptive();
+          return const CircularProgressIndicator.adaptive();
           // return Text(
           //   'Loading ${(100 * progress).roundToDouble()}%',
           //   style: TextStyle(fontSize: 11.0),
@@ -620,7 +618,7 @@ class _EuVisaPageState extends State<EuVisaPage> {
                     },
                     child: const Text(
                       'Exit',
-                      style: const TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                   ElevatedButton(

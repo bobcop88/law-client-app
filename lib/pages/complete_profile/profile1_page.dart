@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/complete_profile/profile_class.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -69,16 +68,14 @@ class _ProfileOneState extends State<ProfileOne> {
                     // ),
                     hintText: AppLocalizations.of(context)!.profile1_enter_name,
                     focusedBorder: const OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(15.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
                       borderSide: BorderSide(
-                          color: const Color.fromRGBO(15, 48, 65, 1),
+                          color: Color.fromRGBO(15, 48, 65, 1),
                           width: 1.0,
                           style: BorderStyle.solid),
                     ),
                     enabledBorder: const OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(const Radius.circular(15.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
                       borderSide: BorderSide(
                           color: Colors.grey,
                           width: 1.0,
@@ -102,16 +99,14 @@ class _ProfileOneState extends State<ProfileOne> {
                     hintText:
                         AppLocalizations.of(context)!.profile1_enter_surname,
                     focusedBorder: const OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(15.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
                       borderSide: BorderSide(
-                          color: const Color.fromRGBO(15, 48, 65, 1),
+                          color: Color.fromRGBO(15, 48, 65, 1),
                           width: 1.0,
                           style: BorderStyle.solid),
                     ),
                     enabledBorder: const OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(const Radius.circular(15.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
                       borderSide: BorderSide(
                           color: Colors.grey,
                           width: 1.0,
@@ -136,16 +131,14 @@ class _ProfileOneState extends State<ProfileOne> {
                     hintText:
                         AppLocalizations.of(context)!.profile1_enter_phone,
                     focusedBorder: const OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(Radius.circular(15.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
                       borderSide: BorderSide(
-                          color: const Color.fromRGBO(15, 48, 65, 1),
+                          color: Color.fromRGBO(15, 48, 65, 1),
                           width: 1.0,
                           style: BorderStyle.solid),
                     ),
                     enabledBorder: const OutlineInputBorder(
-                      borderRadius:
-                          const BorderRadius.all(const Radius.circular(15.0)),
+                      borderRadius: BorderRadius.all(Radius.circular(15.0)),
                       borderSide: BorderSide(
                           color: Colors.grey,
                           width: 1.0,
@@ -204,34 +197,5 @@ class _ProfileOneState extends State<ProfileOne> {
         ),
       ),
     );
-  }
-
-  errorFieldMissing() {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Missing fields'),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [const Text('Some fields are missing')],
-            ),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Complete now'),
-              ),
-              TextButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  FirebaseAuth.instance.currentUser!.delete();
-                },
-                child: const Text('Exit'),
-              ),
-            ],
-          );
-        });
   }
 }

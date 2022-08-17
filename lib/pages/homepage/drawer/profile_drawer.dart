@@ -15,9 +15,9 @@ class _ProfileDrawerState extends State<ProfileDrawer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(15, 48, 65, 1),
+        backgroundColor: const Color.fromRGBO(15, 48, 65, 1),
         elevation: 0,
-        title: Text('Personal Profile'),
+        title: const Text('Personal Profile'),
       ),
       body: Column(
         children: [

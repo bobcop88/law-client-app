@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ErrorDialog {
@@ -7,25 +6,43 @@ class ErrorDialog {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Missing fields'),
+            title: const Text(
+              'Missing Details',
+              textAlign: TextAlign.center,
+            ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [Text('Some fields are missing')],
+              children: const [
+                Text(
+                  'One or more fields required are missing. Please make sure to complete all fields in order to continue',
+                  style: TextStyle(color: Colors.grey, fontSize: 12.0),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
             actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text('Complete now'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  FirebaseAuth.instance.currentUser!.delete();
-                  // FirebaseAuth.instance.signOut();
-                },
-                child: Text('Exit'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // TextButton(
+                  //   onPressed: () {
+
+                  //     // Navigator.of(context).pop();
+                  //     // FirebaseAuth.instance.currentUser!.delete();
+                  //     FirebaseAuth.instance.signOut();
+                  //   },
+                  //   child: Text(
+                  //     'Exit',
+                  //     style: TextStyle(color: Colors.black),
+                  //   ),
+                  // ),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text('Complete now'),
+                  ),
+                ],
               ),
             ],
           );

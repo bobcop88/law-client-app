@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/register_page/forgot_password_page.dart';
 import 'package:new_client_app/utils/users/database_users.dart';
 import 'package:new_client_app/utils/users/user_class.dart';
@@ -269,8 +270,12 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   ElevatedButton.icon(
                     onPressed: () {
-                      // Navigator.of(context).pop();
                       FirebaseAuth.instance.signOut();
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MainPage()));
                     },
                     label: const Text('Log out'),
                     icon: const Icon(Icons.logout_outlined),

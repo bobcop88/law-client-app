@@ -28,13 +28,13 @@ class _TermsConditionsPageRegisterState
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
-                        children: [
+                        children: const [
                           Icon(
                             Icons.library_books_outlined,
                             color: Color.fromRGBO(250, 169, 22, 1),
                             size: 18.0,
                           ),
-                          const SizedBox(
+                          SizedBox(
                             width: 5.0,
                           ),
                           Text(
@@ -49,7 +49,7 @@ class _TermsConditionsPageRegisterState
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus hendrerit mauris id erat aliquet, ac convallis lectus hendrerit. Duis sed dui vel odio dignissim feugiat vitae a metus. Ut volutpat, metus id laoreet efficitur, velit lectus pharetra ligula, ac commodo ligula orci a risus. Nullam imperdiet lacus a bibendum tristique. Nullam tristique congue tincidunt. Duis feugiat, erat nec imperdiet posuere, justo nibh ultricies purus, quis volutpat elit nisl non lorem. Fusce consequat pharetra condimentum. Donec congue, nisl at condimentum aliquam, tortor risus convallis justo, quis sodales lectus enim blandit odio. In aliquam odio semper lectus maximus sodales. Integer tortor diam, placerat at risus quis, posuere suscipit nisi. Proin elit turpis, semper bibendum hendrerit eu, pharetra ut metus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi sed nisl et risus venenatis posuere ut non lorem. Suspendisse non nisi interdum, imperdiet ipsum at, ornare neque. Phasellus nec dolor interdum, bibendum nisl in, vehicula sapien. Donec a tempor tellus.',

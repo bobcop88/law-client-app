@@ -8,8 +8,8 @@ Widget teamScrolling(context) {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => LawyerPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const LawyerPage()));
           },
           child: Container(
             height: 150,
@@ -29,7 +29,7 @@ Widget teamScrolling(context) {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Lesley Roman',
@@ -44,7 +44,7 @@ Widget teamScrolling(context) {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Expanded(
                             child: Text(
                               'Immigration | Nationality',
@@ -84,7 +84,7 @@ Widget teamScrolling(context) {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           'Jillie Tilly',
                           style: TextStyle(
@@ -96,7 +96,7 @@ Widget teamScrolling(context) {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Expanded(
                           child: Text(
                             'Immigration | Nationality',
@@ -134,7 +134,7 @@ Widget teamScrolling(context) {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Expanded(
                           child: Text(
                             'Orville Alex',
@@ -149,7 +149,7 @@ Widget teamScrolling(context) {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Expanded(
                           child: Text(
                             'Global Mobility | Nationality',
@@ -188,7 +188,7 @@ Widget teamScrolling(context) {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Expanded(
                           child: Text(
                             'Jordana Willow',
@@ -203,7 +203,7 @@ Widget teamScrolling(context) {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const [
                         Expanded(
                           child: Text(
                             'Fiscal | Relocation',

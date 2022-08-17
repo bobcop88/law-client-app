@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
 import 'package:new_client_app/pages/register_page/verify_email_page.dart';
-import 'package:new_client_app/pages/start_page/start_page.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
@@ -42,7 +42,6 @@ Future main() async {
 }
 
 final navigatorKey = GlobalKey<NavigatorState>();
-final scaffolKey = GlobalKey<ScaffoldState>();
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -91,7 +90,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
-  final navigatorKey = GlobalKey<NavigatorState>();
+  // final navigatorKey = GlobalKey<NavigatorState>();
 
   void initialization() async {
     await Future.delayed(const Duration(seconds: 4));

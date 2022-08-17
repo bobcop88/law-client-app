@@ -2,7 +2,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/main.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ForgotPassword extends StatefulWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -34,7 +33,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             ),
             Expanded(
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
@@ -159,9 +158,6 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                           children: [
                             ElevatedButton(
                               onPressed: resetPassword,
-                              child: const Text(
-                                'Submit',
-                              ),
                               style: ButtonStyle(
                                   padding: MaterialStateProperty.all(
                                       const EdgeInsets.all(15)),
@@ -169,6 +165,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20)))),
+                              child: const Text(
+                                'Submit',
+                              ),
                             ),
                           ],
                         ),
@@ -184,7 +183,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               navigatorKey.currentState!
                                   .popUntil((route) => route.isFirst);
                             },
-                            child: Text(
+                            child: const Text(
                               'Back',
                               style: TextStyle(color: Colors.black),
                             ),

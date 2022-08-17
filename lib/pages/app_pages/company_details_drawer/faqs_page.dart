@@ -27,7 +27,7 @@ class _FaqsPageState extends State<FaqsPage> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       image: const DecorationImage(
-                          image: const AssetImage('assets/images/faqs.png')),
+                          image: AssetImage('assets/images/faqs.png')),
                     ),
                   ),
                 ),
@@ -83,7 +83,7 @@ class _FaqsPageState extends State<FaqsPage> {
                             child: ListView(
                               children: [
                                 ExpansionTile(
-                                  trailing: Icon(
+                                  trailing: const Icon(
                                     Icons.add,
                                     size: 18.0,
                                     color: Colors.black,
@@ -106,7 +106,7 @@ class _FaqsPageState extends State<FaqsPage> {
                                       padding: const EdgeInsets.only(
                                           left: 16.0, bottom: 10.0),
                                       child: Row(
-                                        children: [
+                                        children: const [
                                           Expanded(
                                             child: Text(
                                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique eleifend dui, ac iaculis erat rutrum vel. Duis aliquam consequat urna, eu imperdiet lacus egestas ac.',
@@ -122,7 +122,7 @@ class _FaqsPageState extends State<FaqsPage> {
                                   ],
                                 ),
                                 ExpansionTile(
-                                  trailing: Icon(
+                                  trailing: const Icon(
                                     Icons.add,
                                     size: 18.0,
                                     color: Colors.black,
@@ -145,7 +145,7 @@ class _FaqsPageState extends State<FaqsPage> {
                                       padding: const EdgeInsets.only(
                                           left: 16.0, bottom: 10.0),
                                       child: Row(
-                                        children: [
+                                        children: const [
                                           Expanded(
                                             child: Text(
                                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique eleifend dui, ac iaculis erat rutrum vel. Duis aliquam consequat urna, eu imperdiet lacus egestas ac.',
@@ -161,7 +161,7 @@ class _FaqsPageState extends State<FaqsPage> {
                                   ],
                                 ),
                                 ExpansionTile(
-                                  trailing: Icon(
+                                  trailing: const Icon(
                                     Icons.add,
                                     size: 18.0,
                                     color: Colors.black,
@@ -184,7 +184,7 @@ class _FaqsPageState extends State<FaqsPage> {
                                       padding: const EdgeInsets.only(
                                           left: 16.0, bottom: 10.0),
                                       child: Row(
-                                        children: [
+                                        children: const [
                                           Expanded(
                                             child: Text(
                                               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus tristique eleifend dui, ac iaculis erat rutrum vel. Duis aliquam consequat urna, eu imperdiet lacus egestas ac.',

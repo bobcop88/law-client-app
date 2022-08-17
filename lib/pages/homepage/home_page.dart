@@ -5,15 +5,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
 import 'package:new_client_app/pages/app_pages/homepage_first/home_first.dart';
 import 'package:new_client_app/pages/app_pages/my_services_main_page/my_services_page.dart';
 import 'package:new_client_app/pages/app_pages/notifications/notifications_page.dart';
 import 'package:new_client_app/pages/app_pages/profile_page/profile_page.dart';
 import 'package:new_client_app/pages/app_pages/services_main_page/services_page.dart';
-import 'package:new_client_app/pages/complete_profile/complete_profile_page.dart';
 import 'package:new_client_app/pages/homepage/drawer/nav_drawer.dart';
+import 'package:new_client_app/utils/errors/error_complete_profile.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,13 +23,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   int _selectedIndex = 0;
   final PageController menuController = PageController();
   final userId = FirebaseAuth.instance.currentUser!.uid;
   bool showNewChatMessage = false;
   bool showNotificationBadge = false;
   Timer? timer;
-  bool userCompleted = true;
+  bool userCompleted = false;
 
   @override
   void initState() {
@@ -41,6 +42,13 @@ class _HomePageState extends State<HomePage> {
       checkNewNotification(userId);
     });
   }
+
+  // void checkNew() {
+  //   timer = Timer.periodic(const Duration(seconds: 4), (_) {
+  //     checkNewChat();
+  //     checkNewNotification(userId);
+  //   });
+  // }
 
   void pageChanged(int index) {
     setState(() {
@@ -84,7 +92,7 @@ class _HomePageState extends State<HomePage> {
             color: Colors.black,
           ),
           onPressed: () {
-            scaffolKey.currentState!.openDrawer();
+            scaffoldKey.currentState!.openDrawer();
           },
         ),
         actions: [
@@ -129,7 +137,7 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Theme.of(context).primaryColor,
       body: Scaffold(
-        key: scaffolKey,
+        key: scaffoldKey,
         drawer: const SideMenu(),
         body: SafeArea(
           child: Row(
@@ -218,10 +226,12 @@ class _HomePageState extends State<HomePage> {
         if (value.data()!['isRead'] == false &&
             value.data()!['senderLastMessage'] != userId) {
           setState(() {
+            if (!mounted) return;
             showNewChatMessage = true;
           });
         } else {
           setState(() {
+            if (!mounted) return;
             showNewChatMessage = false;
           });
         }
@@ -245,12 +255,20 @@ class _HomePageState extends State<HomePage> {
     final collection = await FirebaseFirestore.instance
         .collection('clients/$userId/notificationsFromAdmin')
         .get();
+    if (collection.docs.isEmpty) {
+      if (!mounted) return;
+      setState(() {
+        showNotificationBadge = false;
+      });
+    }
     collection.docs.forEach((element) {
       if (element.data()['isNew'] == true) {
+        if (!mounted) return;
         setState(() {
           showNotificationBadge = true;
         });
       } else {
+        if (!mounted) return;
         setState(() {
           showNotificationBadge = false;
         });
@@ -273,36 +291,9 @@ class _HomePageState extends State<HomePage> {
         .doc(userId)
         .get()
         .then((doc) {
-      if (doc.exists == false) {
-        return errorComplete();
+      if (doc['userCompleted'] == false) {
+        return ErrorCompleteProfile().errorComplete(context);
       }
     });
-  }
-
-  void errorComplete() {
-    showDialog(
-        context: context,
-        builder: (BuildContext content) {
-          return AlertDialog(
-            title: const Text('Please complete your profile'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const CompleteProfilePage()));
-                },
-                child: const Text('Complete now'),
-              ),
-              TextButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Not now'),
-              ),
-            ],
-          );
-        });
   }
 }

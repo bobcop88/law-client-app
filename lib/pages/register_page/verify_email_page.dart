@@ -2,10 +2,8 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/pages/complete_profile/complete_profile_page.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
-import 'package:new_client_app/utils/logs/database_logs.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -196,9 +194,6 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                                 //     : null;
                                 // dialogResentVerificationEmail();
                               },
-                              child: const Text(
-                                'Resend email',
-                              ),
                               style: ButtonStyle(
                                   padding: MaterialStateProperty.all(
                                       const EdgeInsets.all(15)),
@@ -206,6 +201,9 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(20)))),
+                              child: const Text(
+                                'Resend email',
+                              ),
                             ),
                           ],
                         ),

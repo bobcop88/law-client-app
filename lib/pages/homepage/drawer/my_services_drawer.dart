@@ -14,9 +14,9 @@ class _MyServicesDrawerState extends State<MyServicesDrawer> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(15, 48, 65, 1),
+        backgroundColor: const Color.fromRGBO(15, 48, 65, 1),
         elevation: 0,
-        title: Text('My Services'),
+        title: const Text('My Services'),
       ),
       body: Column(
         children: [

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ErrorNoDocs {
@@ -7,13 +6,13 @@ class ErrorNoDocs {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(
+            title: const Text(
               'Documents are missing',
               textAlign: TextAlign.center,
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: const [
                 Text(
                   'You need to upload all documents in order to request the service',
                   style: TextStyle(color: Colors.grey, fontSize: 12.0),
@@ -29,11 +28,11 @@ class ErrorNoDocs {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    style: ButtonStyle(
+                    style: const ButtonStyle(
                       visualDensity: VisualDensity.compact,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Upload now',
                       style: TextStyle(color: Color.fromRGBO(250, 169, 22, 1)),
                     ),
@@ -58,13 +57,13 @@ class ErrorNoDocs {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(
+            title: const Text(
               'One or more fields are not completed',
               textAlign: TextAlign.center,
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: const [
                 Text(
                   'You need to complete all required fields in order to request the service',
                   style: TextStyle(color: Colors.grey, fontSize: 12.0),
@@ -80,11 +79,11 @@ class ErrorNoDocs {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    style: ButtonStyle(
+                    style: const ButtonStyle(
                       visualDensity: VisualDensity.compact,
                       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Complete now',
                       style: TextStyle(color: Color.fromRGBO(250, 169, 22, 1)),
                     ),

@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:new_client_app/utils/users/user_class.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -34,6 +33,7 @@ class DatabaseUsers {
       email: FirebaseAuth.instance.currentUser!.email,
       dateCreation: DateTime.now().microsecondsSinceEpoch,
       token: token,
+      userCompleted: true,
     );
 
     final json = userCompleteProfile.toJson();

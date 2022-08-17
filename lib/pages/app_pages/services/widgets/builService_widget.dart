@@ -35,9 +35,9 @@ class BuildServiceWidget {
                               height: 45,
                               width: 45,
                               decoration: BoxDecoration(
-                                  color: Color.fromARGB(54, 250, 170, 22),
+                                  color: const Color.fromARGB(54, 250, 170, 22),
                                   borderRadius: BorderRadius.circular(10)),
-                              child: Icon(
+                              child: const Icon(
                                 Icons.miscellaneous_services,
                                 color: Color.fromRGBO(250, 169, 22, 1),
                                 size: 30.0,
@@ -54,7 +54,7 @@ class BuildServiceWidget {
                                 Expanded(
                                   child: Text(
                                     services.serviceName,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 15.0,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -66,7 +66,7 @@ class BuildServiceWidget {
                             ),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Start Date: ',
                                   style: TextStyle(
                                       fontSize: 12.0, color: Colors.grey),
@@ -75,14 +75,14 @@ class BuildServiceWidget {
                                   DateFormat('dd MMMM yyyy').format(
                                       DateTime.fromMicrosecondsSinceEpoch(
                                           services.creationDate)),
-                                  style: TextStyle(fontSize: 12.0),
+                                  style: const TextStyle(fontSize: 12.0),
                                 ),
                               ],
                             ),
                             const Divider(),
                             Row(
                               children: [
-                                Text(
+                                const Text(
                                   'Status: ',
                                   style: TextStyle(
                                       fontSize: 12.0, color: Colors.grey),

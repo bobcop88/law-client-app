@@ -40,7 +40,7 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
               Expanded(
                 child: Card(
                   elevation: 5,
-                  shadowColor: Color.fromRGBO(15, 48, 65, 1),
+                  shadowColor: const Color.fromRGBO(15, 48, 65, 1),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -99,7 +99,8 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
                               check
                                   ? Navigator.of(context).push(
                                       MaterialPageRoute(
-                                          builder: (context) => EuVisaPage()))
+                                          builder: (context) =>
+                                              const EuVisaPage()))
                                   : ErrorServiceExists(
                                           uid: user, serviceName: 'EU Visa')
                                       .alertServiceExists(context);
@@ -107,7 +108,7 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
                               return;
                             }
                           },
-                          child: Text('Request service'),
+                          child: const Text('Request service'),
                         ),
                       ],
                     ),
@@ -121,7 +122,7 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
               Expanded(
                 child: Card(
                   elevation: 5,
-                  shadowColor: Color.fromRGBO(15, 48, 65, 1),
+                  shadowColor: const Color.fromRGBO(15, 48, 65, 1),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -166,7 +167,7 @@ class _ImmigrationPageState extends State<ImmigrationPage> {
                         ),
                         ElevatedButton(
                           onPressed: nationality != 'Bulgaria' ? () {} : null,
-                          child: Text('Request service'),
+                          child: const Text('Request service'),
                         ),
                       ],
                     ),

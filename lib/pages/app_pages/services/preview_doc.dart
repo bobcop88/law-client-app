@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 
 class PreviewDoc extends StatefulWidget {
@@ -14,7 +13,7 @@ class _PreviewDocState extends State<PreviewDoc> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Preview Document'),
+        title: const Text('Preview Document'),
         elevation: 0.0,
         backgroundColor: const Color.fromRGBO(15, 48, 65, 1),
       ),

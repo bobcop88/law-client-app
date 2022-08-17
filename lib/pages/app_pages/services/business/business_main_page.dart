@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/services/business/business_service_1.dart';
-import 'package:new_client_app/pages/app_pages/services/immigration/eu_visa_page.dart';
 import 'package:new_client_app/utils/errors/error_service_exists.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 
@@ -41,7 +40,7 @@ class _BusinessMainPageState extends State<BusinessMainPage> {
               Expanded(
                 child: Card(
                   elevation: 5,
-                  shadowColor: Color.fromRGBO(15, 48, 65, 1),
+                  shadowColor: const Color.fromRGBO(15, 48, 65, 1),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -101,7 +100,7 @@ class _BusinessMainPageState extends State<BusinessMainPage> {
                                   ? Navigator.of(context).push(
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              BusinessServiceOnePage()))
+                                              const BusinessServiceOnePage()))
                                   : ErrorServiceExists(
                                           uid: user,
                                           serviceName: 'Business Service 1')
@@ -110,7 +109,7 @@ class _BusinessMainPageState extends State<BusinessMainPage> {
                               return;
                             }
                           },
-                          child: Text('Request service'),
+                          child: const Text('Request service'),
                         ),
                       ],
                     ),
@@ -124,7 +123,7 @@ class _BusinessMainPageState extends State<BusinessMainPage> {
               Expanded(
                 child: Card(
                   elevation: 5,
-                  shadowColor: Color.fromRGBO(15, 48, 65, 1),
+                  shadowColor: const Color.fromRGBO(15, 48, 65, 1),
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
@@ -169,7 +168,7 @@ class _BusinessMainPageState extends State<BusinessMainPage> {
                         ),
                         ElevatedButton(
                           onPressed: nationality != 'Bulgaria' ? () {} : null,
-                          child: Text('Request service'),
+                          child: const Text('Request service'),
                         ),
                       ],
                     ),

@@ -15,7 +15,7 @@ class _ServicesPageState extends State<ServicesPage> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: const BoxDecoration(color: Colors.white),
         child: Padding(
           padding: const EdgeInsets.only(left: 30.0, right: 30.0),
           child: Column(
@@ -26,7 +26,7 @@ class _ServicesPageState extends State<ServicesPage> {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => ImmigrationPage()));
+                      builder: (context) => const ImmigrationPage()));
                 },
                 child: Row(
                   children: [
@@ -35,7 +35,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         height: 400,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             fit: BoxFit.cover,
                             alignment: Alignment.centerLeft,
                             image: AssetImage(
@@ -48,7 +48,7 @@ class _ServicesPageState extends State<ServicesPage> {
                           children: [
                             Container(
                               height: 130,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(20),
                                       bottomRight: Radius.circular(20)),
@@ -61,7 +61,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                       Expanded(
                                         child: Text(
                                           'Immigration'.toUpperCase(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 17.0,
                                               letterSpacing: 1),
@@ -77,7 +77,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                     padding: const EdgeInsets.only(
                                         left: 15.0, right: 15.0),
                                     child: Row(
-                                      children: [
+                                      children: const [
                                         Expanded(
                                           child: Text(
                                             'Specialists in immigration law for Expats and Non-Residents',
@@ -106,7 +106,7 @@ class _ServicesPageState extends State<ServicesPage> {
               GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => BusinessMainPage()));
+                      builder: (context) => const BusinessMainPage()));
                 },
                 child: Row(
                   children: [
@@ -115,7 +115,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         height: 400,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
-                          image: DecorationImage(
+                          image: const DecorationImage(
                             fit: BoxFit.cover,
                             image: AssetImage(
                               'assets/images/categories/Corporate.jpg',
@@ -127,7 +127,7 @@ class _ServicesPageState extends State<ServicesPage> {
                           children: [
                             Container(
                               height: 130,
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                   borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(20),
                                       bottomRight: Radius.circular(20)),
@@ -140,7 +140,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                       Expanded(
                                         child: Text(
                                           'Business'.toUpperCase(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               color: Colors.white,
                                               fontSize: 17.0,
                                               letterSpacing: 1),
@@ -156,7 +156,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                     padding: const EdgeInsets.only(
                                         left: 15.0, right: 15.0),
                                     child: Row(
-                                      children: [
+                                      children: const [
                                         Expanded(
                                           child: Text(
                                             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce tempor nunc urna, eget aliquam ex convallis vitae.',
@@ -189,7 +189,7 @@ class _ServicesPageState extends State<ServicesPage> {
                       height: 400,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
                             'assets/images/categories/Properties.jpg',
@@ -201,7 +201,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         children: [
                           Container(
                             height: 130,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(20),
                                     bottomRight: Radius.circular(20)),
@@ -215,7 +215,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                       child: Text(
                                         'Nationality & Citizenship'
                                             .toUpperCase(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 17.0,
                                             letterSpacing: 1),
@@ -231,7 +231,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                   padding: const EdgeInsets.only(
                                       left: 15.0, right: 15.0),
                                   child: Row(
-                                    children: [
+                                    children: const [
                                       Expanded(
                                         child: Text(
                                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -263,7 +263,7 @@ class _ServicesPageState extends State<ServicesPage> {
                       height: 400,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(
                             'assets/images/categories/Litigation.jpg',
@@ -275,7 +275,7 @@ class _ServicesPageState extends State<ServicesPage> {
                         children: [
                           Container(
                             height: 130,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                                 borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(20),
                                     bottomRight: Radius.circular(20)),
@@ -288,7 +288,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                     Expanded(
                                       child: Text(
                                         'Global Mobility'.toUpperCase(),
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             color: Colors.white,
                                             fontSize: 17.0,
                                             letterSpacing: 1),
@@ -304,7 +304,7 @@ class _ServicesPageState extends State<ServicesPage> {
                                   padding: const EdgeInsets.only(
                                       left: 15.0, right: 15.0),
                                   child: Row(
-                                    children: [
+                                    children: const [
                                       Expanded(
                                         child: Text(
                                           'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',

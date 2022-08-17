@@ -1,13 +1,7 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:new_client_app/pages/app_pages/services/services_pending/pending_service_page.dart';
 import 'package:new_client_app/utils/errors/error_no_docs.dart';
 import 'package:new_client_app/utils/logs/database_logs.dart';
 import 'package:new_client_app/utils/notifications/database_notifications.dart';
@@ -31,7 +25,6 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     fetchUserData(user);
   }
@@ -84,7 +77,7 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                                           10)),
                                               child: const Icon(
                                                 Icons.miscellaneous_services,
-                                                color: const Color.fromRGBO(
+                                                color: Color.fromRGBO(
                                                     250, 169, 22, 1),
                                                 size: 30.0,
                                               ),
@@ -95,7 +88,7 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                       const Expanded(
                                         child: Text(
                                           'Business Service 1',
-                                          style: const TextStyle(
+                                          style: TextStyle(
                                               fontSize: 17.0,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -238,7 +231,7 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                                             focusedBorder:
                                                                 OutlineInputBorder(
                                                               borderRadius:
-                                                                  const BorderRadius
+                                                                  BorderRadius
                                                                           .all(
                                                                       Radius.circular(
                                                                           5.0)),
@@ -260,7 +253,7 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                                                   .all(Radius
                                                                       .circular(
                                                                           5.0)),
-                                                              borderSide: const BorderSide(
+                                                              borderSide: BorderSide(
                                                                   color: Colors
                                                                       .grey,
                                                                   width: 1.0,
@@ -343,13 +336,13 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                                             hintText:
                                                                 'Enter information 2...',
                                                             focusedBorder:
-                                                                const OutlineInputBorder(
+                                                                OutlineInputBorder(
                                                               borderRadius: BorderRadius
                                                                   .all(Radius
                                                                       .circular(
                                                                           5.0)),
                                                               borderSide: BorderSide(
-                                                                  color: const Color
+                                                                  color: Color
                                                                           .fromRGBO(
                                                                       15,
                                                                       48,
@@ -366,7 +359,7 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                                                   .all(Radius
                                                                       .circular(
                                                                           5.0)),
-                                                              borderSide: const BorderSide(
+                                                              borderSide: BorderSide(
                                                                   color: Colors
                                                                       .grey,
                                                                   width: 1.0,
@@ -554,7 +547,7 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
         context: context,
         builder: (BuildContext context) {
           return const SimpleDialog(
-            title: const Text('Please upload a document'),
+            title: Text('Please upload a document'),
           );
         });
   }
@@ -594,7 +587,7 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                     },
                     child: const Text(
                       'Exit',
-                      style: const TextStyle(color: Colors.black),
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                   ElevatedButton(

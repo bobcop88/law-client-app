@@ -11,11 +11,11 @@ class _LawyerPageState extends State<LawyerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(242, 242, 242, 1),
+      backgroundColor: const Color.fromRGBO(242, 242, 242, 1),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(15, 48, 65, 1),
+        backgroundColor: const Color.fromRGBO(15, 48, 65, 1),
         elevation: 0,
-        title: Text('Lesley Roman'),
+        title: const Text('Lesley Roman'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -27,7 +27,7 @@ class _LawyerPageState extends State<LawyerPage> {
                     height: 200,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      image: DecorationImage(
+                      image: const DecorationImage(
                           image: AssetImage('assets/images/team/team_1.png')),
                     ),
                   ),

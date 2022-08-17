@@ -44,6 +44,6 @@ class _CompleteProfilePageState extends State<CompleteProfilePage> {
 
   void changePage(int index) {
     _completeProfileController.animateTo(1,
-        duration: Duration(seconds: 1), curve: Curves.easeIn);
+        duration: const Duration(seconds: 1), curve: Curves.easeIn);
   }
 }

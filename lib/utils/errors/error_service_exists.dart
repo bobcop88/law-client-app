@@ -13,7 +13,6 @@ class ErrorServiceExists {
         .doc(serviceName)
         .get()
         .then((service) {
-      print(service.exists);
       service.exists ? true : false;
     });
   }
@@ -23,13 +22,13 @@ class ErrorServiceExists {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text(
+            title: const Text(
               'Service already requested',
               textAlign: TextAlign.center,
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
-              children: [
+              children: const [
                 Text(
                   'You have already requested the service',
                   style: TextStyle(color: Colors.grey, fontSize: 12.0),
@@ -44,7 +43,7 @@ class ErrorServiceExists {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text(
+                    child: const Text(
                       'Close',
                       style: TextStyle(
                         color: Color.fromRGBO(250, 169, 22, 1),

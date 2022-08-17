@@ -6,10 +6,8 @@ import 'package:new_client_app/pages/app_pages/chat/chat_main_page.dart';
 import 'package:new_client_app/pages/app_pages/company_details_drawer/about_us_page.dart';
 import 'package:new_client_app/pages/app_pages/company_details_drawer/faqs_page.dart';
 import 'package:new_client_app/pages/app_pages/company_details_drawer/terms_page.dart';
-import 'package:new_client_app/pages/app_pages/profile_page/profile_page.dart';
 import 'package:new_client_app/pages/homepage/drawer/my_services_drawer.dart';
 import 'package:new_client_app/pages/homepage/drawer/profile_drawer.dart';
-import 'package:new_client_app/pages/homepage/home_page.dart';
 
 class SideMenu extends StatefulWidget {
   const SideMenu({Key? key}) : super(key: key);
@@ -21,6 +19,7 @@ class SideMenu extends StatefulWidget {
 class _SideMenuState extends State<SideMenu> {
   final PageController menuController = PageController();
   final userId = FirebaseAuth.instance.currentUser!.uid;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +52,7 @@ class _SideMenuState extends State<SideMenu> {
             title: const Text('My Profile'),
             contentPadding: const EdgeInsets.only(left: 12.0),
             onTap: () {
-              scaffolKey.currentState!.closeDrawer();
+              // scaffoldKey.currentState?.closeDrawer();
 
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const ProfileDrawer()));
@@ -77,7 +76,7 @@ class _SideMenuState extends State<SideMenu> {
           ),
           ListTile(
             onTap: () {
-              scaffolKey.currentState!.closeDrawer();
+              // scaffoldKey.currentState!.closeDrawer();
               chatFromMenu();
             },
             leading: CircleAvatar(
@@ -139,8 +138,8 @@ class _SideMenuState extends State<SideMenu> {
           ),
           ListTile(
             onTap: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => FaqsPage()));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const FaqsPage()));
             },
             leading: CircleAvatar(
                 radius: 18,
@@ -162,6 +161,11 @@ class _SideMenuState extends State<SideMenu> {
                 GestureDetector(
                   onTap: () {
                     FirebaseAuth.instance.signOut();
+                    Navigator.of(context).pop();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MainPage()));
                   },
                   child: Row(
                     children: const [
@@ -192,13 +196,14 @@ class _SideMenuState extends State<SideMenu> {
     );
   }
 
-  void chatFromMenu() {
-    if (FirebaseFirestore.instance
-            .collection('chats')
-            .doc(userId)
-            .get()
-            .then((value) => value.exists) ==
-        true) {
+  void chatFromMenu() async {
+    bool exist = await FirebaseFirestore.instance
+        .collection('chats')
+        .doc(userId)
+        .get()
+        .then((value) => value.exists);
+
+    if (exist) {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (context) => ChatPage(id: userId)));
     } else {

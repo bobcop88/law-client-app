@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +6,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
 import 'package:new_client_app/pages/register_page/register_terms_page.dart';
-import 'package:new_client_app/pages/register_page/verify_email_page.dart';
 import 'package:new_client_app/utils/logs/database_logs.dart';
-import 'package:new_client_app/utils/users/database_users.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -48,7 +47,7 @@ class _RegisterPageState extends State<RegisterPage> {
             Expanded(
               flex: 4,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
@@ -351,15 +350,15 @@ class _RegisterPageState extends State<RegisterPage> {
                                         return const Color.fromRGBO(
                                             250, 169, 22, 1);
                                       }
+                                      return null;
                                     }),
                                   ),
                                   const Text('I accept '),
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TermsConditionsPageRegister()));
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                          builder: (context) =>
+                                              const TermsConditionsPageRegister()));
                                     },
                                     child: const Text(
                                       'Terms and Conditions',
@@ -497,6 +496,10 @@ class _RegisterPageState extends State<RegisterPage> {
           'Registration with email',
           'Registration');
       await user.sendEmailVerification();
+      await FirebaseFirestore.instance
+          .collection('clients')
+          .doc(user.uid)
+          .set({'userCompleted': false});
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString() ==

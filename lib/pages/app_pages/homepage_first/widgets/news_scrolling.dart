@@ -8,14 +8,14 @@ Widget newsScrolling(BuildContext context) {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => NewsPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const NewsPage()));
           },
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
+              image: const DecorationImage(
                   image: AssetImage('assets/images/News1.jpg'),
                   fit: BoxFit.cover),
             ),
@@ -28,7 +28,7 @@ Widget newsScrolling(BuildContext context) {
                   children: [
                     Expanded(
                       child: Container(
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color.fromRGBO(15, 48, 65, 1),
                           borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(10),
@@ -45,14 +45,14 @@ Widget newsScrolling(BuildContext context) {
                                   Expanded(
                                     child: Text(
                                       'Nuevo estado de alarma'.toUpperCase(),
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white, fontSize: 12.0),
                                     ),
                                   ),
                                 ],
                               ),
                               Row(
-                                children: [
+                                children: const [
                                   Expanded(
                                     child: Text(
                                       'All you need to know',
@@ -80,7 +80,7 @@ Widget newsScrolling(BuildContext context) {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
+            image: const DecorationImage(
                 image: AssetImage('assets/images/News2.jpg'),
                 fit: BoxFit.cover),
           ),
@@ -93,7 +93,7 @@ Widget newsScrolling(BuildContext context) {
                 children: [
                   Expanded(
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color.fromRGBO(15, 48, 65, 1),
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10),
@@ -110,14 +110,14 @@ Widget newsScrolling(BuildContext context) {
                                 Expanded(
                                   child: Text(
                                     'Nuevo estado de alarma'.toUpperCase(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 12.0),
                                   ),
                                 ),
                               ],
                             ),
                             Row(
-                              children: [
+                              children: const [
                                 Expanded(
                                   child: Text(
                                     'All you need to know',
@@ -144,7 +144,7 @@ Widget newsScrolling(BuildContext context) {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
-            image: DecorationImage(
+            image: const DecorationImage(
                 image: AssetImage('assets/slider_home/slider_3.png'),
                 fit: BoxFit.cover),
           ),
@@ -158,7 +158,7 @@ Widget newsScrolling(BuildContext context) {
                   Expanded(
                     child: Container(
                       height: 50,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Color.fromRGBO(15, 48, 65, 1),
                         borderRadius: BorderRadius.only(
                             bottomLeft: Radius.circular(10),
@@ -174,14 +174,14 @@ Widget newsScrolling(BuildContext context) {
                                 Expanded(
                                   child: Text(
                                     'Nuevo estado de alarma'.toUpperCase(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         color: Colors.white, fontSize: 12.0),
                                   ),
                                 ),
                               ],
                             ),
                             Row(
-                              children: [
+                              children: const [
                                 Expanded(
                                   child: Text(
                                     'All you need to know',

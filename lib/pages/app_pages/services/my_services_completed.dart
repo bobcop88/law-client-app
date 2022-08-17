@@ -1,8 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:new_client_app/pages/app_pages/services/widgets/builService_widget.dart';
-import 'package:new_client_app/pages/app_pages/test/profile1_test.dart';
-import 'package:new_client_app/pages/complete_profile/profile1_page.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 import 'package:new_client_app/utils/services/my_service_class.dart';
 
@@ -23,7 +21,7 @@ class _CompletedServicesState extends State<CompletedServices> {
           if (!snapshot.hasData) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Center(child: CircularProgressIndicator.adaptive()),
               ],
             );
@@ -36,7 +34,7 @@ class _CompletedServicesState extends State<CompletedServices> {
                     children: [
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Icon(
                             Icons.content_paste,
                             size: 30.0,

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -76,15 +75,14 @@ class _ProfileTwoState extends State<ProfileTwo> {
                   // ),
                   hintText: AppLocalizations.of(context)!.profile2_enter_dob,
                   focusedBorder: const OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide(
-                        color: const Color.fromRGBO(15, 48, 65, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 1.0,
                         style: BorderStyle.solid),
                   ),
                   enabledBorder: const OutlineInputBorder(
-                    borderRadius:
-                        const BorderRadius.all(const Radius.circular(15.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide(
                         color: Colors.grey,
                         width: 1.0,
@@ -114,15 +112,14 @@ class _ProfileTwoState extends State<ProfileTwo> {
                   hintText:
                       AppLocalizations.of(context)!.profile2_enter_country,
                   focusedBorder: const OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide(
-                        color: const Color.fromRGBO(15, 48, 65, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 1.0,
                         style: BorderStyle.solid),
                   ),
                   enabledBorder: const OutlineInputBorder(
-                    borderRadius:
-                        const BorderRadius.all(const Radius.circular(15.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide(
                         color: Colors.grey,
                         width: 1.0,
@@ -148,15 +145,14 @@ class _ProfileTwoState extends State<ProfileTwo> {
                   // ),
                   hintText: AppLocalizations.of(context)!.profile2_enter_id,
                   focusedBorder: const OutlineInputBorder(
-                    borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide(
-                        color: const Color.fromRGBO(15, 48, 65, 1),
+                        color: Color.fromRGBO(15, 48, 65, 1),
                         width: 1.0,
                         style: BorderStyle.solid),
                   ),
                   enabledBorder: const OutlineInputBorder(
-                    borderRadius:
-                        const BorderRadius.all(const Radius.circular(15.0)),
+                    borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide(
                         color: Colors.grey,
                         width: 1.0,
@@ -238,7 +234,7 @@ class _ProfileTwoState extends State<ProfileTwo> {
     if (dateOfBirth != null) {
       FocusScope.of(context).unfocus();
       final selectedDOB = DateFormat('dd/MM/yyyy').format(dateOfBirth);
-      dateOfBirthValue = dateOfBirth.millisecondsSinceEpoch;
+      dateOfBirthValue = dateOfBirth.microsecondsSinceEpoch;
       setState(() {
         _dateOfBirthController.value = TextEditingValue(text: selectedDOB);
       });
@@ -265,7 +261,7 @@ class _ProfileTwoState extends State<ProfileTwo> {
               const SizedBox(
                 height: 10.0,
               ),
-              Container(
+              SizedBox(
                 height: 500.0,
                 width: 300.0,
                 child: FutureBuilder<List<Country>>(
