@@ -20,12 +20,14 @@ class _RejectedWidgetState extends State<RejectedWidget> {
   UploadTask? uploadTask;
   String textUpload = 'Upload document';
   bool loadingDoc = false;
+  bool loadedDoc = false;
+  String docUrl = '';
   final user = FirebaseAuth.instance.currentUser!.uid;
   @override
   Widget build(BuildContext context) {
     return SimpleDialog(
       title: Row(
-        children: [
+        children: const [
           Expanded(
               child: Text(
             'We\u0027re sorry, your service has been rejected',
@@ -34,18 +36,24 @@ class _RejectedWidgetState extends State<RejectedWidget> {
         ],
       ),
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  Text('Reason'),
+        Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: const [
+                  Text(
+                    'Reason',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
-              const Divider(),
-              Row(
-                children: [
+            ),
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: const [
                   Expanded(
                     child: Text(
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id metus porttitor, porttitor est ut, aliquam nisi. Ut vestibulum cursus leo, eget facilisis felis facilisis eget. Phasellus neque ante, convallis mollis maximus sit amet, ornare ut ante. Praesent tincidunt sem sed urna gravida dapibus.',
@@ -54,24 +62,81 @@ class _RejectedWidgetState extends State<RejectedWidget> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  !loadingDoc
-                      ? TextButton(
-                          onPressed: _showSelectFile,
-                          child: Text(textUpload),
-                        )
-                      : Expanded(child: Text(textUpload)),
-                  Visibility(
-                    visible: loadingDoc,
-                    child: Center(
-                      child: CircularProgressIndicator.adaptive(),
-                    ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      !loadedDoc
+                          ? GestureDetector(
+                              onTap: _showSelectFile,
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.add_circle_outline,
+                                    size: 20.0,
+                                    color: Color.fromRGBO(250, 169, 22, 1),
+                                  ),
+                                  const SizedBox(
+                                    width: 5.0,
+                                  ),
+                                  Text(
+                                    textUpload,
+                                    style: TextStyle(
+                                      color: Color.fromRGBO(250, 169, 22, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Expanded(
+                              child: Text(
+                              textUpload,
+                              maxLines: 1,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                            )),
+                      Visibility(
+                        visible: loadingDoc,
+                        child: Center(
+                          child: CircularProgressIndicator.adaptive(),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    if (docUrl.isNotEmpty) {
+                      FirebaseStorage.instance.refFromURL(docUrl).delete();
+                    }
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    'Exit',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Submit new document'),
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );
@@ -100,10 +165,12 @@ class _RejectedWidgetState extends State<RejectedWidget> {
       setState(() {
         textUpload = pickedFile!.name;
         loadingDoc = false;
+        loadedDoc = true;
 
         // print('finished');
       });
     });
+    docUrl = await snapshot.ref.getDownloadURL();
 
     setState(() {
       uploadTask = null;
@@ -181,10 +248,11 @@ class _RejectedWidgetState extends State<RejectedWidget> {
     final snapshot = await uploadTask!.whenComplete(() {
       setState(() {
         textUpload = pickedFile!.name;
-        loadingDoc = false;
+        loadingDoc = true;
 
         // print('finished');
       });
     });
+    docUrl = await snapshot.ref.getDownloadURL();
   }
 }

@@ -49,6 +49,7 @@ class _StatusWidgetState extends State<StatusWidget> {
                       MaterialStateProperty.all(BorderSide(color: Colors.red)),
                 ),
                 onPressed: () => showDialog(
+                    // barrierDismissible: false,
                     context: context,
                     builder: (BuildContext context) {
                       return RejectedWidget(
