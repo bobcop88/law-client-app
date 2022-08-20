@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:new_client_app/pages/app_pages/services/preview_doc.dart';
+import 'package:new_client_app/pages/app_pages/services/services_pending/status_widget.dart';
 import 'package:new_client_app/utils/services/database_services.dart';
 import 'package:new_client_app/utils/services/my_service_class.dart';
 
 class ServicePendingPage extends StatefulWidget {
-  String serviceName;
-  String userId;
-  ServicePendingPage(
+  final String serviceName;
+  final String userId;
+  const ServicePendingPage(
       {Key? key, required this.serviceName, required this.userId})
       : super(key: key);
 
@@ -64,8 +65,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                             BorderRadius.circular(10)),
                                     child: const Icon(
                                       Icons.miscellaneous_services,
-                                      color:
-                                          Color.fromRGBO(250, 169, 22, 1),
+                                      color: Color.fromRGBO(250, 169, 22, 1),
                                       size: 30.0,
                                     ),
                                   ),
@@ -82,6 +82,15 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                             ),
                           ],
                         ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                      child: StatusWidget(
+                        status: service.currentState,
                       ),
                     ),
                     const SizedBox(
@@ -107,7 +116,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                   width: 5.0,
                                 ),
                                 const Text(
-                                  'Start Date: ',
+                                  'Requested on: ',
                                   style: TextStyle(
                                       fontSize: 12.0, color: Colors.grey),
                                 ),
@@ -193,8 +202,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                 children: [
                                   const Icon(
                                     Icons.short_text,
-                                    color:
-                                        Color.fromRGBO(250, 169, 22, 1),
+                                    color: Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
                                   ),
                                   const SizedBox(
@@ -244,8 +252,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                 children: [
                                   const Icon(
                                     Icons.short_text,
-                                    color:
-                                        Color.fromRGBO(250, 169, 22, 1),
+                                    color: Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
                                   ),
                                   const SizedBox(
@@ -266,8 +273,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                 children: [
                                   const Icon(
                                     Icons.short_text,
-                                    color:
-                                        Color.fromRGBO(250, 169, 22, 1),
+                                    color: Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
                                   ),
                                   const SizedBox(
@@ -317,8 +323,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                 children: [
                                   const Icon(
                                     Icons.short_text,
-                                    color:
-                                        Color.fromRGBO(250, 169, 22, 1),
+                                    color: Color.fromRGBO(250, 169, 22, 1),
                                     size: 15.0,
                                   ),
                                   const SizedBox(
@@ -397,52 +402,68 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                                     Text(service.doc1Status)),
                                           ],
                                         ),
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PreviewDoc(
+                                                              docUrl: service
+                                                                  .doc1Url,
+                                                            )));
+                                              },
+                                              child: Text('View Document'),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
                                   const SizedBox(
                                     width: 5.0,
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PreviewDoc(
-                                                        docUrl: service.doc1Url,
-                                                      )));
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey),
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              4,
-                                          height: 150,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: Image.network(
-                                              service.doc1Url,
-                                              scale: 0.5,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const Text(
-                                        'Document 1',
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 12.0),
-                                      ),
-                                    ],
-                                  ),
+                                  // Column(
+                                  //   crossAxisAlignment:
+                                  //       CrossAxisAlignment.center,
+                                  //   children: [
+                                  //     GestureDetector(
+                                  //       onTap: () {
+                                  //         Navigator.of(context).push(
+                                  //             MaterialPageRoute(
+                                  //                 builder: (context) =>
+                                  //                     PreviewDoc(
+                                  //                       docUrl: service.doc1Url,
+                                  //                     )));
+                                  //       },
+                                  //       child: Container(
+                                  //         decoration: BoxDecoration(
+                                  //             border: Border.all(
+                                  //                 color: Colors.grey),
+                                  //             borderRadius:
+                                  //                 BorderRadius.circular(5)),
+                                  //         width: MediaQuery.of(context)
+                                  //                 .size
+                                  //                 .width /
+                                  //             4,
+                                  //         height: 150,
+                                  //         child: Padding(
+                                  //           padding: const EdgeInsets.all(2.0),
+                                  //           child: Image.network(
+                                  //             service.doc1Url,
+                                  //             scale: 0.5,
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //     const Text(
+                                  //       'Document 1',
+                                  //       style: TextStyle(
+                                  //           color: Colors.grey, fontSize: 12.0),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                 ],
                               ),
                             ],
@@ -489,52 +510,68 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                                                     Text(service.doc2Status)),
                                           ],
                                         ),
+                                        Row(
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                Navigator.of(context).push(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            PreviewDoc(
+                                                              docUrl: service
+                                                                  .doc2Url,
+                                                            )));
+                                              },
+                                              child: Text('View Document'),
+                                            ),
+                                          ],
+                                        ),
                                       ],
                                     ),
                                   ),
                                   const SizedBox(
                                     width: 5.0,
                                   ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      PreviewDoc(
-                                                        docUrl: service.doc2Url,
-                                                      )));
-                                        },
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.grey),
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              4,
-                                          height: 150,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(2.0),
-                                            child: Image.network(
-                                              service.doc2Url,
-                                              scale: 0.5,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      const Text(
-                                        'Document 2',
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 12.0),
-                                      ),
-                                    ],
-                                  ),
+                                  // Column(
+                                  //   crossAxisAlignment:
+                                  //       CrossAxisAlignment.center,
+                                  //   children: [
+                                  //     GestureDetector(
+                                  //       onTap: () {
+                                  //         Navigator.of(context).push(
+                                  //             MaterialPageRoute(
+                                  //                 builder: (context) =>
+                                  //                     PreviewDoc(
+                                  //                       docUrl: service.doc2Url,
+                                  //                     )));
+                                  //       },
+                                  //       child: Container(
+                                  //         decoration: BoxDecoration(
+                                  //             border: Border.all(
+                                  //                 color: Colors.grey),
+                                  //             borderRadius:
+                                  //                 BorderRadius.circular(5)),
+                                  //         width: MediaQuery.of(context)
+                                  //                 .size
+                                  //                 .width /
+                                  //             4,
+                                  //         height: 150,
+                                  //         child: Padding(
+                                  //           padding: const EdgeInsets.all(2.0),
+                                  //           child: Image.network(
+                                  //             service.doc2Url,
+                                  //             scale: 0.5,
+                                  //           ),
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //     const Text(
+                                  //       'Document 2',
+                                  //       style: TextStyle(
+                                  //           color: Colors.grey, fontSize: 12.0),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                 ],
                               ),
                             ],

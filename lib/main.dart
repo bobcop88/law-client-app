@@ -100,7 +100,7 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+    // WidgetsBinding.instance.addObserver(this);
     initialization();
   }
 
@@ -108,17 +108,17 @@ class _MainPageState extends State<MainPage> with WidgetsBindingObserver {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    WidgetsBinding.instance.removeObserver(this);
+    // WidgetsBinding.instance.removeObserver(this);
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    super.didChangeAppLifecycleState(state);
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   super.didChangeAppLifecycleState(state);
 
-    if (state == AppLifecycleState.detached) {
-      FirebaseAuth.instance.signOut();
-    }
-  }
+  //   if (state == AppLifecycleState.detached) {
+  //     FirebaseAuth.instance.signOut();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {

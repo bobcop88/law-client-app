@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Expanded(
               child: Image.asset(
-                'assets/logo.png',
+                'assets/logo_neu.png',
                 height: 50.0,
               ),
             ),
@@ -133,6 +133,9 @@ class _HomePageState extends State<HomePage> {
               },
             ),
           ),
+          const SizedBox(
+            width: 5.0,
+          )
         ],
       ),
       backgroundColor: Theme.of(context).primaryColor,

@@ -34,18 +34,18 @@ class _RegisterPageState extends State<RegisterPage> {
         body: Column(
           children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [Expanded(child: Image.asset('assets/logo.png'))],
-                ),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: Padding(
+                    padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                    child: Image.asset('assets/logo_neu.png'),
+                  ))
+                ],
               ),
             ),
-            const SizedBox(
-              height: 10.0,
-            ),
             Expanded(
-              flex: 4,
+              flex: 3,
               child: Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,

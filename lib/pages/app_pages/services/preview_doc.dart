@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class PreviewDoc extends StatefulWidget {
-  String docUrl;
-  PreviewDoc({Key? key, required this.docUrl}) : super(key: key);
+  final String docUrl;
+  const PreviewDoc({Key? key, required this.docUrl}) : super(key: key);
 
   @override
   State<PreviewDoc> createState() => _PreviewDocState();
@@ -22,7 +23,10 @@ class _PreviewDocState extends State<PreviewDoc> {
           Expanded(
             child: Row(children: [
               Expanded(
-                child: Image.network(widget.docUrl),
+                child: WebView(
+                  initialUrl: widget.docUrl,
+                ),
+                // Image.network(widget.docUrl),
               )
             ]),
           ),
