@@ -32,6 +32,8 @@ class DatabaseService {
       creationDate: DateTime.now().microsecondsSinceEpoch,
       emailUser: FirebaseAuth.instance.currentUser!.email.toString(),
       userId: FirebaseAuth.instance.currentUser!.uid,
+      rejectedNeedDocument: false,
+      rejectedReason: ''
     );
 
     final json = myService.toJson();

@@ -3,7 +3,14 @@ import 'package:new_client_app/pages/app_pages/services/services_pending/rejecte
 
 class StatusWidget extends StatefulWidget {
   final String status;
-  const StatusWidget({Key? key, required this.status}) : super(key: key);
+  final String rejectedReason;
+  final bool rejectedNeedDoc;
+  const StatusWidget(
+      {Key? key,
+      required this.status,
+      required this.rejectedReason,
+      required this.rejectedNeedDoc})
+      : super(key: key);
 
   @override
   State<StatusWidget> createState() => _StatusWidgetState();
@@ -54,6 +61,8 @@ class _StatusWidgetState extends State<StatusWidget> {
                     builder: (BuildContext context) {
                       return RejectedWidget(
                         folder: 'document_requested',
+                        rejectedReason: widget.rejectedReason,
+                        rejectedNeedDoc: widget.rejectedNeedDoc,
                       );
                     }),
                 child: Text(

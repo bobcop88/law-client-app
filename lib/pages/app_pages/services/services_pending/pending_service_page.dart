@@ -91,6 +91,8 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: StatusWidget(
                         status: service.currentState,
+                        rejectedReason: service.rejectedReason,
+                        rejectedNeedDoc: service.rejectedNeedDocument,
                       ),
                     ),
                     const SizedBox(

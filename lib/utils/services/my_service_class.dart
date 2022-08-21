@@ -14,6 +14,8 @@ class UserMyServices {
   final String field1Status;
   final String field2Status;
   final String field3Status;
+  final String rejectedReason;
+  final bool rejectedNeedDocument;
 
   UserMyServices({
     required this.currentState,
@@ -31,6 +33,8 @@ class UserMyServices {
     required this.field1Status,
     required this.field2Status,
     required this.field3Status,
+    required this.rejectedReason,
+    required this.rejectedNeedDocument,
   });
 
   Map<String, dynamic> toJson() => {
@@ -49,25 +53,28 @@ class UserMyServices {
         'field1Status': field1Status,
         'field2Status': field2Status,
         'field3Status': field3Status,
+        'rejectedNeedDocument': rejectedNeedDocument,
+        'rejectedReason': rejectedReason,
       };
 
   static UserMyServices fromJson(Map<String, dynamic> json) => UserMyServices(
-        currentState: json['currentState'],
-        serviceName: json['serviceName'],
-        doc1Status: json['doc1Status'],
-        doc2Status: json['doc2Status'],
-        creationDate: json['creationDate'],
-        emailUser: json['emailUser'],
-        userId: json['userId'],
-        doc1Url: json['doc1Url'],
-        doc2Url: json['doc2Url'],
-        field1: json['field1'],
-        field2: json['field2'],
-        field3: json['field3'],
-        field1Status: json['field1Status'],
-        field2Status: json['field2Status'],
-        field3Status: json['field3Status'],
-      );
+      currentState: json['currentState'],
+      serviceName: json['serviceName'],
+      doc1Status: json['doc1Status'],
+      doc2Status: json['doc2Status'],
+      creationDate: json['creationDate'],
+      emailUser: json['emailUser'],
+      userId: json['userId'],
+      doc1Url: json['doc1Url'],
+      doc2Url: json['doc2Url'],
+      field1: json['field1'],
+      field2: json['field2'],
+      field3: json['field3'],
+      field1Status: json['field1Status'],
+      field2Status: json['field2Status'],
+      field3Status: json['field3Status'],
+      rejectedReason: json['rejectedReason'],
+      rejectedNeedDocument: json['rejectedNeedDocument']);
 }
 
 class BusinessServiceClass {

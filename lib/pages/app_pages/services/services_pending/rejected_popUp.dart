@@ -9,7 +9,14 @@ import 'package:image_picker/image_picker.dart';
 
 class RejectedWidget extends StatefulWidget {
   final String folder;
-  const RejectedWidget({Key? key, required this.folder}) : super(key: key);
+  final String rejectedReason;
+  final bool rejectedNeedDoc;
+  const RejectedWidget(
+      {Key? key,
+      required this.folder,
+      required this.rejectedReason,
+      required this.rejectedNeedDoc})
+      : super(key: key);
 
   @override
   State<RejectedWidget> createState() => _RejectedWidgetState();
@@ -53,10 +60,10 @@ class _RejectedWidgetState extends State<RejectedWidget> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                children: const [
+                children: [
                   Expanded(
                     child: Text(
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin id metus porttitor, porttitor est ut, aliquam nisi. Ut vestibulum cursus leo, eget facilisis felis facilisis eget. Phasellus neque ante, convallis mollis maximus sit amet, ornare ut ante. Praesent tincidunt sem sed urna gravida dapibus.',
+                      widget.rejectedReason,
                       style: TextStyle(fontSize: 12.0, color: Colors.grey),
                     ),
                   ),
