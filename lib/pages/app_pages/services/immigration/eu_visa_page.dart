@@ -544,7 +544,6 @@ class _EuVisaPageState extends State<EuVisaPage> {
 
     final XFile? photo = await ImagePicker().pickImage(
       source: ImageSource.camera,
-      // imageQuality: 2,
     );
     if (photo == null) return;
 

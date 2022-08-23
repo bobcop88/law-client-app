@@ -33,7 +33,8 @@ class DatabaseService {
       emailUser: FirebaseAuth.instance.currentUser!.email.toString(),
       userId: FirebaseAuth.instance.currentUser!.uid,
       rejectedNeedDocument: false,
-      rejectedReason: ''
+      rejectedReason: '',
+      rejectedUpdateClient: '',
     );
 
     final json = myService.toJson();
@@ -130,5 +131,12 @@ class DatabaseService {
       return service.exists ? false : true;
     });
     return check;
+  }
+
+  updateRejectedService(serviceName, newValue) {
+    return FirebaseFirestore.instance
+        .collection('clients/$uid/myServices/')
+        .doc(serviceName)
+        .update({'rejectedUpdateClient': newValue, 'currentState': 'Started'});
   }
 }

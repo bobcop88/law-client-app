@@ -16,26 +16,27 @@ class UserMyServices {
   final String field3Status;
   final String rejectedReason;
   final bool rejectedNeedDocument;
+  final String rejectedUpdateClient;
 
-  UserMyServices({
-    required this.currentState,
-    required this.serviceName,
-    required this.doc1Status,
-    required this.doc2Status,
-    required this.creationDate,
-    required this.emailUser,
-    required this.userId,
-    required this.doc1Url,
-    required this.doc2Url,
-    required this.field1,
-    required this.field2,
-    required this.field3,
-    required this.field1Status,
-    required this.field2Status,
-    required this.field3Status,
-    required this.rejectedReason,
-    required this.rejectedNeedDocument,
-  });
+  UserMyServices(
+      {required this.currentState,
+      required this.serviceName,
+      required this.doc1Status,
+      required this.doc2Status,
+      required this.creationDate,
+      required this.emailUser,
+      required this.userId,
+      required this.doc1Url,
+      required this.doc2Url,
+      required this.field1,
+      required this.field2,
+      required this.field3,
+      required this.field1Status,
+      required this.field2Status,
+      required this.field3Status,
+      required this.rejectedReason,
+      required this.rejectedNeedDocument,
+      required this.rejectedUpdateClient});
 
   Map<String, dynamic> toJson() => {
         'currentState': currentState,
@@ -55,6 +56,7 @@ class UserMyServices {
         'field3Status': field3Status,
         'rejectedNeedDocument': rejectedNeedDocument,
         'rejectedReason': rejectedReason,
+        'rejectedUpdateClient': rejectedUpdateClient,
       };
 
   static UserMyServices fromJson(Map<String, dynamic> json) => UserMyServices(
@@ -74,7 +76,8 @@ class UserMyServices {
       field2Status: json['field2Status'],
       field3Status: json['field3Status'],
       rejectedReason: json['rejectedReason'],
-      rejectedNeedDocument: json['rejectedNeedDocument']);
+      rejectedNeedDocument: json['rejectedNeedDocument'],
+      rejectedUpdateClient: json['rejectedUpdateClient']);
 }
 
 class BusinessServiceClass {

@@ -118,12 +118,14 @@ class _HomeFirstState extends State<HomeFirst> {
                                   ),
                                 ),
                               ),
-                              const Text(
-                                'Eu Visa',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17.0,
-                                    fontWeight: FontWeight.w500),
+                              const Expanded(
+                                child: Text(
+                                  'Eu Visa',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 17.0,
+                                      fontWeight: FontWeight.w500),
+                                ),
                               ),
                             ],
                           ),
@@ -159,12 +161,14 @@ class _HomeFirstState extends State<HomeFirst> {
                                 ),
                               ),
                             ),
-                            const Text(
-                              'Fiscal',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.w500),
+                            const Expanded(
+                              child: Text(
+                                'Fiscal',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ],
                         ),
@@ -203,12 +207,14 @@ class _HomeFirstState extends State<HomeFirst> {
                                 ),
                               ),
                             ),
-                            const Text(
-                              'Relocation',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.w500),
+                            const Expanded(
+                              child: Text(
+                                'Relocation',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ],
                         ),
@@ -243,12 +249,14 @@ class _HomeFirstState extends State<HomeFirst> {
                                 ),
                               ),
                             ),
-                            const Text(
-                              'Litigation',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17.0,
-                                  fontWeight: FontWeight.w500),
+                            const Expanded(
+                              child: Text(
+                                'Litigation',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17.0,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ],
                         ),

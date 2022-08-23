@@ -93,6 +93,7 @@ class _ServicePendingPageState extends State<ServicePendingPage> {
                         status: service.currentState,
                         rejectedReason: service.rejectedReason,
                         rejectedNeedDoc: service.rejectedNeedDocument,
+                        serviceName: service.serviceName,
                       ),
                     ),
                     const SizedBox(

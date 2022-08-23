@@ -5,11 +5,13 @@ class StatusWidget extends StatefulWidget {
   final String status;
   final String rejectedReason;
   final bool rejectedNeedDoc;
+  final String serviceName;
   const StatusWidget(
       {Key? key,
       required this.status,
       required this.rejectedReason,
-      required this.rejectedNeedDoc})
+      required this.rejectedNeedDoc,
+      required this.serviceName})
       : super(key: key);
 
   @override
@@ -55,16 +57,39 @@ class _StatusWidgetState extends State<StatusWidget> {
                   side:
                       MaterialStateProperty.all(BorderSide(color: Colors.red)),
                 ),
-                onPressed: () => showDialog(
-                    // barrierDismissible: false,
-                    context: context,
-                    builder: (BuildContext context) {
-                      return RejectedWidget(
-                        folder: 'document_requested',
-                        rejectedReason: widget.rejectedReason,
-                        rejectedNeedDoc: widget.rejectedNeedDoc,
-                      );
-                    }),
+                onPressed: () {
+                  Navigator.of(context).push(PageRouteBuilder(
+                      opaque: false,
+                      pageBuilder: (BuildContext context, _, __) =>
+                          RejectedWidget(
+                            folder: 'document_requested',
+                            rejectedReason: widget.rejectedReason,
+                            rejectedNeedDoc: widget.rejectedNeedDoc,
+                            serviceName: widget.serviceName,
+                          )));
+                },
+                // => showDialog(
+                //     barrierDismissible: false,
+                //     context: context,
+                //     builder: (BuildContext context) {
+                //       return Row(
+                //         children: [
+                //           Expanded(
+                //             child: Column(
+                //               children: [
+                //                 Expanded(
+                //                   child: RejectedWidget(
+                //                     folder: 'document_requested',
+                //                     rejectedReason: widget.rejectedReason,
+                //                     rejectedNeedDoc: widget.rejectedNeedDoc,
+                //                   ),
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //         ],
+                //       );
+                //     }),
                 child: Text(
                   'Rejected Reasons',
                   style: TextStyle(color: Colors.red),
