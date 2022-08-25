@@ -42,3 +42,29 @@ class EmailNotification {
         }));
   }
 }
+
+class DatabaseNotificationsUserToAdmin {
+  final String adminUser;
+  DatabaseNotificationsUserToAdmin({required this.adminUser});
+
+  Future sendNotificationToAdmin(
+      String id, String name, String email, String type, String details) async {
+    final notificationsUser = FirebaseFirestore.instance
+        .collection('adminUsers/$adminUser/notificationsFromUsers');
+    final date = DateTime.now().microsecondsSinceEpoch;
+    final notificationDoc = notificationsUser.doc(date.toString());
+
+    final notificationToAdmin = NotificationsUserToAdmin(
+      userId: id,
+      nameUser: name,
+      emailUser: email,
+      notificationType: type,
+      notificationDetails: details,
+      dateNotification: date,
+      isNew: true,
+    );
+
+    final json = notificationToAdmin.toJson();
+    await notificationDoc.set(json);
+  }
+}

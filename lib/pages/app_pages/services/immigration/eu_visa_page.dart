@@ -501,13 +501,13 @@ class _EuVisaPageState extends State<EuVisaPage> {
                   },
                   child: const Text('Select from Device'),
                 ),
-                CupertinoActionSheetAction(
-                  onPressed: () {
-                    cameraFile(doc, preview, folder, docUrl);
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Camera'),
-                ),
+                // CupertinoActionSheetAction(
+                //   onPressed: () {
+                //     cameraFile(doc, preview, folder, docUrl);
+                //     Navigator.of(context).pop();
+                //   },
+                //   child: const Text('Camera'),
+                // ),
               ],
             );
           });
@@ -525,56 +525,56 @@ class _EuVisaPageState extends State<EuVisaPage> {
                     Navigator.of(context).pop();
                   },
                 ),
-                ListTile(
-                  leading: const Icon(Icons.camera_alt),
-                  title: const Text('Camera'),
-                  onTap: () {
-                    cameraFile(doc, preview, folder, docUrl);
-                    Navigator.of(context).pop();
-                  },
-                ),
+                // ListTile(
+                //   leading: const Icon(Icons.camera_alt),
+                //   title: const Text('Camera'),
+                //   onTap: () {
+                //     cameraFile(doc, preview, folder, docUrl);
+                //     Navigator.of(context).pop();
+                //   },
+                // ),
               ],
             );
           });
     }
   }
 
-  Future cameraFile(fileName, previewFile, folder, docUrl) async {
-    // final ImagePicker picker = ImagePicker();
+  // Future cameraFile(fileName, previewFile, folder, docUrl) async {
+  //   // final ImagePicker picker = ImagePicker();
 
-    final XFile? photo = await ImagePicker().pickImage(
-      source: ImageSource.camera,
-    );
-    if (photo == null) return;
+  //   final XFile? photo = await ImagePicker().pickImage(
+  //     source: ImageSource.camera,
+  //   );
+  //   if (photo == null) return;
 
-    final path = '$user/euVisa/$folder/${photo.name}';
+  //   final path = '$user/euVisa/$folder/${photo.name}';
 
-    final ref = FirebaseStorage.instance.ref().child(path);
-    uploadTask = ref.putFile(File(photo.path));
-    final snapshot = await uploadTask!.whenComplete(() {
-      setState(() {
-        if (fileName == doc1Name) {
-          doc1Name = photo.name;
-          previewdoc1 = true;
-        }
-        if (fileName == doc2Name) {
-          doc2Name = photo.name;
-          previewdoc2 = true;
-        }
-        link = photo.path;
-        // print('finished');
-      });
-    });
-    final docUrlTemp = await snapshot.ref.getDownloadURL();
-    setState(() {
-      if (docUrl == doc1Url) {
-        doc1Url = docUrlTemp;
-      }
-      if (docUrl == doc2Url) {
-        doc2Url = docUrlTemp;
-      }
-    });
-  }
+  //   final ref = FirebaseStorage.instance.ref().child(path);
+  //   uploadTask = ref.putFile(File(photo.path));
+  //   final snapshot = await uploadTask!.whenComplete(() {
+  //     setState(() {
+  //       if (fileName == doc1Name) {
+  //         doc1Name = photo.name;
+  //         previewdoc1 = true;
+  //       }
+  //       if (fileName == doc2Name) {
+  //         doc2Name = photo.name;
+  //         previewdoc2 = true;
+  //       }
+  //       link = photo.path;
+  //       // print('finished');
+  //     });
+  //   });
+  //   final docUrlTemp = await snapshot.ref.getDownloadURL();
+  //   setState(() {
+  //     if (docUrl == doc1Url) {
+  //       doc1Url = docUrlTemp;
+  //     }
+  //     if (docUrl == doc2Url) {
+  //       doc2Url = docUrlTemp;
+  //     }
+  //   });
+  // }
 
   Future<bool?> showBackPopUp() {
     return showDialog<bool>(

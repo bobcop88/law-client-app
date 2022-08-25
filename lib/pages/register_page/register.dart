@@ -7,6 +7,7 @@ import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
 import 'package:new_client_app/pages/register_page/register_terms_page.dart';
 import 'package:new_client_app/utils/logs/database_logs.dart';
+import 'package:new_client_app/utils/notifications/database_notifications.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -499,7 +500,11 @@ class _RegisterPageState extends State<RegisterPage> {
       await FirebaseFirestore.instance
           .collection('clients')
           .doc(user.uid)
-          .set({'userCompleted': false});
+          .set({'userCompleted': false, 'id': user.uid, 'email': user.email});
+      DatabaseNotificationsUserToAdmin(
+              adminUser: 'rVu8FOvKC3aoBcOiq4FKinZY42p1')
+          .sendNotificationToAdmin(user.uid, user.email!, user.email!,
+              'Registration', 'New Registration - complete profile pending');
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString() ==

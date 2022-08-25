@@ -7,6 +7,7 @@ import 'package:new_client_app/pages/complete_profile/profile_class.dart';
 import 'package:new_client_app/pages/homepage/home_page.dart';
 import 'package:new_client_app/utils/errors/error_dialog.dart';
 import 'package:new_client_app/utils/logs/database_logs.dart';
+import 'package:new_client_app/utils/notifications/database_notifications.dart';
 import 'package:new_client_app/utils/users/database_users.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -344,6 +345,14 @@ class _ProfileTwoState extends State<ProfileTwo> {
       );
       DatabaseLogUser().createLogUser(
           id, 'client', email!, 'Completed profile user', 'Registration');
+      DatabaseNotificationsUserToAdmin(
+              adminUser: 'rVu8FOvKC3aoBcOiq4FKinZY42p1')
+          .sendNotificationToAdmin(
+              id,
+              ProfileDatas.firstName!,
+              email,
+              'Registration',
+              'Registration completed - Full profile available');
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString()),
@@ -360,4 +369,9 @@ class _ProfileTwoState extends State<ProfileTwo> {
       });
     });
   }
+
+  // firstUppercase(String name) {
+
+  //   name
+  // }
 }

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -230,10 +229,9 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                                                 'Enter information 1...',
                                                             focusedBorder:
                                                                 OutlineInputBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                          .all(
-                                                                      Radius.circular(
+                                                              borderRadius: BorderRadius
+                                                                  .all(Radius
+                                                                      .circular(
                                                                           5.0)),
                                                               borderSide: BorderSide(
                                                                   color: Color
@@ -343,11 +341,11 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                                                           5.0)),
                                                               borderSide: BorderSide(
                                                                   color: Color
-                                                                          .fromRGBO(
-                                                                      15,
-                                                                      48,
-                                                                      65,
-                                                                      1),
+                                                                      .fromRGBO(
+                                                                          15,
+                                                                          48,
+                                                                          65,
+                                                                          1),
                                                                   width: 1.0,
                                                                   style:
                                                                       BorderStyle
@@ -522,6 +520,16 @@ class _BusinessServiceOnePageState extends State<BusinessServiceOnePage> {
                                     'Request');
                                 EmailNotification().sendEmailServiceRequested(
                                     userName, 'Business Service 1', userEmail);
+
+                                DatabaseNotificationsUserToAdmin(
+                                        adminUser:
+                                            'rVu8FOvKC3aoBcOiq4FKinZY42p1')
+                                    .sendNotificationToAdmin(
+                                        user,
+                                        userName,
+                                        userEmail,
+                                        'Service',
+                                        'New Service requested: Business Service 1');
                               },
                               child: const Text('Send request'),
                             ),
