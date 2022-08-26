@@ -168,8 +168,10 @@ class _ProfileOneState extends State<ProfileOne> {
                             } else {
                               widget.controller.jumpToPage(2);
 
-                              ProfileDatas.firstName = _firstName.text;
-                              ProfileDatas.lastName = _lastName.text;
+                              ProfileDatas.firstName =
+                                  firstUpperCase(_firstName.text);
+                              ProfileDatas.lastName =
+                                  firstUpperCase(_lastName.text);
                               ProfileDatas.phoneNumber = _phoneNumber.text;
                             }
                           },
@@ -197,5 +199,16 @@ class _ProfileOneState extends State<ProfileOne> {
         ),
       ),
     );
+  }
+
+  firstUpperCase(name) {
+    List<String> list = name.split(' ');
+    List<String> listUpperCase = [];
+
+    list.forEach((element) {
+      return listUpperCase.add(element[0].toUpperCase() + element.substring(1));
+    });
+
+    return listUpperCase.join(' ');
   }
 }

@@ -28,64 +28,79 @@ class _ProfilePageState extends State<ProfilePage> {
           final userDetails = snapshot.data!;
           return Column(
             children: [
-              Container(
-                decoration: const BoxDecoration(
-                    color: Color.fromRGBO(15, 48, 65, 1),
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(50),
-                        bottomRight: Radius.circular(50))),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 8.0, bottom: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Column(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.white,
-                            radius: 25.0,
-                            child: Text(
-                              userDetails.firstName.split(' ')[0][0] +
-                                  userDetails.lastName.split(' ')[0][0],
-                              style: const TextStyle(
-                                  fontSize: 20.0,
-                                  color: Color.fromRGBO(15, 48, 65, 1)),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5.0,
-                          ),
-                          Text(
-                            '${userDetails.firstName} ${userDetails.lastName}',
-                            style: const TextStyle(
-                                fontSize: 25.0,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          const SizedBox(
-                            height: 5.0,
-                          ),
-                          Row(
+              Flexible(
+                child: Container(
+                  decoration: const BoxDecoration(
+                      color: Color.fromRGBO(15, 48, 65, 1),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(50),
+                          bottomRight: Radius.circular(50))),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Flexible(
+                          child: Column(
                             children: [
-                              const Text(
-                                'Registered on: ',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 10.0,
+                              const SizedBox(
+                                height: 8.0,
+                              ),
+                              CircleAvatar(
+                                backgroundColor: Colors.white,
+                                radius: 25.0,
+                                child: Text(
+                                  userDetails.firstName.split(' ')[0][0] +
+                                      userDetails.lastName.split(' ')[0][0],
+                                  style: const TextStyle(
+                                      fontSize: 20.0,
+                                      color: Color.fromRGBO(15, 48, 65, 1)),
                                 ),
                               ),
-                              Text(
-                                DateFormat('dd MMMM yyyy').format(
-                                    DateTime.fromMicrosecondsSinceEpoch(
-                                        snapshot.data!.dateCreation)),
-                                style: const TextStyle(
-                                    color: Colors.white, fontSize: 10.0),
+                              const SizedBox(
+                                height: 5.0,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Flexible(
+                                    child: Text(
+                                      '${userDetails.firstName} ${userDetails.lastName}',
+                                      style: const TextStyle(
+                                          fontSize: 25.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 5.0,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Registered on: ',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 10.0,
+                                    ),
+                                  ),
+                                  Text(
+                                    DateFormat('dd MMMM yyyy').format(
+                                        DateTime.fromMicrosecondsSinceEpoch(
+                                            snapshot.data!.dateCreation)),
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 10.0),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -96,6 +111,7 @@ class _ProfilePageState extends State<ProfilePage> {
               //   endIndent: 150,
               // ),
               Expanded(
+                flex: 3,
                 child: ListView(
                   padding: const EdgeInsets.all(10.0),
                   children: [

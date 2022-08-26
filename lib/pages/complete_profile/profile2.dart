@@ -369,9 +369,4 @@ class _ProfileTwoState extends State<ProfileTwo> {
       });
     });
   }
-
-  // firstUppercase(String name) {
-
-  //   name
-  // }
 }
