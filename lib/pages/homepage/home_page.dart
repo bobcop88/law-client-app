@@ -11,6 +11,7 @@ import 'package:new_client_app/pages/app_pages/my_services_main_page/my_services
 import 'package:new_client_app/pages/app_pages/notifications/notifications_page.dart';
 import 'package:new_client_app/pages/app_pages/profile_page/profile_page.dart';
 import 'package:new_client_app/pages/app_pages/services_main_page/services_page.dart';
+import 'package:new_client_app/pages/homepage/drawer/end_drawer_notifications.dart';
 import 'package:new_client_app/pages/homepage/drawer/nav_drawer.dart';
 import 'package:new_client_app/utils/errors/error_complete_profile.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
@@ -125,11 +126,12 @@ class _HomePageState extends State<HomePage> {
               icon: const Icon(CupertinoIcons.bell),
               color: const Color.fromRGBO(15, 48, 65, 1),
               onPressed: () {
+                scaffoldKey.currentState!.openEndDrawer();
                 updateNotificationBadge();
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => NotificationsPage(
-                          id: userId,
-                        )));
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (context) => NotificationsPage(
+                //           id: userId,
+                //         )));
               },
             ),
           ),
@@ -142,6 +144,7 @@ class _HomePageState extends State<HomePage> {
       body: Scaffold(
         key: scaffoldKey,
         drawer: const SideMenu(),
+        endDrawer: EndDrawerNotifications(id: userId),
         body: SafeArea(
           child: Row(
             children: [

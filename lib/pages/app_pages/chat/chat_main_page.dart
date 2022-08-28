@@ -80,8 +80,19 @@ class _ChatPageState extends State<ChatPage> {
                                               ? const Color.fromRGBO(
                                                   250, 169, 22, 1)
                                               : Colors.grey[300],
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
+                                          borderRadius: BorderRadius.only(
+                                              topLeft:
+                                                  const Radius.circular(10),
+                                              topRight:
+                                                  const Radius.circular(10),
+                                              bottomLeft: message.sender ==
+                                                      widget.id
+                                                  ? const Radius.circular(10)
+                                                  : Radius.zero,
+                                              bottomRight: message.sender ==
+                                                      widget.id
+                                                  ? Radius.zero
+                                                  : const Radius.circular(10))),
                                       child: Padding(
                                         padding: const EdgeInsets.all(12.0),
                                         child: Column(

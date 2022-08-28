@@ -34,10 +34,11 @@ class _RejectedWidgetState extends State<RejectedWidget> {
   String docUrl = '';
   final textController = TextEditingController();
   final user = FirebaseAuth.instance.currentUser!.uid;
+  bool errorMessageVisible = true;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
+      onTap: (() => FocusScope.of(context).unfocus()),
       child: Scaffold(
         backgroundColor: Colors.white.withOpacity(0.95),
         body: SafeArea(
@@ -70,24 +71,44 @@ class _RejectedWidgetState extends State<RejectedWidget> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
-                            children: const [
-                              Text(
-                                'Reason',
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Divider(),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
                             children: [
-                              Expanded(
-                                child: Text(
-                                  widget.rejectedReason,
-                                  style: const TextStyle(
-                                      fontSize: 12.0, color: Colors.grey),
+                              Flexible(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                'Why has been the service rejected?',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const Divider(),
+                                        Row(
+                                          children: [
+                                            Flexible(
+                                              child: Text(
+                                                widget.rejectedReason,
+                                                style: const TextStyle(
+                                                    fontSize: 12.0,
+                                                    color: Colors.grey),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
@@ -116,6 +137,13 @@ class _RejectedWidgetState extends State<RejectedWidget> {
                             ),
                             ElevatedButton(
                               onPressed: () {
+                                if (textController.text.trim().isEmpty) {
+                                  setState(() {
+                                    errorMessageVisible = true;
+                                  });
+                                  print(errorMessageVisible);
+                                  return;
+                                }
                                 Navigator.of(context).pop();
                                 DatabaseService(uid: user)
                                     .updateRejectedService(
@@ -138,130 +166,6 @@ class _RejectedWidgetState extends State<RejectedWidget> {
         ),
       ),
     );
-    // SimpleDialog(
-    //   title: Row(
-    //     mainAxisSize: MainAxisSize.max,
-    //     children: const [
-    //       Expanded(
-    //           child: Text(
-    //         'We\u0027re sorry, your service has been rejected',
-    //         textAlign: TextAlign.center,
-    //       ))
-    //     ],
-    //   ),
-    //   children: [
-    //     Row(
-    //       mainAxisSize: MainAxisSize.max,
-    //       children: [
-    //         Column(
-    //           mainAxisSize: MainAxisSize.max,
-    //           children: [
-    //             Padding(
-    //               padding: const EdgeInsets.all(8.0),
-    //               child: Row(
-    //                 children: const [
-    //                   Text(
-    //                     'Reason',
-    //                     style: TextStyle(fontWeight: FontWeight.bold),
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //             const Divider(),
-    //             Padding(
-    //               padding: const EdgeInsets.all(8.0),
-    //               child: Row(
-    //                 children: [
-    //                   Expanded(
-    //                     child: Text(
-    //                       widget.rejectedReason,
-    //                       style: const TextStyle(
-    //                           fontSize: 12.0, color: Colors.grey),
-    //                     ),
-    //                   ),
-    //                 ],
-    //               ),
-    //             ),
-    //             widget.rejectedNeedDoc ? uploadDoc() : getText(),
-    //             // Padding(
-    //             //   padding: const EdgeInsets.all(8.0),
-    //             //   child: Container(
-    //             //     decoration: BoxDecoration(
-    //             //         border: Border.all(color: Colors.grey),
-    //             //         borderRadius: BorderRadius.circular(10)),
-    //             //     child: Padding(
-    //             //       padding: const EdgeInsets.all(12.0),
-    //             //       child: Row(
-    //             //         mainAxisSize: MainAxisSize.min,
-    //             //         mainAxisAlignment: MainAxisAlignment.center,
-    //             //         children: [
-    //             //           !loadedDoc
-    //             //               ? GestureDetector(
-    //             //                   onTap: _showSelectFile,
-    //             //                   child: Row(
-    //             //                     children: [
-    //             //                       Icon(
-    //             //                         Icons.add_circle_outline,
-    //             //                         size: 20.0,
-    //             //                         color: Color.fromRGBO(250, 169, 22, 1),
-    //             //                       ),
-    //             //                       const SizedBox(
-    //             //                         width: 5.0,
-    //             //                       ),
-    //             //                       Text(
-    //             //                         textUpload,
-    //             //                         style: TextStyle(
-    //             //                           color: Color.fromRGBO(250, 169, 22, 1),
-    //             //                         ),
-    //             //                       ),
-    //             //                     ],
-    //             //                   ),
-    //             //                 )
-    //             //               : Expanded(
-    //             //                   child: Text(
-    //             //                   textUpload,
-    //             //                   maxLines: 1,
-    //             //                   textAlign: TextAlign.center,
-    //             //                   overflow: TextOverflow.ellipsis,
-    //             //                 )),
-    //             //           Visibility(
-    //             //             visible: loadingDoc,
-    //             //             child: Center(
-    //             //               child: CircularProgressIndicator.adaptive(),
-    //             //             ),
-    //             //           ),
-    //             //         ],
-    //             //       ),
-    //             //     ),
-    //             //   ),
-    //             // ),
-    //             Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceAround,
-    //               children: [
-    //                 TextButton(
-    //                   onPressed: () {
-    //                     if (docUrl.isNotEmpty) {
-    //                       FirebaseStorage.instance.refFromURL(docUrl).delete();
-    //                     }
-    //                     Navigator.of(context).pop();
-    //                   },
-    //                   child: const Text(
-    //                     'Exit',
-    //                     style: TextStyle(color: Colors.black),
-    //                   ),
-    //                 ),
-    //                 ElevatedButton(
-    //                   onPressed: () {},
-    //                   child: const Text('Submit new document'),
-    //                 ),
-    //               ],
-    //             ),
-    //           ],
-    //         ),
-    //       ],
-    //     ),
-    //   ],
-    // );
   }
 
   Future selectFile() async {
@@ -434,37 +338,65 @@ class _RejectedWidgetState extends State<RejectedWidget> {
   }
 
   Widget getText() {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            children: [
-              Text(
-                'Enter the required information',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-        ),
-        Row(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+            border: Border.all(), borderRadius: BorderRadius.circular(10)),
+        child: Column(
           children: [
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  controller: textController,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      isDense: true,
-                      hintText: 'Enter the required text',
-                      contentPadding: EdgeInsets.all(8)),
-                ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Text(
+                    'Please enter the details required: ',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      onChanged: (value) {
+                        setState(() {
+                          errorMessageVisible = false;
+                        });
+                      },
+                      style: TextStyle(fontSize: 12.0),
+                      controller: textController,
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          isDense: true,
+                          hintText: 'Enter the required text',
+                          contentPadding: EdgeInsets.all(12)),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            !errorMessageVisible
+                ? Container()
+                : Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: Text(
+                            'Please complete the details in order to submit the review of your service',
+                            style: TextStyle(color: Colors.red, fontSize: 12.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
           ],
         ),
-      ],
+      ),
     );
   }
 }

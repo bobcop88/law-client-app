@@ -4,24 +4,20 @@ import 'package:new_client_app/pages/app_pages/services/services_pending/pending
 import 'package:new_client_app/utils/notifications/database_notifications.dart';
 import 'package:new_client_app/utils/notifications/notification_class.dart';
 
-class NotificationsPage extends StatefulWidget {
+class EndDrawerNotifications extends StatefulWidget {
   final String id;
-  const NotificationsPage({Key? key, required this.id}) : super(key: key);
+  const EndDrawerNotifications({Key? key, required this.id}) : super(key: key);
 
   @override
-  State<NotificationsPage> createState() => _NotificationsPageState();
+  State<EndDrawerNotifications> createState() => _EndDrawerNotificationsState();
 }
 
-class _NotificationsPageState extends State<NotificationsPage> {
+class _EndDrawerNotificationsState extends State<EndDrawerNotifications> {
   bool notificationVisible = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(15, 48, 65, 1),
-        title: const Text('Notifications'),
-      ),
-      body: StreamBuilder<List<NotificationAdminDetails>>(
+    return Drawer(
+      child: StreamBuilder<List<NotificationAdminDetails>>(
         stream: DatabaseNotifications().readNotifications(widget.id),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -62,6 +58,20 @@ class _NotificationsPageState extends State<NotificationsPage> {
             final notification = snapshot.data!;
             return Column(
               children: [
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Notifications',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
+                // const SizedBox(
+                //   height: 10.0,
+                // ),
                 Expanded(
                   child: ListView(
                     children: notification.map(buildNotification).toList(),

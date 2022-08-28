@@ -277,7 +277,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       'Reset Password',
                       style: TextStyle(
                         color: Color.fromRGBO(15, 48, 65, 1),
-                        decoration: TextDecoration.underline,
+                        // decoration: TextDecoration.underline,
                       ),
                     ),
                   ),

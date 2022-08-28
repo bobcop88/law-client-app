@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_client_app/pages/app_pages/services/services_pending/rejected_popUp.dart';
+import 'package:new_client_app/pages/app_pages/services/services_pending/rejected_request_page.dart';
 
 class StatusWidget extends StatefulWidget {
   final String status;
