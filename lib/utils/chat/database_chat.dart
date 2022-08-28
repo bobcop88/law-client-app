@@ -41,4 +41,14 @@ class DatabaseChat {
             .map((doc) => ChatMessage.fromJson(doc.data()))
             .toList());
   }
+
+  Stream<List<ChatMessageGeneral>> newChatMessages(id) {
+    return FirebaseFirestore.instance
+        .collection('chats/$id/messages')
+        .where('senderLastMessage', isEqualTo: id)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => ChatMessageGeneral.fromJson(doc.data()))
+            .toList());
+  }
 }

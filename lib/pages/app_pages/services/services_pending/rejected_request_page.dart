@@ -75,10 +75,13 @@ class _RejectedWidgetState extends State<RejectedWidget> {
                               Flexible(
                                 child: Container(
                                   decoration: BoxDecoration(
-                                      border: Border.all(),
+                                      border: Border.all(
+                                          color:
+                                              Color.fromRGBO(250, 169, 22, 1)),
                                       borderRadius: BorderRadius.circular(10)),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        8.0, 20.0, 8.0, 20.0),
                                     child: Column(
                                       children: [
                                         Row(
@@ -141,7 +144,6 @@ class _RejectedWidgetState extends State<RejectedWidget> {
                                   setState(() {
                                     errorMessageVisible = true;
                                   });
-                                  print(errorMessageVisible);
                                   return;
                                 }
                                 Navigator.of(context).pop();
@@ -342,59 +344,64 @@ class _RejectedWidgetState extends State<RejectedWidget> {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-            border: Border.all(), borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+            border: Border.all(color: Color.fromRGBO(250, 169, 22, 1)),
+            borderRadius: BorderRadius.circular(10)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Please enter the details required: ',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
                 children: [
-                  Text(
-                    'Please enter the details required: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            errorMessageVisible = false;
+                          });
+                        },
+                        style: TextStyle(fontSize: 12.0),
+                        controller: textController,
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            isDense: true,
+                            hintText: 'Enter the required text',
+                            contentPadding: EdgeInsets.all(12)),
+                      ),
+                    ),
                   ),
                 ],
               ),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      onChanged: (value) {
-                        setState(() {
-                          errorMessageVisible = false;
-                        });
-                      },
-                      style: TextStyle(fontSize: 12.0),
-                      controller: textController,
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          isDense: true,
-                          hintText: 'Enter the required text',
-                          contentPadding: EdgeInsets.all(12)),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            !errorMessageVisible
-                ? Container()
-                : Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            'Please complete the details in order to submit the review of your service',
-                            style: TextStyle(color: Colors.red, fontSize: 12.0),
+              !errorMessageVisible
+                  ? Container()
+                  : Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              'Please complete the details in order to submit the review of your service',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 12.0),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  )
-          ],
+                        ],
+                      ),
+                    )
+            ],
+          ),
         ),
       ),
     );

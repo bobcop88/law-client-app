@@ -13,6 +13,8 @@ import 'package:new_client_app/pages/app_pages/profile_page/profile_page.dart';
 import 'package:new_client_app/pages/app_pages/services_main_page/services_page.dart';
 import 'package:new_client_app/pages/homepage/drawer/end_drawer_notifications.dart';
 import 'package:new_client_app/pages/homepage/drawer/nav_drawer.dart';
+import 'package:new_client_app/utils/chat/chat_class.dart';
+import 'package:new_client_app/utils/chat/database_chat.dart';
 import 'package:new_client_app/utils/errors/error_complete_profile.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
@@ -39,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     checkUserComplete();
     timer = Timer.periodic(const Duration(seconds: 4), (_) {
-      checkNewChat();
+      // checkNewChat();
       checkNewNotification(userId);
     });
   }
@@ -97,24 +99,49 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         actions: [
-          Badge(
-            badgeContent: const Text(
-              '1',
-              style: TextStyle(fontSize: 8, color: Colors.white),
-            ),
-            position: BadgePosition.topEnd(top: 10, end: 10),
-            showBadge: showNewChatMessage ? true : false,
-            child: IconButton(
-              icon: const Icon(CupertinoIcons.chat_bubble_2),
-              color: const Color.fromRGBO(15, 48, 65, 1),
-              onPressed: () {
-                updateLastMessage();
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => ChatPage(id: userId)));
-                checkNewChat();
-              },
-            ),
-          ),
+          StreamBuilder<List<ChatMessageGeneral>>(
+              stream: DatabaseChat().newChatMessages(userId),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Container();
+                } else {
+                  final chats = snapshot.data!;
+
+                  chats.forEach(
+                    (element) {
+                      if (element.isRead == false) {
+                        setState(() {
+                          showNewChatMessage = true;
+                        });
+                      }
+                    },
+                  );
+
+                  return Badge(
+                    badgeContent: const Text(
+                      '1',
+                      style: TextStyle(fontSize: 8, color: Colors.white),
+                    ),
+                    position: BadgePosition.topEnd(top: 10, end: 10),
+                    showBadge: showNewChatMessage ? true : false,
+                    child: IconButton(
+                      icon: const Icon(CupertinoIcons.chat_bubble_2),
+                      color: const Color.fromRGBO(15, 48, 65, 1),
+                      onPressed: () {
+                        updateLastMessage();
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ChatPage(id: userId)));
+                        if (showNewChatMessage == true) {
+                          setState(() {
+                            showNewChatMessage = false;
+                          });
+                        }
+                        // checkNewChat();
+                      },
+                    ),
+                  );
+                }
+              }),
           Badge(
             badgeContent: const Text(
               '1',
