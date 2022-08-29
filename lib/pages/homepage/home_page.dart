@@ -16,6 +16,8 @@ import 'package:new_client_app/pages/homepage/drawer/nav_drawer.dart';
 import 'package:new_client_app/utils/chat/chat_class.dart';
 import 'package:new_client_app/utils/chat/database_chat.dart';
 import 'package:new_client_app/utils/errors/error_complete_profile.dart';
+import 'package:new_client_app/utils/notifications/database_notifications.dart';
+import 'package:new_client_app/utils/notifications/notification_class.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,10 +42,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     checkUserComplete();
-    timer = Timer.periodic(const Duration(seconds: 4), (_) {
-      // checkNewChat();
-      checkNewNotification(userId);
-    });
+    // timer = Timer.periodic(const Duration(seconds: 4), (_) {
+    //   // checkNewChat();
+    //   checkNewNotification(userId);
+    // });
   }
 
   // void checkNew() {
@@ -99,23 +101,31 @@ class _HomePageState extends State<HomePage> {
           },
         ),
         actions: [
-          StreamBuilder<List<ChatMessageGeneral>>(
+          StreamBuilder<DocumentSnapshot>(
               stream: DatabaseChat().newChatMessages(userId),
-              builder: (context, snapshot) {
+              builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                 if (!snapshot.hasData) {
-                  return Container();
+                  return IconButton(
+                    icon: const Icon(CupertinoIcons.chat_bubble_2),
+                    color: const Color.fromRGBO(15, 48, 65, 1),
+                    onPressed: () {
+                      updateLastMessage();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => ChatPage(id: userId)));
+                      if (showNewChatMessage == true) {
+                        setState(() {
+                          showNewChatMessage = false;
+                        });
+                      }
+                      // checkNewChat();
+                    },
+                  );
                 } else {
                   final chats = snapshot.data!;
 
-                  chats.forEach(
-                    (element) {
-                      if (element.isRead == false) {
-                        setState(() {
-                          showNewChatMessage = true;
-                        });
-                      }
-                    },
-                  );
+                  if (chats['isRead'] == false) {
+                    showNewChatMessage = true;
+                  }
 
                   return Badge(
                     badgeContent: const Text(
@@ -142,26 +152,62 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
               }),
-          Badge(
-            badgeContent: const Text(
-              '1',
-              style: TextStyle(fontSize: 8, color: Colors.white),
-            ),
-            position: BadgePosition.topEnd(top: 10, end: 10),
-            showBadge: showNotificationBadge,
-            child: IconButton(
-              icon: const Icon(CupertinoIcons.bell),
-              color: const Color.fromRGBO(15, 48, 65, 1),
-              onPressed: () {
-                scaffoldKey.currentState!.openEndDrawer();
-                updateNotificationBadge();
-                // Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => NotificationsPage(
-                //           id: userId,
-                //         )));
-              },
-            ),
-          ),
+          StreamBuilder<List<NotificationAdminDetails>>(
+              stream: DatabaseNotifications().newNotificationsFromAdmin(userId),
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  print('here');
+                  return Badge(
+                    badgeContent: const Text(
+                      '1',
+                      style: TextStyle(fontSize: 8, color: Colors.white),
+                    ),
+                    position: BadgePosition.topEnd(top: 10, end: 10),
+                    showBadge: showNotificationBadge,
+                    child: IconButton(
+                      icon: const Icon(CupertinoIcons.bell),
+                      color: const Color.fromRGBO(15, 48, 65, 1),
+                      onPressed: () {
+                        scaffoldKey.currentState!.openEndDrawer();
+                        updateNotificationBadge();
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => NotificationsPage(
+                        //           id: userId,
+                        //         )));
+                      },
+                    ),
+                  );
+                } else {
+                  final notifications = snapshot.data!;
+
+                  for (var element in notifications) {
+                    if (element.isNew == true) {
+                      showNotificationBadge = true;
+                    }
+                  }
+
+                  return Badge(
+                    badgeContent: const Text(
+                      '1',
+                      style: TextStyle(fontSize: 8, color: Colors.white),
+                    ),
+                    position: BadgePosition.topEnd(top: 10, end: 10),
+                    showBadge: showNotificationBadge,
+                    child: IconButton(
+                      icon: const Icon(CupertinoIcons.bell),
+                      color: const Color.fromRGBO(15, 48, 65, 1),
+                      onPressed: () {
+                        scaffoldKey.currentState!.openEndDrawer();
+                        updateNotificationBadge();
+                        // Navigator.of(context).push(MaterialPageRoute(
+                        //     builder: (context) => NotificationsPage(
+                        //           id: userId,
+                        //         )));
+                      },
+                    ),
+                  );
+                }
+              }),
           const SizedBox(
             width: 5.0,
           )
@@ -246,36 +292,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void checkNewChat() async {
-    final chat =
-        FirebaseFirestore.instance.collection('chats').doc(userId).get();
+  // void checkNewChat() async {
+  //   final chat =
+  //       FirebaseFirestore.instance.collection('chats').doc(userId).get();
 
-    if (await chat.then((value) => value.exists) == true) {
-      FirebaseFirestore.instance
-          .collection('chats')
-          .doc(userId)
-          .get()
-          .then((value) {
-        if (value.data()!['isRead'] == false &&
-            value.data()!['senderLastMessage'] != userId) {
-          setState(() {
-            if (!mounted) return;
-            showNewChatMessage = true;
-          });
-        } else {
-          setState(() {
-            if (!mounted) return;
-            showNewChatMessage = false;
-          });
-        }
-      });
-    } else {
-      FirebaseFirestore.instance
-          .collection('chats')
-          .doc(userId)
-          .set({'started': true});
-    }
-  }
+  //   if (await chat.then((value) => value.exists) == true) {
+  //     FirebaseFirestore.instance
+  //         .collection('chats')
+  //         .doc(userId)
+  //         .get()
+  //         .then((value) {
+  //       if (value.data()!['isRead'] == false &&
+  //           value.data()!['senderLastMessage'] != userId) {
+  //         setState(() {
+  //           if (!mounted) return;
+  //           showNewChatMessage = true;
+  //         });
+  //       } else {
+  //         setState(() {
+  //           if (!mounted) return;
+  //           showNewChatMessage = false;
+  //         });
+  //       }
+  //     });
+  //   } else {
+  //     FirebaseFirestore.instance
+  //         .collection('chats')
+  //         .doc(userId)
+  //         .set({'started': true});
+  //   }
+  // }
 
   void updateLastMessage() {
     FirebaseFirestore.instance
@@ -315,6 +361,9 @@ class _HomePageState extends State<HomePage> {
         .get();
     collection.docs.forEach((element) {
       element.reference.update({'isNew': false});
+    });
+    setState(() {
+      showNotificationBadge = false;
     });
   }
 

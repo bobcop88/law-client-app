@@ -505,6 +505,14 @@ class _RegisterPageState extends State<RegisterPage> {
               adminUser: 'rVu8FOvKC3aoBcOiq4FKinZY42p1')
           .sendNotificationToAdmin(user.uid, user.email!, user.email!,
               'Registration', 'New Registration - complete profile pending');
+      FirebaseFirestore.instance
+          .collection('chats')
+          .doc(user.uid)
+          .set({'started': true, 'isRead': true});
+      FirebaseFirestore.instance
+          .collection('clients/${user.uid}/notificationsFromAdmin')
+          .doc('first')
+          .set({'isNew': true, 'notificationDate': 123});
     } on FirebaseAuthException catch (e) {
       final snackBar = SnackBar(
         content: Text(e.message.toString() ==

@@ -20,6 +20,16 @@ class DatabaseNotifications {
         .doc(notificationId)
         .delete();
   }
+
+  Stream<List<NotificationAdminDetails>> newNotificationsFromAdmin(id) {
+    return FirebaseFirestore.instance
+        .collection('clients/$id/notificationsFromAdmin')
+        .orderBy('notificationDate', descending: true)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => NotificationAdminDetails.fromJson(doc.data()))
+            .toList());
+  }
 }
 
 class EmailNotification {

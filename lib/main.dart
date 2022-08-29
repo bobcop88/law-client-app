@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Inscale Media',
       navigatorKey: navigatorKey,
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color.fromRGBO(242, 242, 242, 1),
         elevatedButtonTheme: ElevatedButtonThemeData(
