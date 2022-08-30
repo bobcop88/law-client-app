@@ -1,9 +1,13 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:new_client_app/main.dart';
 import 'package:new_client_app/pages/complete_profile/complete_profile_page.dart';
 import 'package:new_client_app/pages/login_page/login_page.dart';
+import 'package:new_client_app/pages/register_page/register.dart';
 
 class VerifyEmailPage extends StatefulWidget {
   const VerifyEmailPage({Key? key}) : super(key: key);
@@ -216,9 +220,12 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
                         children: [
                           TextButton(
                             onPressed: () async {
+                              timer?.cancel();
                               Navigator.of(context).pop();
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const LoginPage()));
+                                  builder: (context) => const MainPage()));
+
+                              deleteRecordsDatabase(user);
                               await FirebaseAuth.instance.currentUser!.delete();
                             },
                             child: const Text(
@@ -308,5 +315,13 @@ class _VerifyEmailPageState extends State<VerifyEmailPage> {
             ],
           );
         });
+  }
+
+  deleteRecordsDatabase(uid) {
+    FirebaseFirestore.instance
+        .collection('clients/$uid/notificationsFromAdmin')
+        .doc('first')
+        .delete();
+    FirebaseFirestore.instance.collection('clients').doc(uid).delete();
   }
 }

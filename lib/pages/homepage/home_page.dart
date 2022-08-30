@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    timer?.cancel();
+    // timer?.cancel();
     super.dispose();
   }
 
@@ -110,12 +110,12 @@ class _HomePageState extends State<HomePage> {
                     color: const Color.fromRGBO(15, 48, 65, 1),
                     onPressed: () {
                       updateLastMessage();
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => ChatPage(id: userId)));
                       if (showNewChatMessage == true) {
                         setState(() {
                           showNewChatMessage = false;
                         });
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => ChatPage(id: userId)));
                       }
                       // checkNewChat();
                     },
@@ -123,7 +123,8 @@ class _HomePageState extends State<HomePage> {
                 } else {
                   final chats = snapshot.data!;
 
-                  if (chats['isRead'] == false) {
+                  if (chats['isRead'] == false &&
+                      chats['senderLastMessage'] != userId) {
                     showNewChatMessage = true;
                   }
 
@@ -142,9 +143,7 @@ class _HomePageState extends State<HomePage> {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => ChatPage(id: userId)));
                         if (showNewChatMessage == true) {
-                          setState(() {
-                            showNewChatMessage = false;
-                          });
+                          showNewChatMessage = false;
                         }
                         // checkNewChat();
                       },
@@ -156,7 +155,6 @@ class _HomePageState extends State<HomePage> {
               stream: DatabaseNotifications().newNotificationsFromAdmin(userId),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  print('here');
                   return Badge(
                     badgeContent: const Text(
                       '1',
@@ -168,8 +166,8 @@ class _HomePageState extends State<HomePage> {
                       icon: const Icon(CupertinoIcons.bell),
                       color: const Color.fromRGBO(15, 48, 65, 1),
                       onPressed: () {
+                        // updateNotificationBadge();
                         scaffoldKey.currentState!.openEndDrawer();
-                        updateNotificationBadge();
                         // Navigator.of(context).push(MaterialPageRoute(
                         //     builder: (context) => NotificationsPage(
                         //           id: userId,
@@ -179,12 +177,20 @@ class _HomePageState extends State<HomePage> {
                   );
                 } else {
                   final notifications = snapshot.data!;
+                  final newNotification =
+                      notifications.any((element) => element.isNew == true);
 
-                  for (var element in notifications) {
-                    if (element.isNew == true) {
-                      showNotificationBadge = true;
-                    }
+                  if (newNotification) {
+                    showNotificationBadge = true;
                   }
+
+                  // for (var element in notifications) {
+                  //   if (element.isNew == true) {
+                  //     showNotificationBadge = true;
+                  //   } else {
+                  //     showNotificationBadge = false;
+                  //   }
+                  // }
 
                   return Badge(
                     badgeContent: const Text(
@@ -197,8 +203,12 @@ class _HomePageState extends State<HomePage> {
                       icon: const Icon(CupertinoIcons.bell),
                       color: const Color.fromRGBO(15, 48, 65, 1),
                       onPressed: () {
-                        scaffoldKey.currentState!.openEndDrawer();
                         updateNotificationBadge();
+
+                        if (showNotificationBadge == true) {
+                          showNotificationBadge = false;
+                        }
+                        scaffoldKey.currentState!.openEndDrawer();
                         // Navigator.of(context).push(MaterialPageRoute(
                         //     builder: (context) => NotificationsPage(
                         //           id: userId,
@@ -330,41 +340,41 @@ class _HomePageState extends State<HomePage> {
         .update({'isRead': true});
   }
 
-  checkNewNotification(userId) async {
-    final collection = await FirebaseFirestore.instance
-        .collection('clients/$userId/notificationsFromAdmin')
-        .get();
-    if (collection.docs.isEmpty) {
-      if (!mounted) return;
-      setState(() {
-        showNotificationBadge = false;
-      });
-    }
-    collection.docs.forEach((element) {
-      if (element.data()['isNew'] == true) {
-        if (!mounted) return;
-        setState(() {
-          showNotificationBadge = true;
-        });
-      } else {
-        if (!mounted) return;
-        setState(() {
-          showNotificationBadge = false;
-        });
-      }
-    });
-  }
+  // checkNewNotification(userId) async {
+  //   final collection = await FirebaseFirestore.instance
+  //       .collection('clients/$userId/notificationsFromAdmin')
+  //       .get();
+  //   if (collection.docs.isEmpty) {
+  //     if (!mounted) return;
+  //     setState(() {
+  //       showNotificationBadge = false;
+  //     });
+  //   }
+  //   collection.docs.forEach((element) {
+  //     if (element.data()['isNew'] == true) {
+  //       if (!mounted) return;
+  //       setState(() {
+  //         showNotificationBadge = true;
+  //       });
+  //     } else {
+  //       if (!mounted) return;
+  //       setState(() {
+  //         showNotificationBadge = false;
+  //       });
+  //     }
+  //   });
+  // }
 
   void updateNotificationBadge() async {
+    // setState(() {
+    //   showNotificationBadge = false;
+    // });
     final collection = await FirebaseFirestore.instance
         .collection('clients/$userId/notificationsFromAdmin')
         .get();
-    collection.docs.forEach((element) {
+    for (var element in collection.docs) {
       element.reference.update({'isNew': false});
-    });
-    setState(() {
-      showNotificationBadge = false;
-    });
+    }
   }
 
   void checkUserComplete() {
